@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a1f3a">
+<title>Sutherland European Adventure 2026</title>
+<style>
+:root {
+  --navy:#1a1f3a; --gold:#c9a84c; --gold-light:#e8d5a3; --stone:#f5f0e8;
+  --stone-dark:#e8e0d0; --text:#2c2c2c; --text-muted:#6b6b6b; --white:#fff;
+  --green:#1a5c3a; --green-light:#e8f4ee; --purple:#7c3d8f; --amber:#8b5e00;
+  --blue:#2d6a8f; --blue-light:#e8f2f8; --red:#c0392b;
+  --shadow:0 2px 12px rgba(26,31,58,.10); --shadow-lg:0 8px 32px rgba(26,31,58,.15);
+  --radius:12px; --radius-sm:8px; --safe-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── PIN SCREEN ── */
+#pin-screen{position:fixed;inset:0;background:var(--navy);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px}
+.pin-logo{font-size:48px;margin-bottom:8px}
+.pin-title{font-size:22px;color:var(--gold);font-family:Georgia,serif;text-align:center;margin-bottom:4px}
+.pin-sub{font-size:13px;color:rgba(255,255,255,.5);font-family:Arial,sans-serif;margin-bottom:32px;text-align:center}
+.pin-dots{display:flex;gap:12px;margin-bottom:24px}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(255,255,255,.2);transition:.2s}
+.pin-dot.filled{background:var(--gold)}
+.pin-pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:240px}
+.pin-btn{background:rgba(255,255,255,.1);border:none;color:#fff;font-size:22px;font-family:Arial,sans-serif;font-weight:600;border-radius:50%;width:72px;height:72px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center}
+.pin-btn:active{background:var(--gold);color:var(--navy);transform:scale(.93)}
+.pin-btn.del{font-size:18px}
+.pin-error{color:#e74c3c;font-size:13px;font-family:Arial,sans-serif;margin-top:12px;height:18px;text-align:center}
+
+/* ── HEADER ── */
+.app-header{background:var(--navy);color:#fff;padding:14px 16px 0;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-lg)}
+.header-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
+.trip-title{font-size:16px;font-weight:700;color:var(--gold);letter-spacing:.3px;line-height:1.3;font-family:Georgia,serif}
+.trip-dates{font-size:11px;color:rgba(255,255,255,.55);font-family:Arial,sans-serif;margin-top:2px}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;margin-left:12px}
+.days-to-go{font-size:22px;font-weight:700;color:var(--gold);line-height:1}
+.days-label{font-size:10px;color:rgba(255,255,255,.5);font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.5px}
+.lock-btn{background:none;border:none;color:rgba(255,255,255,.4);font-size:16px;cursor:pointer;padding:2px}
+.progress-bar-wrap{margin-bottom:10px}
+.progress-label{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.4);font-family:Arial,sans-serif;margin-bottom:4px}
+.progress-track{height:3px;background:rgba(255,255,255,.15);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),#e8d5a3);border-radius:2px;transition:width 1s ease}
+.segment-tabs{display:flex;overflow-x:auto;scrollbar-width:none;gap:2px;padding-bottom:1px}
+.segment-tabs::-webkit-scrollbar{display:none}
+.seg-tab{flex-shrink:0;padding:7px 10px 9px;border:none;background:transparent;color:rgba(255,255,255,.45);font-size:10px;font-family:Arial,sans-serif;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:2px}
+.seg-tab .te{font-size:15px}.seg-tab .tl{font-size:9px;text-transform:uppercase;letter-spacing:.4px}
+.seg-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--stone-dark);padding:8px 12px calc(8px + var(--safe-bottom));display:flex;gap:8px;z-index:90;box-shadow:0 -4px 20px rgba(0,0,0,.08)}
+.nav-btn{flex:1;padding:10px 6px;border:none;border-radius:var(--radius-sm);font-size:12px;font-family:Arial,sans-serif;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:.15s}
+.nav-btn:active{transform:scale(.96)}
+.nav-btn .nb-icon{font-size:18px;line-height:1}
+.nav-btn .nb-label{font-size:9px;text-transform:uppercase;letter-spacing:.4px}
+.nav-btn.primary{background:var(--navy);color:var(--gold)}
+.nav-btn.secondary{background:var(--stone-dark);color:var(--text-muted)}
+.nav-btn.active-docs{background:var(--amber);color:#fff}
+
+/* ── MAIN ── */
+.main{padding:16px 16px 120px;max-width:600px;margin:0 auto}
+
+/* ── SEGMENT HEADER ── */
+.segment-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:12px 14px;border-radius:var(--radius);background:var(--white);box-shadow:var(--shadow)}
+.seg-icon{font-size:26px;flex-shrink:0}.seg-name{font-size:15px;font-weight:700;color:var(--navy)}.seg-count{font-size:12px;color:var(--text-muted);font-family:Arial,sans-serif;margin-top:1px}
+
+/* ── DAY CARD ── */
+.day-card{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden;transition:box-shadow .2s}
+.day-card.today{box-shadow:0 0 0 2px var(--gold),var(--shadow-lg)}
+.day-card-header{cursor:pointer;user-select:none}
+
+/* Hero image */
+.day-hero{width:100%;height:160px;object-fit:cover;display:block;background:linear-gradient(135deg,#1a1f3a,#2d6a8f);min-height:160px}
+.day-hero-wrap{position:relative;width:100%;height:160px;overflow:hidden;background:linear-gradient(135deg,#1a1f3a 0%,#2d6a8f 100%)}
+.day-hero-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
+.day-hero-wrap .hero-overlay{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(26,31,58,.7),transparent);pointer-events:none}
+.day-hero-placeholder{width:100%;height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,var(--stone),var(--stone-dark))}
+
+/* Header info */
+.day-header-info{padding:12px 14px 8px;display:flex;align-items:flex-start;gap:10px}
+.day-flag-date{flex-shrink:0;display:flex;flex-direction:column;align-items:center;min-width:42px}
+.day-flag{font-size:20px;line-height:1}
+.day-date-label{font-size:9px;color:var(--text-muted);font-family:Arial,sans-serif;text-transform:uppercase;letter-spacing:.3px;margin-top:3px;text-align:center}
+.day-main{flex:1;min-width:0}
+.day-location{font-size:14px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:3px}
+.day-preview{font-size:12px;color:var(--text-muted);font-family:Arial,sans-serif;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.day-chevron{flex-shrink:0;color:var(--text-muted);font-size:11px;margin-top:3px;transition:transform .25s}
+.day-card.open .day-chevron{transform:rotate(180deg)}
+.tag-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.tag{font-size:9px;font-family:Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 7px;border-radius:20px}
+.tag-included{background:var(--green-light);color:var(--green)}
+.tag-booked{background:#fff3e0;color:#e65100}
+.tag-flight{background:var(--blue-light);color:var(--blue)}
+.tag-arrival{background:var(--purple-light,#f3eaf6);color:var(--purple)}
+
+/* ── DAY BODY ── */
+.day-body{display:none;border-top:1px solid var(--stone-dark)}
+.day-card.open .day-body{display:block}
+.day-section{padding:11px 14px;border-bottom:1px solid var(--stone-dark)}
+.day-section:last-child{border-bottom:none}
+.section-label{font-size:9px;font-family:Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-muted);margin-bottom:5px}
+.section-content{font-size:13px;font-family:Arial,sans-serif;line-height:1.6;color:var(--text)}
+.accom-icon{font-size:15px;margin-right:6px}
+.excursion-block{background:var(--green-light);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:9px 11px;font-size:13px;font-family:Arial,sans-serif;line-height:1.5;color:#1a3d2a}
+.excursion-block.booked{background:#fff8e8;border-left-color:var(--gold);color:#5a3e00}
+
+/* ── ACTION BUTTONS ── */
+.action-row{display:flex;gap:6px;flex-wrap:wrap;padding:10px 14px;background:var(--stone);border-top:1px solid var(--stone-dark)}
+.btn{flex:1;min-width:80px;padding:9px 10px;border-radius:var(--radius-sm);border:none;font-size:11px;font-family:Arial,sans-serif;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;text-decoration:none;transition:opacity .15s,transform .1s;text-align:center}
+.btn:active{transform:scale(.97);opacity:.85}
+.btn-map{background:var(--navy);color:#fff}
+.btn-book{background:var(--gold);color:var(--navy)}
+.btn-ticket{background:var(--red);color:#fff}
+.btn-rest{background:#8b1a1a;color:#fff}
+
+/* ── NOTES ── */
+.notes-section{padding:10px 14px;background:#fffdf5;border-top:1px solid var(--stone-dark)}
+.notes-label{display:flex;align-items:center;gap:5px;font-size:10px;font-family:Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--amber);margin-bottom:6px}
+.notes-textarea{width:100%;min-height:68px;padding:8px 10px;border:1.5px solid var(--stone-dark);border-radius:var(--radius-sm);font-size:13px;font-family:Arial,sans-serif;color:var(--text);background:#fff;resize:vertical;outline:none;transition:border-color .2s;line-height:1.5}
+.notes-textarea:focus{border-color:var(--gold)}
+.notes-textarea::placeholder{color:#bbb}
+.notes-saved{font-size:10px;font-family:Arial,sans-serif;color:var(--green);margin-top:3px;opacity:0;transition:opacity .3s;height:13px}
+.notes-saved.show{opacity:1}
+
+/* ── TODAY BADGE ── */
+.today-badge{display:inline-flex;align-items:center;gap:3px;background:var(--gold);color:var(--navy);font-size:9px;font-family:Arial,sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.4px;padding:2px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+
+/* ── DOCS PANEL ── */
+#docs-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+.docs-header{background:var(--white);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.docs-header h2{font-size:16px;color:var(--navy);margin-bottom:4px}
+.docs-header p{font-size:12px;color:var(--text-muted);font-family:Arial,sans-serif;line-height:1.5}
+.doc-category{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
+.doc-cat-header{padding:12px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;background:var(--stone)}
+.doc-cat-icon{font-size:20px}
+.doc-cat-title{font-size:14px;font-weight:700;color:var(--navy);flex:1}
+.doc-cat-chev{color:var(--text-muted);font-size:11px;transition:transform .25s}
+.doc-category.open .doc-cat-chev{transform:rotate(180deg)}
+.doc-cat-body{display:none;padding:12px 14px;border-top:1px solid var(--stone-dark)}
+.doc-category.open .doc-cat-body{display:block}
+.doc-item{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:1px solid var(--stone-dark)}
+.doc-item:last-child{border-bottom:none}
+.doc-item-info{flex:1}
+.doc-item-name{font-size:13px;font-weight:700;color:var(--navy)}
+.doc-item-detail{font-size:11px;color:var(--text-muted);font-family:Arial,sans-serif;margin-top:2px}
+.doc-link-btn{background:var(--navy);color:var(--gold);border:none;border-radius:var(--radius-sm);padding:6px 11px;font-size:11px;font-family:Arial,sans-serif;font-weight:700;cursor:pointer;text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;gap:4px}
+.doc-note-area{width:100%;margin-top:10px;padding:8px 10px;border:1.5px solid var(--stone-dark);border-radius:var(--radius-sm);font-size:12px;font-family:Arial,sans-serif;min-height:60px;resize:vertical;outline:none;background:#fff}
+.doc-note-area:focus{border-color:var(--gold)}
+.doc-save-btn{margin-top:6px;background:var(--amber);color:#fff;border:none;border-radius:var(--radius-sm);padding:7px 14px;font-size:11px;font-family:Arial,sans-serif;font-weight:700;cursor:pointer}
+.doc-saved{font-size:10px;font-family:Arial,sans-serif;color:var(--green);margin-left:8px;opacity:0;transition:opacity .3s}
+.doc-saved.show{opacity:1}
+.doc-url-input{width:100%;padding:8px 10px;border:1.5px solid var(--stone-dark);border-radius:var(--radius-sm);font-size:12px;font-family:Arial,sans-serif;outline:none;background:#fff;margin-top:6px}
+.doc-url-input:focus{border-color:var(--gold)}
+
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.day-card{animation:fadeIn .22s ease both}
+.day-card:nth-child(2){animation-delay:.04s}.day-card:nth-child(3){animation-delay:.08s}
+.day-card:nth-child(4){animation-delay:.12s}.day-card:nth-child(5){animation-delay:.16s}
+</style>
+</head>
+<body>
+
+<!-- ── PIN SCREEN ── -->
+<div id="pin-screen">
+  <div class="pin-logo">🌍</div>
+  <div class="pin-title">Sutherland European Adventure</div>
+  <div class="pin-sub">Enter your 4-digit PIN to access</div>
+  <div class="pin-dots" id="pinDots">
+    <div class="pin-dot" id="d0"></div>
+    <div class="pin-dot" id="d1"></div>
+    <div class="pin-dot" id="d2"></div>
+    <div class="pin-dot" id="d3"></div>
+  </div>
+  <div class="pin-pad">
+    <button class="pin-btn" onclick="pinPress('1')">1</button>
+    <button class="pin-btn" onclick="pinPress('2')">2</button>
+    <button class="pin-btn" onclick="pinPress('3')">3</button>
+    <button class="pin-btn" onclick="pinPress('4')">4</button>
+    <button class="pin-btn" onclick="pinPress('5')">5</button>
+    <button class="pin-btn" onclick="pinPress('6')">6</button>
+    <button class="pin-btn" onclick="pinPress('7')">7</button>
+    <button class="pin-btn" onclick="pinPress('8')">8</button>
+    <button class="pin-btn" onclick="pinPress('9')">9</button>
+    <button class="pin-btn" onclick="pinPress('clear')" style="font-size:13px">CLR</button>
+    <button class="pin-btn" onclick="pinPress('0')">0</button>
+    <button class="pin-btn del" onclick="pinPress('del')">⌫</button>
+  </div>
+  <div class="pin-error" id="pinError"></div>
+  <div style="margin-top:20px;font-size:11px;color:rgba(255,255,255,.3);font-family:Arial,sans-serif;text-align:center">Default PIN: 2026<br>Change in Settings after login</div>
+</div>
+
+<!-- ── APP (hidden until PIN) ── -->
+<div id="app" style="display:none">
+
+<div class="app-header">
+  <div class="header-top">
+    <div>
+      <div class="trip-title">🌍 Sutherland European Adventure</div>
+      <div class="trip-dates">14 Sep – 24 Oct 2026 &nbsp;·&nbsp; 41 days</div>
+    </div>
+    <div class="header-right">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div>
+          <div class="days-to-go" id="countdown">—</div>
+          <div class="days-label" id="countdownLabel">days to go</div>
+        </div>
+        <button class="lock-btn" onclick="lockApp()" title="Lock">🔒</button>
+      </div>
+    </div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-label">
+      <span>14 Sep</span><span id="progressLabel">—</span><span>24 Oct</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div class="segment-tabs" id="segTabs"></div>
+</div>
+
+<div class="main" id="main"></div>
+
+<!-- Docs panel -->
+<div id="docs-panel"></div>
+
+<div class="bottom-nav">
+  <button class="nav-btn primary" onclick="goToday()" id="todayBtn">
+    <span class="nb-icon">📍</span><span class="nb-label">Today</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showItinerary()" id="itinBtn">
+    <span class="nb-icon">📅</span><span class="nb-label">Itinerary</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showDocs()" id="docsBtn">
+    <span class="nb-icon">📁</span><span class="nb-label">Documents</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showSettings()" id="settBtn">
+    <span class="nb-icon">⚙️</span><span class="nb-label">Settings</span>
+  </button>
+</div>
+
+</div><!-- end #app -->
+
+<script>
+// ════════════════════════════════════════
+// ITINERARY DATA
+// ════════════════════════════════════════
+const SEGMENTS = [
+  { id:"travel", name:"Travel Out", emoji:"✈️", color:"#4a5568", days:[
+    { date:"Mon 14 Sep", location:"Launceston → Melbourne", flag:"🇦🇺",
+      img:"https://source.unsplash.com/800x400/?melbourne,australia,skyline",
+      accommodation:"Pan Pacific South Wharf, Melbourne",
+      transport:"VA1365 Launceston → Melbourne",
+      activity:"Fly to Melbourne, check in overnight at Pan Pacific South Wharf. First leg of the great adventure!",
+      excursion:null, tags:["flight"],
+      links:[] },
+    { date:"Tue 15 Sep", location:"Melbourne → KL → Paris", flag:"🌏",
+      img:"https://source.unsplash.com/800x400/?airplane,flight,airport",
+      accommodation:"In Transit (Malaysian Airlines)",
+      transport:"MH148 Melbourne → Kuala Lumpur | MH20 KL → Paris CDG",
+      activity:"Long-haul flight to Paris via Kuala Lumpur. Arrive Paris CDG early Wednesday morning. Try to sleep on the plane!",
+      excursion:null, tags:["flight"], links:[] }
+  ]},
+
+  { id:"paris", name:"Paris", emoji:"🗼", color:"#2d6a8f", days:[
+    { date:"Wed 16 Sep", location:"Paris – Arrival Day", flag:"🇫🇷",
+      img:"https://source.unsplash.com/800x400/?eiffel,tower,paris,sunrise",
+      accommodation:"Les Jardins de Verve – By Locke, Latin Quarter",
+      transport:"Taxi CDG → Hotel (~€62 fixed fare) | EES biometric at CDG",
+      activity:"Arrive ~07:00. EES biometric processing at CDG. Check-in from 11:00. Gentle first day: Place Monge Market 11:15, Panthéon 13:00, coffee at Le Comptoir du Panthéon 14:00, Luxembourg Gardens 14:45, Rue Mouffetard stroll 17:30. Dinner at Quartier Latin Pizza 18:30. Gelato at Amorino 20:00. Lights out 21:00 — jet lag is real.",
+      excursion:null, tags:["arrival"],
+      links:[
+        {label:"Hotel Check-in", url:"https://byleocke.com/hotels/les-jardins-de-verve/", type:"book"},
+        {label:"CDG Arrival Info", url:"https://www.parisaeroport.fr/en/passengers/access/paris-charles-de-gaulle/public-transport", type:"info"}
+      ] },
+
+    { date:"Thu 17 Sep", location:"Paris – Batobus & Moulin Rouge", flag:"🇫🇷",
+      img:"https://source.unsplash.com/800x400/?moulin,rouge,paris,montmartre",
+      accommodation:"Les Jardins de Verve – By Locke",
+      transport:"Batobus 2-Day Pass from Jardin des Plantes | Taxi to Montmartre 17:45",
+      activity:"08:30 leave hotel. Arènes de Lutèce 08:50. Jardin des Plantes 09:05. Batobus 10:00 → Eiffel Tower stop. Trocadéro terrace 10:35. Coffee at Carette 11:15. Batobus → Louvre stop 12:00. Lunch Right Bank 12:20. Opéra Garnier 13:30. Galeries Lafayette glass dome & free rooftop 14:00. Madeleine 14:45. Place de la Concorde 15:00. Tuileries gardens 15:15. Palais Royal 15:45. Louvre exterior & pyramid 16:05. Batobus return 16:30. Hotel rest 17:00. Taxi 17:45 → Montmartre 18:10. Dinner La Couvée 18:30. Walk Moulin Rouge 20:15. Show 20:30–23:00. Taxi home 23:00.",
+      excursion:"Moulin Rouge Show – 20:30 seating (BOOK IMMEDIATELY – sells out months ahead)",
+      tags:[],
+      links:[
+        {label:"Moulin Rouge Tickets", url:"https://www.moulinrouge.fr/en/shows/feerie", type:"ticket"},
+        {label:"Book La Couvée", url:"https://www.thefork.com/restaurant/la-couvee-r715441", type:"rest"},
+        {label:"Batobus Passes", url:"https://www.batobus.com/en/tickets", type:"book"},
+        {label:"Galeries Lafayette Rooftop", url:"https://www.galerieslafayette.com/rooftop/", type:"info"}
+      ] },
+
+    { date:"Fri 18 Sep", location:"Paris – Left Bank, Marais & 2CV Tour", flag:"🇫🇷",
+      img:"https://source.unsplash.com/800x400/?notre,dame,paris,cathedral",
+      accommodation:"Les Jardins de Verve – By Locke",
+      transport:"Batobus Day 2 | Taxi Marais → hotel 15:15 | 2CV pickup hotel 20:00",
+      activity:"08:30 leave. Scenic walk to Batobus via quays 08:50. Optional crêpe stop 09:15. Batobus 10:00 → Invalides. Pont Alexandre III 10:20. Petit Palais (FREE museum) 10:40. Les Invalides & Napoleon's Tomb 11:20. Batobus → Notre-Dame 12:10. Notre-Dame exterior & Île Saint-Louis 12:25. Takeaway lunch 13:00. Marais stroll 13:45: Rue des Rosiers, Place des Vosges (must-see!), Boulevard Beaumarchais. Taxi hotel 15:15. Rest 15:45–18:00. Wine tasting + small plates Vins & Whisky 18:00 (serves as dinner). 2CV Famous Montmartre Night Tour 20:00 from hotel — Sacré-Cœur, Place du Tertre, hidden streets, Paris panorama. Home 22:00.",
+      excursion:"2CV Famous Montmartre Night Tour – hotel pickup 20:00 (€180/car) | Wine + small plates Vins & Whisky 18:00",
+      tags:[],
+      links:[
+        {label:"Book 2CV Tour", url:"https://2cvparistour.com/the-famous-montmartre/", type:"book"},
+        {label:"Notre-Dame Info", url:"https://www.notredamedeparis.fr/en/visit/", type:"info"},
+        {label:"Petit Palais (Free)", url:"https://www.petitpalais.paris.fr/en", type:"info"},
+        {label:"Vins & Whisky", url:"https://maps.app.goo.gl/6SuQEfvNcGJjBc8G9", type:"rest"}
+      ] },
+
+    { date:"Sat 19 Sep", location:"Paris – Versailles Day Trip", flag:"🇫🇷",
+      img:"https://source.unsplash.com/800x400/?versailles,palace,france,gardens",
+      accommodation:"Les Jardins de Verve – By Locke",
+      transport:"Walk to Gare d'Austerlitz | RER C 08:30 | Return ~16:00 | Taxi to Margaux 18:30",
+      activity:"08:00 leave. RER C 08:30 → Versailles Château-Rive Gauche (35 min, arrive ~09:15). Timed entry Palace 09:30–11:00: King's & Queen's Apartments, Hall of Mirrors. Golf cart rental 11:00 from Grand Canal kiosk. Explore gardens, Grand Trianon, Petit Trianon (Marie Antoinette's retreat), Queen's Hamlet (storybook village). Light lunch in gardens 13:30. Return station 15:15. RER C 16:00, Paris 16:45. Rest hotel 16:45–18:30. Taxi to Margaux 18:30. Dinner Margaux 19:00 overlooking Eiffel Tower. Sparkle displays at 20:00, 21:00 & 22:00. Back hotel ~21:30.",
+      excursion:"Versailles Passport ticket + timed entry 09:30 (BOOK NOW) | Golf cart rental | Margaux dinner 19:00 (BOOK URGENTLY)",
+      tags:[],
+      links:[
+        {label:"Versailles Tickets", url:"https://ticket.chateauversailles.fr/en/ticketing", type:"ticket"},
+        {label:"Book Margaux", url:"https://www.restaurantmargaux.com/en/reservation", type:"rest"},
+        {label:"Versailles Golf Cart", url:"https://www.versailles-golf.fr", type:"book"},
+        {label:"RER C Info", url:"https://www.transilien.com/en/line-c/", type:"info"}
+      ] },
+
+    { date:"Sun 20 Sep", location:"Paris → Amsterdam → Viking Magni", flag:"🇫🇷🇳🇱",
+      img:"https://source.unsplash.com/800x400/?amsterdam,canal,netherlands",
+      accommodation:"Viking Magni (embark)",
+      transport:"Taxi → Gare du Nord 09:00 | Eurostar 10:30 → Amsterdam Centraal 13:50 | Walk 5 min to dock",
+      activity:"07:30 wake & pack. Check out. Boulangerie Carton breakfast outside Gare du Nord 08:35. Eurostar check-in 09:00 (security + exit & entry controls). Depart 10:30. Arrive Amsterdam Centraal 13:50. Walk 5–10 min to Viking Magni. Check in 14:00, settle into French Balcony cabin. Canal walk 15:00–17:00: Prins Hendrikkade, Brouwersgracht, Haarlemmerdijk. Dinner onboard 18:00. Night walk Red Light District 19:45–21:15. Back to ship 21:30.",
+      excursion:"Eurostar Paris → Amsterdam 10:30 (BOOK URGENTLY – sells out)",
+      tags:[],
+      links:[
+        {label:"Book Eurostar", url:"https://www.eurostar.com/uk-en/train/france-to-netherlands/paris-to-amsterdam", type:"ticket"},
+        {label:"Gare du Nord Info", url:"https://www.eurostar.com/uk-en/stations/paris-nord", type:"info"}
+      ] }
+  ]},
+
+  { id:"magni", name:"Viking Magni", emoji:"🚢", color:"#1a5c3a", days:[
+    { date:"Mon 21 Sep", location:"Kinderdijk, Netherlands", flag:"🇳🇱",
+      img:"https://source.unsplash.com/800x400/?windmill,kinderdijk,netherlands",
+      accommodation:"Viking Magni", transport:"Ship docks Kinderdijk",
+      activity:"UNESCO World Heritage windmills tour. Enter a working windmill to see mechanisms and living quarters. Dutch cheese & jenever (juniper gin) tasting onboard. Dutch Golden Age presentation. Cruise overnight.",
+      excursion:"✅ INCLUDED: Kinderdijk Windmills guided tour (UNESCO)", tags:["included"],
+      links:[{label:"Kinderdijk Info", url:"https://www.kinderdijk.nl/en/visit/", type:"info"}] },
+
+    { date:"Tue 22 Sep", location:"Cologne, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?cologne,cathedral,germany",
+      accommodation:"Viking Magni", transport:"Ship docks Cologne",
+      activity:"Morning guided tour Cologne Old Town. Cologne Dom (Cathedral) – Germany's largest, UNESCO World Heritage Site. Medieval streets and Roman Praetorium underground ruins.",
+      excursion:"✅ INCLUDED: Cologne Old Town & Dom Cathedral guided tour (UNESCO)", tags:["included"],
+      links:[{label:"Cologne Dom Info", url:"https://www.koelner-dom.de/en/", type:"info"}] },
+
+    { date:"Wed 23 Sep", location:"Koblenz → Rüdesheim, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?koblenz,rhine,germany,river",
+      accommodation:"Viking Magni", transport:"Ship sails UNESCO Middle Rhine Gorge",
+      activity:"Koblenz: German Corner (Deutsches Eck) where Rhine meets Moselle. Historic Old Town. Afternoon: sail the UNESCO Middle Rhine Gorge past hilltop castles, vineyards and the legendary Lorelei Rock. Marksburg Castle views.",
+      excursion:"✅ INCLUDED: Koblenz Old Town & German Corner | Rhine Gorge scenic sailing", tags:["included"],
+      links:[{label:"Rhine Gorge UNESCO", url:"https://www.oberes-mittelrheintal.de/en/", type:"info"}] },
+
+    { date:"Thu 24 Sep", location:"Miltenberg, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?medieval,town,germany,half,timbered",
+      accommodation:"Viking Magni", transport:"Main River sailing – scenic Franconia",
+      activity:"Charming medieval town on the Main River famous for glassblowing. Half-timbered houses, Miltenberg Castle, lovely Market Square. Scenic Franconia region.",
+      excursion:"✅ INCLUDED: Miltenberg Old Town walk & glassblowing demonstration", tags:["included"], links:[] },
+
+    { date:"Fri 25 Sep", location:"Würzburg, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?baroque,palace,germany,interior",
+      accommodation:"Viking Magni", transport:"Ship docks Würzburg",
+      activity:"Magnificent Bishops' Residenz – one of Europe's finest baroque palaces (UNESCO). Grand staircase, Imperial Hall, ceiling frescoes by Tiepolo. Marienberg Fortress views. Franconian wine region.",
+      excursion:"✅ INCLUDED: Würzburg Bishops' Residenz guided tour (UNESCO)", tags:["included"],
+      links:[{label:"Residenz Würzburg", url:"https://www.residenz-wuerzburg.de/englisch/tourist/", type:"info"}] },
+
+    { date:"Sat 26 Sep", location:"Bamberg, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?bamberg,germany,medieval",
+      accommodation:"Viking Magni", transport:"Ship docks Bamberg",
+      activity:"UNESCO-listed medieval city. Old Town Hall (Altes Rathaus) perched on a bridge island in the river. Bamberg Cathedral with the famous Bamberg Rider sculpture. Sample distinctive local rauchbier (smoked beer).",
+      excursion:"✅ INCLUDED: Bamberg medieval Old Town walking tour (UNESCO)", tags:["included"],
+      links:[{label:"Visit Bamberg", url:"https://www.bamberg.info/en/", type:"info"}] },
+
+    { date:"Sun 27 Sep", location:"Nuremberg, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?nuremberg,castle,germany",
+      accommodation:"Viking Magni", transport:"Transit 16-lock Main-Danube Canal",
+      activity:"Transit the 16-lock Main-Danube Canal (106 miles). Nuremberg: Imperial Castle (Kaiserburg), medieval market square, Palace of Justice from the famous WWII Nuremberg Trials. Holy Roman Empire history.",
+      excursion:"⭐ VIKING EXCURSION BOOKED: Nuremberg & WWII History tour", tags:["booked"],
+      links:[{label:"Nuremberg Imperial Castle", url:"https://www.kaiserburg-nuernberg.de/englisch/", type:"info"},
+             {label:"Nuremberg Trials Court", url:"https://www.museums.nuremberg.de/memorium-nuremberg-trials/", type:"ticket"}] },
+
+    { date:"Mon 28 Sep", location:"Regensburg, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?regensburg,danube,bridge,germany",
+      accommodation:"Viking Magni", transport:"Ship docks Regensburg",
+      activity:"UNESCO-listed 2,000-year-old medieval city. Roman structures, 13th–14th century patrician houses, famous Stone Bridge, St. Peter's Cathedral. Visit Alte Würstküche – Germany's oldest restaurant (since 1146) for famous grilled Danube sausages.",
+      excursion:"✅ INCLUDED: Regensburg Through History guided tour (UNESCO) | Alte Würstküche", tags:["included"],
+      links:[{label:"Alte Würstküche", url:"https://www.alte-wurstkuch.de/en", type:"rest"},
+             {label:"UNESCO Regensburg", url:"https://www.regensburg.de/tourismus/en/", type:"info"}] },
+
+    { date:"Tue 29 Sep", location:"Passau, Germany", flag:"🇩🇪",
+      img:"https://source.unsplash.com/800x400/?passau,danube,three,rivers,germany",
+      accommodation:"Viking Magni", transport:"Ship docks at three-rivers confluence",
+      activity:"Where three rivers meet: Inn, Ilz and Danube. Dom St. Stephan with Europe's largest cathedral organ (17,774 pipes!). Old Town patrician architecture. Evening organ concert (May–Oct, not Sundays).",
+      excursion:"✅ INCLUDED: Passau Old Town & Cathedral | Evening organ concert", tags:["included"],
+      links:[{label:"Dom St. Stephan", url:"https://www.bistum-passau.de/dom/", type:"info"}] },
+
+    { date:"Wed 30 Sep", location:"Melk & Krems, Austria", flag:"🇦🇹",
+      img:"https://source.unsplash.com/800x400/?melk,abbey,austria,danube",
+      accommodation:"Viking Magni", transport:"Ship docks Melk, sails Wachau Valley to Krems",
+      activity:"Melk Abbey – 900-year-old Benedictine monastery, Austria's finest baroque architecture. Medieval manuscripts, breathtaking ceiling frescoes. Afternoon: sail UNESCO Wachau Valley past hillside vineyards. Krems: Steiner Tor city gate. Wine tasting in Wachau wine region.",
+      excursion:"⭐ VIKING EXCURSION BOOKED: Melk Abbey & Wachau Valley Wine Tasting", tags:["booked"],
+      links:[{label:"Melk Abbey Tickets", url:"https://www.stiftmelk.at/en/visit/opening-hours-and-prices/", type:"ticket"},
+             {label:"Wachau Valley Info", url:"https://www.welterbe-wachau.at/en/", type:"info"}] },
+
+    { date:"Thu 01 Oct", location:"Vienna, Austria", flag:"🇦🇹",
+      img:"https://source.unsplash.com/800x400/?vienna,austria,cathedral,stephansdom",
+      accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docks Vienna overnight",
+      activity:"City of waltzes and classical music. Ringstrasse boulevard: Hofburg Palace, Kunsthistorisches Museum, Vienna City Hall, Burgtheater. State Opera House. Learn the Viennese waltz. Optional: Schönbrunn Palace.",
+      excursion:"✅ INCLUDED: Vienna city tour – Ringstrasse, State Opera & classical music heritage", tags:["included"],
+      links:[{label:"Vienna State Opera", url:"https://www.wiener-staatsoper.at/en/", type:"ticket"},
+             {label:"Schönbrunn Palace", url:"https://www.schoenbrunn.at/en/tickets/", type:"ticket"}] },
+
+    { date:"Fri 02 Oct", location:"Vienna, Austria (Day 2)", flag:"🇦🇹",
+      img:"https://source.unsplash.com/800x400/?vienna,belvedere,museum,austria",
+      accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docked overnight Vienna",
+      activity:"Second day in Vienna. Belvedere Gallery (Klimt's The Kiss). Vienna's legendary café culture: Café Central or Demel. Prater park and Giant Ferris Wheel. Naschmarkt food market. Optional: Spanish Riding School.",
+      excursion:"✅ INCLUDED: Vienna leisure day – Belvedere, café culture & museum mile", tags:["included"],
+      links:[{label:"Belvedere Tickets", url:"https://www.belvedere.at/en/buy-tickets", type:"ticket"},
+             {label:"Naschmarkt Info", url:"https://www.wiener-naschmarkt.eu/en/", type:"info"}] },
+
+    { date:"Sat 03 Oct", location:"Budapest (arrive on Magni)", flag:"🇭🇺",
+      img:"https://source.unsplash.com/800x400/?fishermans,bastion,budapest,hungary",
+      accommodation:"Viking Magni (final night onboard)", transport:"Ship arrives Budapest",
+      activity:"Final day aboard Viking Magni. Fisherman's Bastion for panoramic Danube views. Buda Castle District. Matthias Church. Chain Bridge. Parliament Building view from Pest side. Final dinner onboard. Farewell to crew.",
+      excursion:"✅ INCLUDED: Budapest – Buda Castle District & Fisherman's Bastion", tags:["included"],
+      links:[{label:"Fisherman's Bastion", url:"https://halaszbastya.eu/en/", type:"ticket"},
+             {label:"Buda Castle", url:"https://www.budacastlebudapest.com/", type:"info"}] }
+  ]},
+
+  { id:"budapest", name:"Budapest", emoji:"🏛️", color:"#7c3d8f", days:[
+    { date:"Sun 04 Oct", location:"Budapest – Explore the City", flag:"🇭🇺",
+      img:"https://source.unsplash.com/800x400/?budapest,parliament,danube,hungary",
+      accommodation:"7Seasons Apartments, Budapest", transport:"Disembark Viking Magni | Transfer to 7Seasons",
+      activity:"Disembark morning. Full day: Heroes' Square & Andrássy Avenue (UNESCO). Hungarian State Opera exterior. Széchenyi Thermal Baths. Great Market Hall for local food and souvenirs. Ruin bars in the Jewish Quarter evening.",
+      excursion:null, tags:[],
+      links:[{label:"Széchenyi Baths Tickets", url:"https://www.szechenyifurdo.hu/en/tickets/", type:"ticket"},
+             {label:"Hungarian Parliament", url:"https://www.parlament.hu/en/visitor-information", type:"ticket"}] },
+
+    { date:"Mon 05 Oct", location:"Budapest – Free Day", flag:"🇭🇺",
+      img:"https://source.unsplash.com/800x400/?budapest,gellert,hill,view,hungary",
+      accommodation:"7Seasons Apartments, Budapest", transport:"Local tram/metro",
+      activity:"Free day. Options: Gellért Hill & Citadella for panoramic views, Margaret Island stroll, Dohány Street Synagogue (Europe's largest), Holocaust Memorial Tree of Life, or a Danube sunset cruise.",
+      excursion:null, tags:[],
+      links:[{label:"Dohány Synagogue Tickets", url:"https://www.dohanystreetsynagogue.hu/en/buy-tickets/", type:"ticket"},
+             {label:"Budapest Danube Cruise", url:"https://www.legenda.hu/en/", type:"book"}] }
+  ]},
+
+  { id:"transit", name:"To Italy", emoji:"🛫", color:"#4a5568", days:[
+    { date:"Tue 06 Oct", location:"Budapest → Venice → Chioggia", flag:"🇭🇺🇮🇹",
+      img:"https://source.unsplash.com/800x400/?chioggia,venice,lagoon,italy,canal",
+      accommodation:"Hotel Grande Italia, Chioggia", transport:"OS543 Budapest→Vienna→Venice | Private transfer Venice→Chioggia (~1hr)",
+      activity:"Fly Austrian Air OS543 Budapest–Vienna–Venice Marco Polo. Private transfer (~1hr) to Chioggia – 'Little Venice' at the southern tip of the Venetian Lagoon. Check in Hotel Grande Italia. Evening stroll along Corso del Popolo, canals, fishing boats and harbour cafes.",
+      excursion:null, tags:["flight"],
+      links:[{label:"Hotel Grande Italia", url:"https://www.hotelgrandeitalia.it/en/", type:"book"}] }
+  ]},
+
+  { id:"sky", name:"Viking Sky", emoji:"⚓", color:"#8b2635", days:[
+    { date:"Wed 07 Oct", location:"Chioggia – Embark Viking Sky", flag:"🇮🇹",
+      img:"https://source.unsplash.com/800x400/?chioggia,venice,lagoon,italy,canal",
+      accommodation:"Viking Sky", transport:"Transfer to Viking Sky embarkation",
+      activity:"Embark Viking Sky. Settle into stateroom. Explore Chioggia's canals, fishing boats and lively Corso del Popolo pedestrian street. 'Little Venice' at the southern tip of the Venetian Lagoon, steeped in seafaring traditions.",
+      excursion:"✅ INCLUDED: Chioggia – Venetian Lagoon fishing village orientation", tags:["included"], links:[] },
+
+    { date:"Thu 08 Oct", location:"Venice, Italy", flag:"🇮🇹",
+      img:"https://source.unsplash.com/800x400/?venice,italy,canal,gondola",
+      accommodation:"Viking Sky", transport:"Vaporetto from Chioggia",
+      activity:"Full day Venice. St. Mark's Square & Basilica (pre-book entry). Doge's Palace – Bridge of Sighs. Rialto Bridge & morning fish market. Gondola ride through smaller canals. Explore Dorsoduro and Cannaregio away from crowds.",
+      excursion:"✅ INCLUDED: Venice – St. Mark's Basilica, Doge's Palace & Rialto highlights", tags:["included"],
+      links:[{label:"St Mark's Basilica", url:"https://www.basilicasanmarco.it/en/visit/", type:"ticket"},
+             {label:"Doge's Palace Tickets", url:"https://www.visitmuve.it/en/museums/palazzo-ducale/", type:"ticket"}] },
+
+    { date:"Fri 09 Oct", location:"Zadar, Croatia", flag:"🇭🇷",
+      img:"https://source.unsplash.com/800x400/?zadar,croatia,adriatic",
+      accommodation:"Viking Sky", transport:"Ship docks Zadar",
+      activity:"Dalmatian coast gem. Old Town peninsula: Roman Forum & Cathedral of St. Anastasia (9th century). Sea Organ – waves playing music through stone pipes. Sun Salutation light installation. Medieval walls and towers.",
+      excursion:"✅ INCLUDED: Zadar Old Town – Roman Forum & Sea Organ", tags:["included"],
+      links:[{label:"Visit Zadar", url:"https://www.zadar.travel/en/", type:"info"}] },
+
+    { date:"Sat 10 Oct", location:"Dubrovnik, Croatia", flag:"🇭🇷",
+      img:"https://source.unsplash.com/800x400/?dubrovnik,croatia,walls,adriatic",
+      accommodation:"Viking Sky", transport:"Ship docks Dubrovnik",
+      activity:"Walk the complete 2km city wall circuit for magnificent Adriatic views (UNESCO). Stradun main street. Rector's Palace. Franciscan Monastery (oldest pharmacy in Europe, since 1317). Optional: cable car to Mount Srđ for panoramic views.",
+      excursion:"✅ INCLUDED: Dubrovnik Old Town walls & historic streets (UNESCO)", tags:["included"],
+      links:[{label:"Dubrovnik City Walls Tickets", url:"https://www.dubrovnik-info.hr/en/old-town/city-walls", type:"ticket"},
+             {label:"Dubrovnik Cable Car", url:"https://www.dubrovnikcablecar.com/en/", type:"ticket"}] },
+
+    { date:"Sun 11 Oct", location:"Kotor, Montenegro", flag:"🇲🇪",
+      img:"https://source.unsplash.com/800x400/?kotor,montenegro,bay,fortress",
+      accommodation:"Viking Sky", transport:"Ship sails dramatic Bay of Kotor",
+      activity:"One of Europe's most dramatic harbour settings – fjord-like bay ringed by mountains (UNESCO). Medieval Old Town walls. Cathedral of Saint Tryphon. Optional: hike 1,350 steps to San Giovanni Fortress for breathtaking bay views.",
+      excursion:"✅ INCLUDED: Kotor Bay sailing & Old Town medieval walking tour (UNESCO)", tags:["included"],
+      links:[{label:"Visit Kotor", url:"https://kotor.travel/en/", type:"info"}] },
+
+    { date:"Mon 12 Oct", location:"Corfu, Greece", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?corfu,greece,fortress,island",
+      accommodation:"Viking Sky", transport:"Ship docks Corfu",
+      activity:"Corfu Old Town shaped by the Venetian Republic (UNESCO). Old Fortress & New Fortress. Liston promenade. Mon Repos Palace. Vlacherna Monastery on its own islet. Archaeological site of Paleopolis.",
+      excursion:"✅ INCLUDED: Corfu Old Town & UNESCO Venetian fortresses tour", tags:["included"],
+      links:[{label:"Visit Corfu", url:"https://www.visitgreece.gr/destinations/ionian-islands/corfu/", type:"info"}] },
+
+    { date:"Tue 13 Oct", location:"Katakolon (Ancient Olympia), Greece", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?olympia,ruins,ancient,greece",
+      accommodation:"Viking Sky", transport:"Ship docks Katakolon | Coach to Olympia (30 min)",
+      activity:"Birthplace of the Olympic Games. Ancient Olympia ruins: Temple of Zeus (one of Seven Wonders), original stadium track, Pheidias's Workshop, Palaestra wrestling school. Olympia Archaeological Museum with famous Hermes of Praxiteles.",
+      excursion:"✅ INCLUDED: Ancient Olympia ruins & Archaeological Museum", tags:["included"],
+      links:[{label:"Ancient Olympia Tickets", url:"https://www.culture.gov.gr/en/service/SitePages/view.aspx?iID=1417", type:"ticket"}] },
+
+    { date:"Wed 14 Oct", location:"Athens (Piraeus), Greece – Day 1", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?parthenon,acropolis,athens,greece",
+      accommodation:"Viking Sky", transport:"Ship docks Piraeus | Metro Line 1 to Athens",
+      activity:"The Acropolis & Parthenon (UNESCO). Acropolis Museum. Ancient Agora – heart of Athenian democracy. Temple of Hephaestus (best preserved in Greece). Syntagma Square & Parliament guard changing ceremony.",
+      excursion:"✅ INCLUDED: Athens – Acropolis, Parthenon & Ancient Agora (UNESCO)", tags:["included"],
+      links:[{label:"Acropolis Tickets", url:"https://etickets.tap.gr/", type:"ticket"},
+             {label:"Acropolis Museum", url:"https://www.theacropolismuseum.gr/en/tickets", type:"ticket"}] },
+
+    { date:"Thu 15 Oct", location:"Athens (Piraeus), Greece – Day 2", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?plaka,athens,greece,streets",
+      accommodation:"Viking Sky", transport:"Ship docked overnight Piraeus",
+      activity:"Second day Athens. Plaka District – 'Neighbourhood of the Gods': cobblestone lanes, neoclassical architecture, meze & ouzo. National Archaeological Museum. Monastiraki flea market. Optional: Cape Sounion and Temple of Poseidon.",
+      excursion:"✅ INCLUDED: Athens Plaka District & National Archaeological Museum", tags:["included"],
+      links:[{label:"National Arch. Museum", url:"https://www.namuseum.gr/en/collections/", type:"ticket"},
+             {label:"Temple of Poseidon", url:"https://odysseus.culture.gr/h/3/gh351.jsp?obj_id=2485", type:"ticket"}] },
+
+    { date:"Fri 16 Oct", location:"Heraklion, Crete, Greece", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?crete,knossos,minoan,greece",
+      accommodation:"Viking Sky", transport:"Ship docks Heraklion",
+      activity:"Home to Europe's earliest civilisation – the Minoans. Palace of Knossos – 3,500-year-old Bronze Age labyrinthine complex. Heraklion Archaeological Museum with famous Minoan frescoes. Venetian harbour walls & Koules Fortress.",
+      excursion:"✅ INCLUDED: Crete – Minoan Palace of Knossos & Archaeological Museum", tags:["included"],
+      links:[{label:"Knossos Tickets", url:"https://etickets.tap.gr/", type:"ticket"},
+             {label:"Heraklion Arch. Museum", url:"https://www.heraklionarchaeologicalmuseum.gr/en/", type:"ticket"}] },
+
+    { date:"Sat 17 Oct", location:"Rhodes, Greece", flag:"🇬🇷",
+      img:"https://source.unsplash.com/800x400/?rhodes,greece,medieval,palace",
+      accommodation:"Viking Sky", transport:"Ship docks Rhodes",
+      activity:"Europe's largest active medieval town (UNESCO). Palace of the Grand Masters – remarkable Crusader fortification. Street of the Knights (Odos Ippoton). Rhodes Old Town walls (3km). Mandraki Harbour where Colossus once stood.",
+      excursion:"✅ INCLUDED: Rhodes medieval Old Town & Palace of Grand Masters (UNESCO)", tags:["included"],
+      links:[{label:"Palace of Grand Masters", url:"https://odysseus.culture.gr/h/1/gh155.jsp?obj_id=3326", type:"ticket"}] },
+
+    { date:"Sun 18 Oct", location:"Ephesus (Kuşadası), Turkey", flag:"🇹🇷",
+      img:"https://source.unsplash.com/800x400/?ephesus,library,celsus,turkey,ruins",
+      accommodation:"Viking Sky", transport:"Ship docks Kuşadası | Coach to Ephesus (30 min)",
+      activity:"One of antiquity's best-preserved cities. Library of Celsus towering 2nd-century façade. Great Theatre (25,000 seats). Temple of Hadrian. Terrace Houses with stunning frescoes (extra fee). Seven Wonders' Temple of Artemis site nearby.",
+      excursion:"✅ INCLUDED: Ancient Ephesus – Library of Celsus & Great Theatre", tags:["included"],
+      links:[{label:"Ephesus Tickets", url:"https://www.kusadasiport.com/ephesus-turkey", type:"ticket"}] },
+
+    { date:"Mon 19 Oct", location:"Troy / Çanakkale, Turkey", flag:"🇹🇷",
+      img:"https://source.unsplash.com/800x400/?troy,ancient,ruins,turkey,canakkale",
+      accommodation:"Viking Sky", transport:"Ship docks Çanakkale",
+      activity:"Ancient Troy (UNESCO) – Homer's legendary city. Famous Trojan Horse replica. Troy Archaeological Museum (opened 2018). Then Gallipoli battlefields & ANZAC memorials – deeply moving WWI sites: Anzac Cove, Lone Pine, Chunuk Bair. Significant for Australians.",
+      excursion:"⭐ VIKING EXCURSION BOOKED: Troy UNESCO ruins & Gallipoli ANZAC memorial sites", tags:["booked"],
+      links:[{label:"Troy UNESCO Site", url:"https://www.muze.gov.tr/en/muzeler/troy-museum", type:"ticket"},
+             {label:"Gallipoli Anzac Info", url:"https://www.awm.gov.au/articles/encyclopedia/gallipoli", type:"info"}] },
+
+    { date:"Tue 20 Oct", location:"Istanbul (overnight onboard)", flag:"🇹🇷",
+      img:"https://source.unsplash.com/800x400/?hagia,sophia,istanbul,turkey",
+      accommodation:"Viking Sky (final night onboard)", transport:"Ship arrives Istanbul overnight",
+      activity:"Arrive Istanbul – final day aboard Viking Sky. Hagia Sophia (exquisite mosaics, now a mosque again). Blue Mosque and its six minarets. Topkapi Palace and its treasures. Grand Bazaar (4,000 shops). Bosphorus views.",
+      excursion:"✅ INCLUDED: Istanbul – Hagia Sophia, Blue Mosque & Topkapi Palace", tags:["included"],
+      links:[{label:"Topkapi Palace Tickets", url:"https://muze.gen.tr/muze-detay/tkp", type:"ticket"},
+             {label:"Hagia Sophia Info", url:"https://www.hagiasophia.com/", type:"info"}] }
+  ]},
+
+  { id:"istanbul", name:"Istanbul", emoji:"🕌", color:"#8b5e00", days:[
+    { date:"Wed 21 Oct", location:"Istanbul – Disembark & Explore", flag:"🇹🇷",
+      img:"https://source.unsplash.com/800x400/?galata,tower,istanbul,turkey",
+      accommodation:"Hotel De Reve Galata Special Class", transport:"Disembark Viking Sky | Transfer to Hotel De Reve Galata",
+      activity:"Disembark morning. Check in Hotel De Reve Galata. Galata Tower (panoramic views). Beyoğlu & İstiklal Avenue (vibrant boulevard). Egyptian Spice Bazaar. Dolmabahçe Palace on the Bosphorus. Evening: Bosphorus sunset cruise for the magical Istanbul skyline.",
+      excursion:null, tags:[],
+      links:[{label:"Hotel De Reve Galata", url:"https://www.hotelderevestanbul.com/en/", type:"book"},
+             {label:"Galata Tower Tickets", url:"https://www.galatakule.net.tr/en/", type:"ticket"},
+             {label:"Bosphorus Cruise", url:"https://www.bosphorustours.com/", type:"book"}] },
+
+    { date:"Thu 22 Oct", location:"Istanbul – Final Day (depart 01:30 Fri)", flag:"🇹🇷",
+      img:"https://source.unsplash.com/800x400/?basilica,cistern,istanbul,underground",
+      accommodation:"Hotel De Reve Galata (checkout before midnight)", transport:"Private transfer → Istanbul Airport IST for MH4270 01:30 on 23rd",
+      activity:"Final day. Basilica Cistern (underground Byzantine reservoir – spectacular). Süleymaniye Mosque. Balat neighbourhood – colourful Greek/Jewish/Armenian quarter. Karaköy waterfront. Final Turkish dinner. Checkout hotel before midnight. Transfer to airport for 01:30 departure. Allow 3hrs for check-in.",
+      excursion:null, tags:[],
+      links:[{label:"Basilica Cistern Tickets", url:"https://www.yerebatan.com/en/tickets", type:"ticket"},
+             {label:"Süleymaniye Mosque", url:"https://www.suleymaniyecamii.org/en/", type:"info"}] }
+  ]},
+
+  { id:"home", name:"Home", emoji:"🏠", color:"#4a5568", days:[
+    { date:"Fri 23 Oct", location:"Istanbul → KL → Melbourne", flag:"🌏",
+      img:"https://source.unsplash.com/800x400/?airplane,flight,airport",
+      accommodation:"In Transit", transport:"MH4270 Istanbul IST → KL | MH147 KL → Melbourne",
+      activity:"Depart Istanbul 01:30. Long-haul return via Kuala Lumpur. Arrive Melbourne to connect to Launceston.",
+      excursion:null, tags:["flight"], links:[] },
+    { date:"Sat 24 Oct", location:"Melbourne → Launceston – Home!", flag:"🇦🇺",
+      img:"https://source.unsplash.com/800x400/?launceston,tasmania,australia",
+      accommodation:"Home – Launceston, Tasmania", transport:"VA1366 Melbourne → Launceston",
+      activity:"Arrive Melbourne. Connect to VA1366 to Launceston. HOME after 41 extraordinary days across Europe! 6 countries, 2 Viking cruises, 30+ ports, countless unforgettable memories.",
+      excursion:null, tags:["flight"], links:[] }
+  ]}
+];
+
+// ════════════════════════════════════════
+// PIN SYSTEM
+// ════════════════════════════════════════
+let pinEntry = '';
+const STORAGE_KEY = 'suth_pin_2026';
+const SESSION_KEY = 'suth_session';
+
+function getPin() {
+  return localStorage.getItem(STORAGE_KEY) || '2026';
+}
+
+function checkSession() {
+  const s = sessionStorage.getItem(SESSION_KEY);
+  if (s === 'ok') unlockApp(true);
+}
+
+function pinPress(val) {
+  if (val === 'del') { pinEntry = pinEntry.slice(0,-1); }
+  else if (val === 'clear') { pinEntry = ''; }
+  else if (pinEntry.length < 4) { pinEntry += val; }
+  updatePinDots();
+  if (pinEntry.length === 4) {
+    setTimeout(checkPin, 150);
+  }
+}
+
+function updatePinDots() {
+  for (let i=0; i<4; i++) {
+    document.getElementById('d'+i).classList.toggle('filled', i < pinEntry.length);
+  }
+}
+
+function checkPin() {
+  if (pinEntry === getPin()) {
+    sessionStorage.setItem(SESSION_KEY,'ok');
+    unlockApp(false);
+  } else {
+    document.getElementById('pinError').textContent = 'Incorrect PIN. Try again.';
+    pinEntry = '';
+    updatePinDots();
+    setTimeout(() => document.getElementById('pinError').textContent = '', 2000);
+  }
+}
+
+function unlockApp(silent) {
+  document.getElementById('pin-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (!silent) {
+    updateHeaderStats();
+    buildTabs();
+    buildMain();
+  }
+}
+
+function lockApp() {
+  sessionStorage.removeItem(SESSION_KEY);
+  pinEntry = '';
+  updatePinDots();
+  document.getElementById('pin-screen').style.display = 'flex';
+  document.getElementById('app').style.display = 'none';
+}
+
+// ════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════
+let activeSegment = 0;
+let activePanel = 'itinerary';
+let notes = {};
+let docNotes = {};
+
+try { notes = JSON.parse(localStorage.getItem('suth_notes_2026') || '{}'); } catch(e) {}
+try { docNotes = JSON.parse(localStorage.getItem('suth_docnotes_2026') || '{}'); } catch(e) {}
+
+// ════════════════════════════════════════
+// DATES
+// ════════════════════════════════════════
+const TRIP_START = new Date('2026-09-14');
+const TRIP_END   = new Date('2026-10-24');
+
+function parseDate(str) {
+  const p = str.split(' ');
+  const mo = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  return new Date(2026, mo[p[2]], parseInt(p[1]));
+}
+
+function updateHeaderStats() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = new Date(TRIP_START); start.setHours(0,0,0,0);
+  const end   = new Date(TRIP_END);   end.setHours(0,0,0,0);
+  const total = (end-start)/86400000;
+  const elapsed = (today-start)/86400000;
+  const el = document.getElementById('countdown');
+  const lab = document.getElementById('countdownLabel');
+  const fill = document.getElementById('progressFill');
+  const prog = document.getElementById('progressLabel');
+  if (!el) return;
+  if (today < start) {
+    el.textContent = Math.ceil((start-today)/86400000);
+    lab.textContent = 'days to go';
+    fill.style.width = '0%'; prog.textContent = 'Not yet departed';
+  } else if (today > end) {
+    el.textContent = '✓'; lab.textContent = 'trip complete!';
+    fill.style.width = '100%'; prog.textContent = 'Trip complete!';
+  } else {
+    el.textContent = Math.ceil((end-today)/86400000);
+    lab.textContent = 'days left';
+    fill.style.width = Math.min(100,(elapsed/total)*100).toFixed(1)+'%';
+    prog.textContent = 'Day '+Math.floor(elapsed+1)+' of '+total;
+  }
+}
+
+function findToday() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  for (let si=0; si<SEGMENTS.length; si++) {
+    for (let di=0; di<SEGMENTS[si].days.length; di++) {
+      const d = parseDate(SEGMENTS[si].days[di].date);
+      if (d.getTime()===today.getTime()) return {seg:si,day:di};
+    }
+  }
+  const start = new Date(TRIP_START); start.setHours(0,0,0,0);
+  return today < start ? {seg:0,day:0} : {seg:SEGMENTS.length-1,day:0};
+}
+
+// ════════════════════════════════════════
+// BUILD UI
+// ════════════════════════════════════════
+function buildTabs() {
+  const c = document.getElementById('segTabs');
+  if (!c) return;
+  c.innerHTML = '';
+  SEGMENTS.forEach((seg,i) => {
+    const btn = document.createElement('button');
+    btn.className = 'seg-tab'+(i===activeSegment?' active':'');
+    btn.innerHTML = `<span class="te">${seg.emoji}</span><span class="tl">${seg.name.split(' ')[0]}</span>`;
+    btn.onclick = ()=>{ activeSegment=i; buildTabs(); buildMain(); showItinerary(); };
+    c.appendChild(btn);
+  });
+}
+
+function btnColor(type) {
+  if (type==='ticket') return 'btn-ticket';
+  if (type==='rest') return 'btn-rest';
+  if (type==='book') return 'btn-book';
+  return 'btn-map';
+}
+function btnIcon(type) {
+  if (type==='ticket') return '🎟';
+  if (type==='rest') return '🍽';
+  if (type==='book') return '🔗';
+  return 'ℹ️';
+}
+
+function buildMain() {
+  const c = document.getElementById('main');
+  if (!c) return;
+  const seg = SEGMENTS[activeSegment];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const ti = findToday();
+  c.innerHTML = '';
+
+  // Segment header
+  const hdr = document.createElement('div');
+  hdr.className = 'segment-header';
+  hdr.innerHTML = `<div class="seg-icon">${seg.emoji}</div>
+    <div><div class="seg-name">${seg.name}</div>
+    <div class="seg-count">${seg.days.length} day${seg.days.length!==1?'s':''}</div></div>`;
+  c.appendChild(hdr);
+
+  seg.days.forEach((day,di) => {
+    const isToday = ti.seg===activeSegment && ti.day===di && parseDate(day.date).getTime()===today.getTime();
+    const card = document.createElement('div');
+    card.className = 'day-card'+(isToday?' today':'');
+    card.id = `card-${activeSegment}-${di}`;
+    const nk = `${activeSegment}-${di}`;
+
+    const tagHtml = (day.tags||[]).map(t=>{
+      if(t==='included') return '<span class="tag tag-included">✓ Included</span>';
+      if(t==='booked') return '<span class="tag tag-booked">★ Pre-booked</span>';
+      if(t==='flight') return '<span class="tag tag-flight">✈ Flight</span>';
+      if(t==='arrival') return '<span class="tag tag-arrival">🎉 Arrival</span>';
+      return '';
+    }).join('');
+
+    let excHtml = '';
+    if (day.excursion) {
+      const isBkd = day.excursion.includes('BOOKED')||day.excursion.includes('INCLUDED');
+      excHtml = `<div class="day-section">
+        <div class="section-label">Excursion / Activity</div>
+        <div class="excursion-block ${isBkd?'booked':''}">${day.excursion}</div></div>`;
+    }
+
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(day.location+' '+day.date.split(' ')[2]+' 2026')}`;
+    let linkBtns = `<a class="btn btn-map" href="${mapUrl}" target="_blank">🗺 Map</a>`;
+    (day.links||[]).forEach(l => {
+      linkBtns += `<a class="btn ${btnColor(l.type)}" href="${l.url}" target="_blank">${btnIcon(l.type)} ${l.label}</a>`;
+    });
+
+    const imgHtml = day.img
+      ? `<div class="day-hero-wrap"><img src="${day.img}" alt="${day.location}" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1f3a,#2d6a8f)'"><div class="hero-overlay"></div></div>`
+      : `<div class="day-hero-wrap" style="display:flex;align-items:center;justify-content:center;font-size:40px">${day.flag}</div>`;
+
+    card.innerHTML = `
+      <div class="day-card-header" onclick="toggleCard('card-${activeSegment}-${di}')">
+        ${imgHtml}
+        <div class="day-header-info">
+          <div class="day-flag-date">
+            <div class="day-flag">${day.flag}</div>
+            <div class="day-date-label">${day.date.split(' ').slice(0,2).join(' ')}</div>
+          </div>
+          <div class="day-main">
+            <div class="day-location">${day.location}${isToday?'<span class="today-badge">📍 Today</span>':''}</div>
+            <div class="day-preview">${day.activity}</div>
+            ${tagHtml?`<div class="tag-row">${tagHtml}</div>`:''}
+          </div>
+          <div class="day-chevron">▼</div>
+        </div>
+      </div>
+      <div class="day-body">
+        <div class="day-section">
+          <div class="section-label">📋 Plan for the Day</div>
+          <div class="section-content">${day.activity}</div>
+        </div>
+        <div class="day-section">
+          <div class="section-label">🏨 Accommodation</div>
+          <div class="section-content"><span class="accom-icon">🛏</span>${day.accommodation}</div>
+        </div>
+        <div class="day-section">
+          <div class="section-label">🚗 Getting Around</div>
+          <div class="section-content">${day.transport}</div>
+        </div>
+        ${excHtml}
+        <div class="action-row">${linkBtns}</div>
+        <div class="notes-section">
+          <div class="notes-label">✏️ Your Notes</div>
+          <textarea class="notes-textarea" id="note-${nk}"
+            placeholder="Last-minute changes, restaurant finds, tips, reminders…"
+            oninput="saveNote('${nk}')">${notes[nk]||''}</textarea>
+          <div class="notes-saved" id="saved-${nk}">✓ Saved</div>
+        </div>
+      </div>`;
+
+    c.appendChild(card);
+    if (isToday) card.classList.add('open');
+  });
+}
+
+function toggleCard(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+function saveNote(key) {
+  notes[key] = document.getElementById('note-'+key)?.value || '';
+  try { localStorage.setItem('suth_notes_2026', JSON.stringify(notes)); } catch(e) {}
+  const s = document.getElementById('saved-'+key);
+  if (s) { s.classList.add('show'); clearTimeout(s._t); s._t = setTimeout(()=>s.classList.remove('show'),1800); }
+}
+
+// ════════════════════════════════════════
+// DOCS PANEL
+// ════════════════════════════════════════
+const DOC_CATEGORIES = [
+  { id:'flights', icon:'✈️', title:'Flights & Transfers', items:[
+    {name:'VA1365 – Launceston → Melbourne', detail:'Mon 14 Sep'},
+    {name:'MH148 – Melbourne → Kuala Lumpur', detail:'Tue 15 Sep'},
+    {name:'MH20 – Kuala Lumpur → Paris CDG', detail:'Tue/Wed 15-16 Sep'},
+    {name:'Eurostar – Paris → Amsterdam', detail:'Sun 20 Sep, 10:30'},
+    {name:'OS543 – Budapest → Vienna → Venice', detail:'Tue 06 Oct'},
+    {name:'MH4270 – Istanbul → Kuala Lumpur', detail:'Fri 23 Oct, 01:30'},
+    {name:'MH147 – Kuala Lumpur → Melbourne', detail:'Fri 23 Oct'},
+    {name:'VA1366 – Melbourne → Launceston', detail:'Sat 24 Oct'},
+  ]},
+  { id:'hotels', icon:'🏨', title:'Hotels & Accommodation', items:[
+    {name:'Pan Pacific South Wharf', detail:'Melbourne – Mon 14 Sep'},
+    {name:'Les Jardins de Verve – By Locke', detail:'Paris Latin Quarter – 16-20 Sep (4 nights)'},
+    {name:'Viking Magni', detail:'River cruise – 20 Sep to 03 Oct'},
+    {name:'7Seasons Apartments', detail:'Budapest – 04-06 Oct (2 nights)'},
+    {name:'Hotel Grande Italia', detail:'Chioggia – Tue 06 Oct (1 night)'},
+    {name:'Viking Sky', detail:'Ocean cruise – 07-21 Oct'},
+    {name:'Hotel De Reve Galata Special Class', detail:'Istanbul – 21-23 Oct (2 nights)'},
+  ]},
+  { id:'cruise', icon:'🚢', title:'Viking Cruise Documents', items:[
+    {name:'Viking Magni – Booking Confirmation', detail:'Grand European Tour – Amsterdam to Budapest'},
+    {name:'Viking Sky – Booking Confirmation', detail:'Ancient Adriatic Treasures – Chioggia to Istanbul'},
+    {name:'Viking Magni – Excursion: Nuremberg', detail:'Pre-booked WWII History tour'},
+    {name:'Viking Magni – Excursion: Melk & Wachau', detail:'Pre-booked Melk Abbey & Wine Tasting'},
+    {name:'Viking Sky – Excursion: Troy & Gallipoli', detail:'Pre-booked ANZAC memorial sites'},
+  ]},
+  { id:'tickets', icon:'🎟', title:'Pre-booked Tickets & Shows', items:[
+    {name:'Moulin Rouge – Féerie Show', detail:'Thu 17 Sep, 20:30 seating, Paris'},
+    {name:'Versailles – Passport Ticket', detail:'Sat 19 Sep, 09:30 timed entry'},
+    {name:'Margaux Restaurant', detail:'Sat 19 Sep, 19:00, Paris 16th'},
+  ]},
+  { id:'insurance', icon:'🛡', title:'Insurance & Health', items:[
+    {name:'Travel Insurance Policy', detail:'Add your policy number and emergency contact'},
+    {name:'EHIC / Medicare Overseas', detail:'European Health Insurance details'},
+    {name:'Emergency Contacts', detail:'Family, doctor, bank numbers'},
+    {name:'Prescription Medications', detail:'List of medications and doses for customs'},
+  ]},
+  { id:'other', icon:'📄', title:'Other Documents', items:[
+    {name:'Passports', detail:'Australian passports – check expiry dates (need 6 months validity)'},
+    {name:'Travel Visas', detail:'Turkey e-Visa required (apply at evisa.gov.tr)'},
+    {name:'Travel Itinerary Summary', detail:'This document!'},
+    {name:'Currency & Cards', detail:'Euro, HUF, HRK, TRY – advise bank of travel'},
+  ]}
+];
+
+function buildDocsPanel() {
+  const c = document.getElementById('docs-panel');
+  c.innerHTML = `
+    <div class="docs-header">
+      <h2>📁 Document Vault</h2>
+      <p>Keep links, reference numbers and notes for all your key travel documents. Add your booking confirmation URLs or reference numbers in the fields below each item.</p>
+    </div>`;
+
+  DOC_CATEGORIES.forEach(cat => {
+    const div = document.createElement('div');
+    div.className = 'doc-category';
+    div.id = 'cat-'+cat.id;
+    let itemsHtml = cat.items.map((item,i)=>{
+      const key = cat.id+'-'+i;
+      const saved = docNotes[key] || {url:'',note:''};
+      return `<div class="doc-item">
+        <div class="doc-item-info">
+          <div class="doc-item-name">${item.name}</div>
+          <div class="doc-item-detail">${item.detail}</div>
+          <input class="doc-url-input" id="url-${key}" placeholder="Paste booking URL or reference number…"
+            value="${saved.url||''}" oninput="saveDocNote('${key}')">
+          <textarea class="doc-note-area" id="docnote-${key}"
+            placeholder="Notes: confirmation number, PIN, contact…"
+            oninput="saveDocNote('${key}')">${saved.note||''}</textarea>
+        </div>
+      </div>`;
+    }).join('');
+
+    div.innerHTML = `
+      <div class="doc-cat-header" onclick="toggleDocCat('cat-${cat.id}')">
+        <div class="doc-cat-icon">${cat.icon}</div>
+        <div class="doc-cat-title">${cat.title}</div>
+        <div class="doc-cat-chev">▼</div>
+      </div>
+      <div class="doc-cat-body">${itemsHtml}</div>`;
+    c.appendChild(div);
+  });
+}
+
+function toggleDocCat(id) {
+  document.getElementById(id)?.classList.toggle('open');
+}
+
+function saveDocNote(key) {
+  docNotes[key] = {
+    url: document.getElementById('url-'+key)?.value || '',
+    note: document.getElementById('docnote-'+key)?.value || ''
+  };
+  try { localStorage.setItem('suth_docnotes_2026', JSON.stringify(docNotes)); } catch(e) {}
+}
+
+// ════════════════════════════════════════
+// SETTINGS
+// ════════════════════════════════════════
+function showSettings() {
+  setPanel('settings');
+  const c = document.getElementById('main');
+  const dp = document.getElementById('docs-panel');
+  dp.style.display = 'none';
+  c.style.display = 'block';
+  c.innerHTML = `
+    <div class="docs-header" style="margin-bottom:14px">
+      <h2>⚙️ Settings</h2>
+      <p>Manage your PIN and app preferences.</p>
+    </div>
+    <div class="doc-category open" style="margin-bottom:12px">
+      <div class="doc-cat-header" style="cursor:default">
+        <div class="doc-cat-icon">🔐</div>
+        <div class="doc-cat-title">Change PIN</div>
+      </div>
+      <div class="doc-cat-body" style="display:block">
+        <p style="font-size:13px;font-family:Arial,sans-serif;color:var(--text-muted);margin-bottom:12px">Current PIN: <strong>${getPin()}</strong>. Enter a new 4-digit PIN below.</p>
+        <input id="newPin1" type="number" maxlength="4" placeholder="New 4-digit PIN"
+          style="width:100%;padding:9px 11px;border:1.5px solid var(--stone-dark);border-radius:8px;font-size:15px;font-family:Arial,sans-serif;outline:none;margin-bottom:8px">
+        <input id="newPin2" type="number" maxlength="4" placeholder="Confirm new PIN"
+          style="width:100%;padding:9px 11px;border:1.5px solid var(--stone-dark);border-radius:8px;font-size:15px;font-family:Arial,sans-serif;outline:none;margin-bottom:8px">
+        <button onclick="changePin()"
+          style="background:var(--navy);color:var(--gold);border:none;border-radius:8px;padding:11px 24px;font-size:14px;font-family:Arial,sans-serif;font-weight:700;cursor:pointer;width:100%">
+          Update PIN
+        </button>
+        <div id="pinMsg" style="font-size:12px;font-family:Arial,sans-serif;margin-top:8px;height:16px"></div>
+      </div>
+    </div>
+    <div class="doc-category open">
+      <div class="doc-cat-header" style="cursor:default">
+        <div class="doc-cat-icon">ℹ️</div>
+        <div class="doc-cat-title">About</div>
+      </div>
+      <div class="doc-cat-body" style="display:block">
+        <p style="font-size:13px;font-family:Arial,sans-serif;color:var(--text-muted);line-height:1.6">
+          <strong>Sutherland European Adventure 2026</strong><br>
+          41 days · 6 countries · 2 Viking cruises · 30+ ports<br>
+          14 September – 24 October 2026<br><br>
+          Notes and document data are stored locally on this device and are not shared or uploaded anywhere.<br><br>
+          Built with ❤️ using Claude AI.
+        </p>
+      </div>
+    </div>`;
+}
+
+function changePin() {
+  const p1 = document.getElementById('newPin1')?.value;
+  const p2 = document.getElementById('newPin2')?.value;
+  const msg = document.getElementById('pinMsg');
+  if (!p1 || p1.length !== 4 || !/^\d{4}$/.test(p1)) {
+    msg.textContent = '❌ PIN must be exactly 4 digits'; msg.style.color='var(--red)'; return;
+  }
+  if (p1 !== p2) {
+    msg.textContent = '❌ PINs do not match'; msg.style.color='var(--red)'; return;
+  }
+  localStorage.setItem(STORAGE_KEY, p1);
+  msg.textContent = '✓ PIN updated successfully'; msg.style.color='var(--green)';
+  setTimeout(()=>{msg.textContent='';},2500);
+}
+
+// ════════════════════════════════════════
+// PANEL ROUTING
+// ════════════════════════════════════════
+function setPanel(p) {
+  activePanel = p;
+  ['todayBtn','itinBtn','docsBtn','settBtn'].forEach(id=>{
+    document.getElementById(id)?.classList.remove('primary','secondary','active-docs');
+    document.getElementById(id)?.classList.add('secondary');
+  });
+  if (p==='itinerary') { document.getElementById('itinBtn')?.classList.replace('secondary','primary'); }
+  else if (p==='docs')  { document.getElementById('docsBtn')?.classList.replace('secondary','active-docs'); }
+  else if (p==='settings') { document.getElementById('settBtn')?.classList.replace('secondary','primary'); }
+}
+
+function showItinerary() {
+  setPanel('itinerary');
+  document.getElementById('main').style.display = 'block';
+  document.getElementById('docs-panel').style.display = 'none';
+  buildMain();
+}
+
+function showDocs() {
+  setPanel('docs');
+  document.getElementById('main').style.display = 'none';
+  const dp = document.getElementById('docs-panel');
+  dp.style.display = 'block';
+  buildDocsPanel();
+}
+
+function goToday() {
+  const info = findToday();
+  if (info.seg !== activeSegment) {
+    activeSegment = info.seg;
+    buildTabs();
+  }
+  showItinerary();
+  setTimeout(()=>{
+    const el = document.getElementById(`card-${info.seg}-${info.day}`);
+    if (el) { el.scrollIntoView({behavior:'smooth',block:'start'}); el.classList.add('open'); }
+  }, 150);
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+checkSession();
+setInterval(updateHeaderStats, 60000);
+</script>
+</body>
+</html>
