@@ -75,10 +75,13 @@ body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-hei
 .day-card-header{cursor:pointer;user-select:none}
 
 /* Hero image */
-.day-hero{width:100%;height:160px;object-fit:cover;display:block;background:linear-gradient(135deg,#1a1f3a,#2d6a8f);min-height:160px}
-.day-hero-wrap{position:relative;width:100%;height:160px;overflow:hidden;background:linear-gradient(135deg,#1a1f3a 0%,#2d6a8f 100%)}
-.day-hero-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s}
-.day-hero-wrap .hero-overlay{position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(26,31,58,.7),transparent);pointer-events:none}
+.day-hero-svg{width:100%;height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer}
+.day-hero-svg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to top,rgba(0,0,0,.35),transparent)}
+.hero-emoji{font-size:52px;line-height:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.4));z-index:1}
+.hero-label{font-size:13px;font-weight:700;color:rgba(255,255,255,.95);font-family:Georgia,serif;margin-top:8px;letter-spacing:.3px;text-shadow:0 1px 4px rgba(0,0,0,.5);z-index:1}
+.hero-sublabel{font-size:10px;color:rgba(255,255,255,.65);font-family:Arial,sans-serif;margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.4);z-index:1}
+/* Stars effect for night scenes */
+.hero-stars{position:absolute;inset:0;z-index:0}
 .day-hero-placeholder{width:100%;height:80px;display:flex;align-items:center;justify-content:center;font-size:36px;background:linear-gradient(135deg,var(--stone),var(--stone-dark))}
 
 /* Header info */
@@ -251,14 +254,14 @@ body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-hei
 const SEGMENTS = [
   { id:"travel", name:"Travel Out", emoji:"✈️", color:"#4a5568", days:[
     { date:"Mon 14 Sep", location:"Launceston → Melbourne", flag:"🇦🇺",
-      img:"https://source.unsplash.com/800x400/?melbourne,australia,skyline",
+      img:"linear-gradient(160deg,#0f2347 0%,#1a4a7a 60%,#2d6a8f 100%)",heroEmoji:"🏙️",heroLabel:"Melbourne",heroSub:"Pan Pacific South Wharf",
       accommodation:"Pan Pacific South Wharf, Melbourne",
       transport:"VA1365 Launceston → Melbourne",
       activity:"Fly to Melbourne, check in overnight at Pan Pacific South Wharf. First leg of the great adventure!",
       excursion:null, tags:["flight"],
       links:[] },
     { date:"Tue 15 Sep", location:"Melbourne → KL → Paris", flag:"🌏",
-      img:"https://source.unsplash.com/800x400/?airplane,flight,airport",
+      img:"linear-gradient(160deg,#0a0f1a 0%,#1a2d5c 50%,#2d4a8f 100%)",heroEmoji:"✈️",heroLabel:"Melbourne → KL → Paris",heroSub:"Malaysian Airlines MH148 · MH20",
       accommodation:"In Transit (Malaysian Airlines)",
       transport:"MH148 Melbourne → Kuala Lumpur | MH20 KL → Paris CDG",
       activity:"Long-haul flight to Paris via Kuala Lumpur. Arrive Paris CDG early Wednesday morning. Try to sleep on the plane!",
@@ -267,7 +270,7 @@ const SEGMENTS = [
 
   { id:"paris", name:"Paris", emoji:"🗼", color:"#2d6a8f", days:[
     { date:"Wed 16 Sep", location:"Paris – Arrival Day", flag:"🇫🇷",
-      img:"https://source.unsplash.com/800x400/?eiffel,tower,paris,sunrise",
+      img:"linear-gradient(160deg,#8b1a4a 0%,#3a0f2a 50%,#1a1f3a 100%)",heroEmoji:"🗼",heroLabel:"Paris – Arrival Day",heroSub:"Les Jardins de Verve · Latin Quarter",
       accommodation:"Les Jardins de Verve – By Locke, Latin Quarter",
       transport:"Taxi CDG → Hotel (~€62 fixed fare) | EES biometric at CDG",
       activity:"Arrive ~07:00. EES biometric processing at CDG. Check-in from 11:00. Gentle first day: Place Monge Market 11:15, Panthéon 13:00, coffee at Le Comptoir du Panthéon 14:00, Luxembourg Gardens 14:45, Rue Mouffetard stroll 17:30. Dinner at Quartier Latin Pizza 18:30. Gelato at Amorino 20:00. Lights out 21:00 — jet lag is real.",
@@ -278,7 +281,7 @@ const SEGMENTS = [
       ] },
 
     { date:"Thu 17 Sep", location:"Paris – Batobus & Moulin Rouge", flag:"🇫🇷",
-      img:"https://source.unsplash.com/800x400/?moulin,rouge,paris,montmartre",
+      img:"linear-gradient(160deg,#8b1a1a 0%,#5a0f0f 50%,#1a0a0a 100%)",heroEmoji:"🎭",heroLabel:"Moulin Rouge Night",heroSub:"Montmartre · 20:30 Show",
       accommodation:"Les Jardins de Verve – By Locke",
       transport:"Batobus 2-Day Pass from Jardin des Plantes | Taxi to Montmartre 17:45",
       activity:"08:30 leave hotel. Arènes de Lutèce 08:50. Jardin des Plantes 09:05. Batobus 10:00 → Eiffel Tower stop. Trocadéro terrace 10:35. Coffee at Carette 11:15. Batobus → Louvre stop 12:00. Lunch Right Bank 12:20. Opéra Garnier 13:30. Galeries Lafayette glass dome & free rooftop 14:00. Madeleine 14:45. Place de la Concorde 15:00. Tuileries gardens 15:15. Palais Royal 15:45. Louvre exterior & pyramid 16:05. Batobus return 16:30. Hotel rest 17:00. Taxi 17:45 → Montmartre 18:10. Dinner La Couvée 18:30. Walk Moulin Rouge 20:15. Show 20:30–23:00. Taxi home 23:00.",
@@ -292,7 +295,7 @@ const SEGMENTS = [
       ] },
 
     { date:"Fri 18 Sep", location:"Paris – Left Bank, Marais & 2CV Tour", flag:"🇫🇷",
-      img:"https://source.unsplash.com/800x400/?notre,dame,paris,cathedral",
+      img:"linear-gradient(160deg,#1a3a5c 0%,#0f2040 50%,#0a1525 100%)",heroEmoji:"⛪",heroLabel:"Left Bank, Marais & 2CV Tour",heroSub:"Notre-Dame · Place des Vosges",
       accommodation:"Les Jardins de Verve – By Locke",
       transport:"Batobus Day 2 | Taxi Marais → hotel 15:15 | 2CV pickup hotel 20:00",
       activity:"08:30 leave. Scenic walk to Batobus via quays 08:50. Optional crêpe stop 09:15. Batobus 10:00 → Invalides. Pont Alexandre III 10:20. Petit Palais (FREE museum) 10:40. Les Invalides & Napoleon's Tomb 11:20. Batobus → Notre-Dame 12:10. Notre-Dame exterior & Île Saint-Louis 12:25. Takeaway lunch 13:00. Marais stroll 13:45: Rue des Rosiers, Place des Vosges (must-see!), Boulevard Beaumarchais. Taxi hotel 15:15. Rest 15:45–18:00. Wine tasting + small plates Vins & Whisky 18:00 (serves as dinner). 2CV Famous Montmartre Night Tour 20:00 from hotel — Sacré-Cœur, Place du Tertre, hidden streets, Paris panorama. Home 22:00.",
@@ -306,7 +309,7 @@ const SEGMENTS = [
       ] },
 
     { date:"Sat 19 Sep", location:"Paris – Versailles Day Trip", flag:"🇫🇷",
-      img:"https://source.unsplash.com/800x400/?versailles,palace,france,gardens",
+      img:"linear-gradient(160deg,#1a5c3a 0%,#0f3a20 50%,#0a1f10 100%)",heroEmoji:"👑",heroLabel:"Palace of Versailles",heroSub:"Hall of Mirrors · Gardens · Trianons",
       accommodation:"Les Jardins de Verve – By Locke",
       transport:"Walk to Gare d'Austerlitz | RER C 08:30 | Return ~16:00 | Taxi to Margaux 18:30",
       activity:"08:00 leave. RER C 08:30 → Versailles Château-Rive Gauche (35 min, arrive ~09:15). Timed entry Palace 09:30–11:00: King's & Queen's Apartments, Hall of Mirrors. Golf cart rental 11:00 from Grand Canal kiosk. Explore gardens, Grand Trianon, Petit Trianon (Marie Antoinette's retreat), Queen's Hamlet (storybook village). Light lunch in gardens 13:30. Return station 15:15. RER C 16:00, Paris 16:45. Rest hotel 16:45–18:30. Taxi to Margaux 18:30. Dinner Margaux 19:00 overlooking Eiffel Tower. Sparkle displays at 20:00, 21:00 & 22:00. Back hotel ~21:30.",
@@ -320,7 +323,7 @@ const SEGMENTS = [
       ] },
 
     { date:"Sun 20 Sep", location:"Paris → Amsterdam → Viking Magni", flag:"🇫🇷🇳🇱",
-      img:"https://source.unsplash.com/800x400/?amsterdam,canal,netherlands",
+      img:"linear-gradient(160deg,#1a3d6b 0%,#0f2a4a 50%,#0a1525 100%)",heroEmoji:"🚢",heroLabel:"Paris → Amsterdam → Viking Magni",heroSub:"Eurostar 10:30 · Embark Grand European Tour",
       accommodation:"Viking Magni (embark)",
       transport:"Taxi → Gare du Nord 09:00 | Eurostar 10:30 → Amsterdam Centraal 13:50 | Walk 5 min to dock",
       activity:"07:30 wake & pack. Check out. Boulangerie Carton breakfast outside Gare du Nord 08:35. Eurostar check-in 09:00 (security + exit & entry controls). Depart 10:30. Arrive Amsterdam Centraal 13:50. Walk 5–10 min to Viking Magni. Check in 14:00, settle into French Balcony cabin. Canal walk 15:00–17:00: Prins Hendrikkade, Brouwersgracht, Haarlemmerdijk. Dinner onboard 18:00. Night walk Red Light District 19:45–21:15. Back to ship 21:30.",
@@ -334,48 +337,48 @@ const SEGMENTS = [
 
   { id:"magni", name:"Viking Magni", emoji:"🚢", color:"#1a5c3a", days:[
     { date:"Mon 21 Sep", location:"Kinderdijk, Netherlands", flag:"🇳🇱",
-      img:"https://source.unsplash.com/800x400/?windmill,kinderdijk,netherlands",
+      img:"linear-gradient(160deg,#2d6a8f 0%,#1a4a6b 50%,#0f2a3a 100%)",heroEmoji:"🌬️",heroLabel:"Kinderdijk, Netherlands",heroSub:"UNESCO Windmills · Dutch Countryside",
       accommodation:"Viking Magni", transport:"Ship docks Kinderdijk",
       activity:"UNESCO World Heritage windmills tour. Enter a working windmill to see mechanisms and living quarters. Dutch cheese & jenever (juniper gin) tasting onboard. Dutch Golden Age presentation. Cruise overnight.",
       excursion:"✅ INCLUDED: Kinderdijk Windmills guided tour (UNESCO)", tags:["included"],
       links:[{label:"Kinderdijk Info", url:"https://www.kinderdijk.nl/en/visit/", type:"info"}] },
 
     { date:"Tue 22 Sep", location:"Cologne, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?cologne,cathedral,germany",
+      img:"linear-gradient(160deg,#2d3a5c 0%,#1a2540 50%,#0f1525 100%)",heroEmoji:"⛪",heroLabel:"Cologne, Germany",heroSub:"Cologne Dom · UNESCO Cathedral",
       accommodation:"Viking Magni", transport:"Ship docks Cologne",
       activity:"Morning guided tour Cologne Old Town. Cologne Dom (Cathedral) – Germany's largest, UNESCO World Heritage Site. Medieval streets and Roman Praetorium underground ruins.",
       excursion:"✅ INCLUDED: Cologne Old Town & Dom Cathedral guided tour (UNESCO)", tags:["included"],
       links:[{label:"Cologne Dom Info", url:"https://www.koelner-dom.de/en/", type:"info"}] },
 
     { date:"Wed 23 Sep", location:"Koblenz → Rüdesheim, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?koblenz,rhine,germany,river",
+      img:"linear-gradient(160deg,#3a5c2d 0%,#253a1a 50%,#15250f 100%)",heroEmoji:"🏰",heroLabel:"Koblenz → Rüdesheim",heroSub:"Rhine Gorge · Lorelei Rock · Castle Views",
       accommodation:"Viking Magni", transport:"Ship sails UNESCO Middle Rhine Gorge",
       activity:"Koblenz: German Corner (Deutsches Eck) where Rhine meets Moselle. Historic Old Town. Afternoon: sail the UNESCO Middle Rhine Gorge past hilltop castles, vineyards and the legendary Lorelei Rock. Marksburg Castle views.",
       excursion:"✅ INCLUDED: Koblenz Old Town & German Corner | Rhine Gorge scenic sailing", tags:["included"],
       links:[{label:"Rhine Gorge UNESCO", url:"https://www.oberes-mittelrheintal.de/en/", type:"info"}] },
 
     { date:"Thu 24 Sep", location:"Miltenberg, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?medieval,town,germany,half,timbered",
+      img:"linear-gradient(160deg,#5c3a2d 0%,#3a251a 50%,#25150f 100%)",heroEmoji:"🏘️",heroLabel:"Miltenberg, Germany",heroSub:"Medieval Town · Main River · Glassblowing",
       accommodation:"Viking Magni", transport:"Main River sailing – scenic Franconia",
       activity:"Charming medieval town on the Main River famous for glassblowing. Half-timbered houses, Miltenberg Castle, lovely Market Square. Scenic Franconia region.",
       excursion:"✅ INCLUDED: Miltenberg Old Town walk & glassblowing demonstration", tags:["included"], links:[] },
 
     { date:"Fri 25 Sep", location:"Würzburg, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?baroque,palace,germany,interior",
+      img:"linear-gradient(160deg,#5c2d3a 0%,#3a1a25 50%,#250f15 100%)",heroEmoji:"🏛️",heroLabel:"Würzburg, Germany",heroSub:"Bishops' Residenz · UNESCO Baroque Palace",
       accommodation:"Viking Magni", transport:"Ship docks Würzburg",
       activity:"Magnificent Bishops' Residenz – one of Europe's finest baroque palaces (UNESCO). Grand staircase, Imperial Hall, ceiling frescoes by Tiepolo. Marienberg Fortress views. Franconian wine region.",
       excursion:"✅ INCLUDED: Würzburg Bishops' Residenz guided tour (UNESCO)", tags:["included"],
       links:[{label:"Residenz Würzburg", url:"https://www.residenz-wuerzburg.de/englisch/tourist/", type:"info"}] },
 
     { date:"Sat 26 Sep", location:"Bamberg, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?bamberg,germany,medieval",
+      img:"linear-gradient(160deg,#3a4a5c 0%,#252f3a 50%,#151a25 100%)",heroEmoji:"🏙️",heroLabel:"Bamberg, Germany",heroSub:"UNESCO Medieval City · Rauchbier · Old Town Hall",
       accommodation:"Viking Magni", transport:"Ship docks Bamberg",
       activity:"UNESCO-listed medieval city. Old Town Hall (Altes Rathaus) perched on a bridge island in the river. Bamberg Cathedral with the famous Bamberg Rider sculpture. Sample distinctive local rauchbier (smoked beer).",
       excursion:"✅ INCLUDED: Bamberg medieval Old Town walking tour (UNESCO)", tags:["included"],
       links:[{label:"Visit Bamberg", url:"https://www.bamberg.info/en/", type:"info"}] },
 
     { date:"Sun 27 Sep", location:"Nuremberg, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?nuremberg,castle,germany",
+      img:"linear-gradient(160deg,#2d2d2d 0%,#1a1a1a 50%,#0f0f0f 100%)",heroEmoji:"🏯",heroLabel:"Nuremberg, Germany",heroSub:"Imperial Castle · WWII History · Palace of Justice",
       accommodation:"Viking Magni", transport:"Transit 16-lock Main-Danube Canal",
       activity:"Transit the 16-lock Main-Danube Canal (106 miles). Nuremberg: Imperial Castle (Kaiserburg), medieval market square, Palace of Justice from the famous WWII Nuremberg Trials. Holy Roman Empire history.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Nuremberg & WWII History tour", tags:["booked"],
@@ -383,7 +386,7 @@ const SEGMENTS = [
              {label:"Nuremberg Trials Court", url:"https://www.museums.nuremberg.de/memorium-nuremberg-trials/", type:"ticket"}] },
 
     { date:"Mon 28 Sep", location:"Regensburg, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?regensburg,danube,bridge,germany",
+      img:"linear-gradient(160deg,#1a3d5c 0%,#0f2540 50%,#0a1525 100%)",heroEmoji:"🌉",heroLabel:"Regensburg, Germany",heroSub:"UNESCO City · Stone Bridge · Alte Würstküche",
       accommodation:"Viking Magni", transport:"Ship docks Regensburg",
       activity:"UNESCO-listed 2,000-year-old medieval city. Roman structures, 13th–14th century patrician houses, famous Stone Bridge, St. Peter's Cathedral. Visit Alte Würstküche – Germany's oldest restaurant (since 1146) for famous grilled Danube sausages.",
       excursion:"✅ INCLUDED: Regensburg Through History guided tour (UNESCO) | Alte Würstküche", tags:["included"],
@@ -391,14 +394,14 @@ const SEGMENTS = [
              {label:"UNESCO Regensburg", url:"https://www.regensburg.de/tourismus/en/", type:"info"}] },
 
     { date:"Tue 29 Sep", location:"Passau, Germany", flag:"🇩🇪",
-      img:"https://source.unsplash.com/800x400/?passau,danube,three,rivers,germany",
+      img:"linear-gradient(160deg,#1a2d4a 0%,#0f1a2d 50%,#0a1020 100%)",heroEmoji:"🌊",heroLabel:"Passau, Germany",heroSub:"Three Rivers · Cathedral Organ · 17,774 Pipes",
       accommodation:"Viking Magni", transport:"Ship docks at three-rivers confluence",
       activity:"Where three rivers meet: Inn, Ilz and Danube. Dom St. Stephan with Europe's largest cathedral organ (17,774 pipes!). Old Town patrician architecture. Evening organ concert (May–Oct, not Sundays).",
       excursion:"✅ INCLUDED: Passau Old Town & Cathedral | Evening organ concert", tags:["included"],
       links:[{label:"Dom St. Stephan", url:"https://www.bistum-passau.de/dom/", type:"info"}] },
 
     { date:"Wed 30 Sep", location:"Melk & Krems, Austria", flag:"🇦🇹",
-      img:"https://source.unsplash.com/800x400/?melk,abbey,austria,danube",
+      img:"linear-gradient(160deg,#4a3d1a 0%,#2d250f 50%,#1a150a 100%)",heroEmoji:"⛪",heroLabel:"Melk Abbey & Krems, Austria",heroSub:"900-year Benedictine Abbey · Wachau Valley Wine",
       accommodation:"Viking Magni", transport:"Ship docks Melk, sails Wachau Valley to Krems",
       activity:"Melk Abbey – 900-year-old Benedictine monastery, Austria's finest baroque architecture. Medieval manuscripts, breathtaking ceiling frescoes. Afternoon: sail UNESCO Wachau Valley past hillside vineyards. Krems: Steiner Tor city gate. Wine tasting in Wachau wine region.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Melk Abbey & Wachau Valley Wine Tasting", tags:["booked"],
@@ -406,7 +409,7 @@ const SEGMENTS = [
              {label:"Wachau Valley Info", url:"https://www.welterbe-wachau.at/en/", type:"info"}] },
 
     { date:"Thu 01 Oct", location:"Vienna, Austria", flag:"🇦🇹",
-      img:"https://source.unsplash.com/800x400/?vienna,austria,cathedral,stephansdom",
+      img:"linear-gradient(160deg,#6b1a2d 0%,#3a0f1a 50%,#200a0f 100%)",heroEmoji:"🎻",heroLabel:"Vienna, Austria",heroSub:"City of Waltzes · State Opera · Ringstrasse",
       accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docks Vienna overnight",
       activity:"City of waltzes and classical music. Ringstrasse boulevard: Hofburg Palace, Kunsthistorisches Museum, Vienna City Hall, Burgtheater. State Opera House. Learn the Viennese waltz. Optional: Schönbrunn Palace.",
       excursion:"✅ INCLUDED: Vienna city tour – Ringstrasse, State Opera & classical music heritage", tags:["included"],
@@ -414,7 +417,7 @@ const SEGMENTS = [
              {label:"Schönbrunn Palace", url:"https://www.schoenbrunn.at/en/tickets/", type:"ticket"}] },
 
     { date:"Fri 02 Oct", location:"Vienna, Austria (Day 2)", flag:"🇦🇹",
-      img:"https://source.unsplash.com/800x400/?vienna,belvedere,museum,austria",
+      img:"linear-gradient(160deg,#4a2d6b 0%,#2d1a3a 50%,#1a0f25 100%)",heroEmoji:"🎨",heroLabel:"Vienna, Austria – Day 2",heroSub:"Belvedere Gallery · Klimt's The Kiss · Café Culture",
       accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docked overnight Vienna",
       activity:"Second day in Vienna. Belvedere Gallery (Klimt's The Kiss). Vienna's legendary café culture: Café Central or Demel. Prater park and Giant Ferris Wheel. Naschmarkt food market. Optional: Spanish Riding School.",
       excursion:"✅ INCLUDED: Vienna leisure day – Belvedere, café culture & museum mile", tags:["included"],
@@ -422,7 +425,7 @@ const SEGMENTS = [
              {label:"Naschmarkt Info", url:"https://www.wiener-naschmarkt.eu/en/", type:"info"}] },
 
     { date:"Sat 03 Oct", location:"Budapest (arrive on Magni)", flag:"🇭🇺",
-      img:"https://source.unsplash.com/800x400/?fishermans,bastion,budapest,hungary",
+      img:"linear-gradient(160deg,#6b3a1a 0%,#3a1a0f 50%,#200f0a 100%)",heroEmoji:"🏰",heroLabel:"Budapest, Hungary",heroSub:"Fisherman's Bastion · Castle District · Chain Bridge",
       accommodation:"Viking Magni (final night onboard)", transport:"Ship arrives Budapest",
       activity:"Final day aboard Viking Magni. Fisherman's Bastion for panoramic Danube views. Buda Castle District. Matthias Church. Chain Bridge. Parliament Building view from Pest side. Final dinner onboard. Farewell to crew.",
       excursion:"✅ INCLUDED: Budapest – Buda Castle District & Fisherman's Bastion", tags:["included"],
@@ -432,7 +435,7 @@ const SEGMENTS = [
 
   { id:"budapest", name:"Budapest", emoji:"🏛️", color:"#7c3d8f", days:[
     { date:"Sun 04 Oct", location:"Budapest – Explore the City", flag:"🇭🇺",
-      img:"https://source.unsplash.com/800x400/?budapest,parliament,danube,hungary",
+      img:"linear-gradient(160deg,#3a1a6b 0%,#1a0f3a 50%,#0f0a20 100%)",heroEmoji:"🏛️",heroLabel:"Budapest",heroSub:"Heroes' Square · Thermal Baths · Great Market Hall",
       accommodation:"7Seasons Apartments, Budapest", transport:"Disembark Viking Magni | Transfer to 7Seasons",
       activity:"Disembark morning. Full day: Heroes' Square & Andrássy Avenue (UNESCO). Hungarian State Opera exterior. Széchenyi Thermal Baths. Great Market Hall for local food and souvenirs. Ruin bars in the Jewish Quarter evening.",
       excursion:null, tags:[],
@@ -440,7 +443,7 @@ const SEGMENTS = [
              {label:"Hungarian Parliament", url:"https://www.parlament.hu/en/visitor-information", type:"ticket"}] },
 
     { date:"Mon 05 Oct", location:"Budapest – Free Day", flag:"🇭🇺",
-      img:"https://source.unsplash.com/800x400/?budapest,gellert,hill,view,hungary",
+      img:"linear-gradient(160deg,#1a3a6b 0%,#0f1a3a 50%,#0a0f25 100%)",heroEmoji:"⛰️",heroLabel:"Budapest – Free Day",heroSub:"Gellért Hill · Synagogue · Danube Cruise",
       accommodation:"7Seasons Apartments, Budapest", transport:"Local tram/metro",
       activity:"Free day. Options: Gellért Hill & Citadella for panoramic views, Margaret Island stroll, Dohány Street Synagogue (Europe's largest), Holocaust Memorial Tree of Life, or a Danube sunset cruise.",
       excursion:null, tags:[],
@@ -450,7 +453,7 @@ const SEGMENTS = [
 
   { id:"transit", name:"To Italy", emoji:"🛫", color:"#4a5568", days:[
     { date:"Tue 06 Oct", location:"Budapest → Venice → Chioggia", flag:"🇭🇺🇮🇹",
-      img:"https://source.unsplash.com/800x400/?chioggia,venice,lagoon,italy,canal",
+      img:"linear-gradient(160deg,#1a5c5c 0%,#0f3a3a 50%,#0a2020 100%)",heroEmoji:"⚓",heroLabel:"Budapest → Venice → Chioggia",heroSub:"Austrian Air OS543 · Hotel Grande Italia",
       accommodation:"Hotel Grande Italia, Chioggia", transport:"OS543 Budapest→Vienna→Venice | Private transfer Venice→Chioggia (~1hr)",
       activity:"Fly Austrian Air OS543 Budapest–Vienna–Venice Marco Polo. Private transfer (~1hr) to Chioggia – 'Little Venice' at the southern tip of the Venetian Lagoon. Check in Hotel Grande Italia. Evening stroll along Corso del Popolo, canals, fishing boats and harbour cafes.",
       excursion:null, tags:["flight"],
@@ -459,13 +462,13 @@ const SEGMENTS = [
 
   { id:"sky", name:"Viking Sky", emoji:"⚓", color:"#8b2635", days:[
     { date:"Wed 07 Oct", location:"Chioggia – Embark Viking Sky", flag:"🇮🇹",
-      img:"https://source.unsplash.com/800x400/?chioggia,venice,lagoon,italy,canal",
+      img:"linear-gradient(160deg,#1a4a5c 0%,#0f2d3a 50%,#0a1520 100%)",heroEmoji:"🛳️",heroLabel:"Chioggia – Embark Viking Sky",heroSub:"Ancient Adriatic Treasures · Venice Lagoon",
       accommodation:"Viking Sky", transport:"Transfer to Viking Sky embarkation",
       activity:"Embark Viking Sky. Settle into stateroom. Explore Chioggia's canals, fishing boats and lively Corso del Popolo pedestrian street. 'Little Venice' at the southern tip of the Venetian Lagoon, steeped in seafaring traditions.",
       excursion:"✅ INCLUDED: Chioggia – Venetian Lagoon fishing village orientation", tags:["included"], links:[] },
 
     { date:"Thu 08 Oct", location:"Venice, Italy", flag:"🇮🇹",
-      img:"https://source.unsplash.com/800x400/?venice,italy,canal,gondola",
+      img:"linear-gradient(160deg,#1a2d5c 0%,#0f1a3a 50%,#0a1025 100%)",heroEmoji:"🚣",heroLabel:"Venice, Italy",heroSub:"St Mark's · Doge's Palace · Rialto Bridge",
       accommodation:"Viking Sky", transport:"Vaporetto from Chioggia",
       activity:"Full day Venice. St. Mark's Square & Basilica (pre-book entry). Doge's Palace – Bridge of Sighs. Rialto Bridge & morning fish market. Gondola ride through smaller canals. Explore Dorsoduro and Cannaregio away from crowds.",
       excursion:"✅ INCLUDED: Venice – St. Mark's Basilica, Doge's Palace & Rialto highlights", tags:["included"],
@@ -473,14 +476,14 @@ const SEGMENTS = [
              {label:"Doge's Palace Tickets", url:"https://www.visitmuve.it/en/museums/palazzo-ducale/", type:"ticket"}] },
 
     { date:"Fri 09 Oct", location:"Zadar, Croatia", flag:"🇭🇷",
-      img:"https://source.unsplash.com/800x400/?zadar,croatia,adriatic",
+      img:"linear-gradient(160deg,#1a4a3a 0%,#0f2d20 50%,#0a1510 100%)",heroEmoji:"🌊",heroLabel:"Zadar, Croatia",heroSub:"Sea Organ · Roman Forum · Dalmatian Coast",
       accommodation:"Viking Sky", transport:"Ship docks Zadar",
       activity:"Dalmatian coast gem. Old Town peninsula: Roman Forum & Cathedral of St. Anastasia (9th century). Sea Organ – waves playing music through stone pipes. Sun Salutation light installation. Medieval walls and towers.",
       excursion:"✅ INCLUDED: Zadar Old Town – Roman Forum & Sea Organ", tags:["included"],
       links:[{label:"Visit Zadar", url:"https://www.zadar.travel/en/", type:"info"}] },
 
     { date:"Sat 10 Oct", location:"Dubrovnik, Croatia", flag:"🇭🇷",
-      img:"https://source.unsplash.com/800x400/?dubrovnik,croatia,walls,adriatic",
+      img:"linear-gradient(160deg,#5c2d1a 0%,#3a1a0f 50%,#200f0a 100%)",heroEmoji:"🏰",heroLabel:"Dubrovnik, Croatia",heroSub:"UNESCO City Walls · Stradun · Adriatic Views",
       accommodation:"Viking Sky", transport:"Ship docks Dubrovnik",
       activity:"Walk the complete 2km city wall circuit for magnificent Adriatic views (UNESCO). Stradun main street. Rector's Palace. Franciscan Monastery (oldest pharmacy in Europe, since 1317). Optional: cable car to Mount Srđ for panoramic views.",
       excursion:"✅ INCLUDED: Dubrovnik Old Town walls & historic streets (UNESCO)", tags:["included"],
@@ -488,28 +491,28 @@ const SEGMENTS = [
              {label:"Dubrovnik Cable Car", url:"https://www.dubrovnikcablecar.com/en/", type:"ticket"}] },
 
     { date:"Sun 11 Oct", location:"Kotor, Montenegro", flag:"🇲🇪",
-      img:"https://source.unsplash.com/800x400/?kotor,montenegro,bay,fortress",
+      img:"linear-gradient(160deg,#2d1a5c 0%,#1a0f3a 50%,#0f0a20 100%)",heroEmoji:"⛵",heroLabel:"Kotor, Montenegro",heroSub:"Bay of Kotor · UNESCO Old Town · Mountain Fortress",
       accommodation:"Viking Sky", transport:"Ship sails dramatic Bay of Kotor",
       activity:"One of Europe's most dramatic harbour settings – fjord-like bay ringed by mountains (UNESCO). Medieval Old Town walls. Cathedral of Saint Tryphon. Optional: hike 1,350 steps to San Giovanni Fortress for breathtaking bay views.",
       excursion:"✅ INCLUDED: Kotor Bay sailing & Old Town medieval walking tour (UNESCO)", tags:["included"],
       links:[{label:"Visit Kotor", url:"https://kotor.travel/en/", type:"info"}] },
 
     { date:"Mon 12 Oct", location:"Corfu, Greece", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?corfu,greece,fortress,island",
+      img:"linear-gradient(160deg,#5c4a1a 0%,#3a2d0f 50%,#201a0a 100%)",heroEmoji:"🌿",heroLabel:"Corfu, Greece",heroSub:"UNESCO Old Town · Venetian Fortresses · Vlacherna",
       accommodation:"Viking Sky", transport:"Ship docks Corfu",
       activity:"Corfu Old Town shaped by the Venetian Republic (UNESCO). Old Fortress & New Fortress. Liston promenade. Mon Repos Palace. Vlacherna Monastery on its own islet. Archaeological site of Paleopolis.",
       excursion:"✅ INCLUDED: Corfu Old Town & UNESCO Venetian fortresses tour", tags:["included"],
       links:[{label:"Visit Corfu", url:"https://www.visitgreece.gr/destinations/ionian-islands/corfu/", type:"info"}] },
 
     { date:"Tue 13 Oct", location:"Katakolon (Ancient Olympia), Greece", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?olympia,ruins,ancient,greece",
+      img:"linear-gradient(160deg,#5c3a1a 0%,#3a200f 50%,#20100a 100%)",heroEmoji:"🏃",heroLabel:"Katakolon – Ancient Olympia",heroSub:"Birthplace of Olympic Games · Temple of Zeus",
       accommodation:"Viking Sky", transport:"Ship docks Katakolon | Coach to Olympia (30 min)",
       activity:"Birthplace of the Olympic Games. Ancient Olympia ruins: Temple of Zeus (one of Seven Wonders), original stadium track, Pheidias's Workshop, Palaestra wrestling school. Olympia Archaeological Museum with famous Hermes of Praxiteles.",
       excursion:"✅ INCLUDED: Ancient Olympia ruins & Archaeological Museum", tags:["included"],
       links:[{label:"Ancient Olympia Tickets", url:"https://www.culture.gov.gr/en/service/SitePages/view.aspx?iID=1417", type:"ticket"}] },
 
     { date:"Wed 14 Oct", location:"Athens (Piraeus), Greece – Day 1", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?parthenon,acropolis,athens,greece",
+      img:"linear-gradient(160deg,#5c4a2d 0%,#3a2d1a 50%,#20180f 100%)",heroEmoji:"🏛️",heroLabel:"Athens, Greece – Day 1",heroSub:"Acropolis · Parthenon · UNESCO · Ancient Agora",
       accommodation:"Viking Sky", transport:"Ship docks Piraeus | Metro Line 1 to Athens",
       activity:"The Acropolis & Parthenon (UNESCO). Acropolis Museum. Ancient Agora – heart of Athenian democracy. Temple of Hephaestus (best preserved in Greece). Syntagma Square & Parliament guard changing ceremony.",
       excursion:"✅ INCLUDED: Athens – Acropolis, Parthenon & Ancient Agora (UNESCO)", tags:["included"],
@@ -517,7 +520,7 @@ const SEGMENTS = [
              {label:"Acropolis Museum", url:"https://www.theacropolismuseum.gr/en/tickets", type:"ticket"}] },
 
     { date:"Thu 15 Oct", location:"Athens (Piraeus), Greece – Day 2", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?plaka,athens,greece,streets",
+      img:"linear-gradient(160deg,#4a2d5c 0%,#2d1a3a 50%,#1a0f20 100%)",heroEmoji:"🫒",heroLabel:"Athens, Greece – Day 2",heroSub:"Plaka District · Monastiraki · National Museum",
       accommodation:"Viking Sky", transport:"Ship docked overnight Piraeus",
       activity:"Second day Athens. Plaka District – 'Neighbourhood of the Gods': cobblestone lanes, neoclassical architecture, meze & ouzo. National Archaeological Museum. Monastiraki flea market. Optional: Cape Sounion and Temple of Poseidon.",
       excursion:"✅ INCLUDED: Athens Plaka District & National Archaeological Museum", tags:["included"],
@@ -525,7 +528,7 @@ const SEGMENTS = [
              {label:"Temple of Poseidon", url:"https://odysseus.culture.gr/h/3/gh351.jsp?obj_id=2485", type:"ticket"}] },
 
     { date:"Fri 16 Oct", location:"Heraklion, Crete, Greece", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?crete,knossos,minoan,greece",
+      img:"linear-gradient(160deg,#5c3d2d 0%,#3a251a 50%,#20150f 100%)",heroEmoji:"🐂",heroLabel:"Heraklion, Crete",heroSub:"Palace of Knossos · Minoan Civilisation",
       accommodation:"Viking Sky", transport:"Ship docks Heraklion",
       activity:"Home to Europe's earliest civilisation – the Minoans. Palace of Knossos – 3,500-year-old Bronze Age labyrinthine complex. Heraklion Archaeological Museum with famous Minoan frescoes. Venetian harbour walls & Koules Fortress.",
       excursion:"✅ INCLUDED: Crete – Minoan Palace of Knossos & Archaeological Museum", tags:["included"],
@@ -533,21 +536,21 @@ const SEGMENTS = [
              {label:"Heraklion Arch. Museum", url:"https://www.heraklionarchaeologicalmuseum.gr/en/", type:"ticket"}] },
 
     { date:"Sat 17 Oct", location:"Rhodes, Greece", flag:"🇬🇷",
-      img:"https://source.unsplash.com/800x400/?rhodes,greece,medieval,palace",
+      img:"linear-gradient(160deg,#1a4a5c 0%,#0f2d3a 50%,#0a1520 100%)",heroEmoji:"🗡️",heroLabel:"Rhodes, Greece",heroSub:"UNESCO Medieval Town · Palace of Grand Masters",
       accommodation:"Viking Sky", transport:"Ship docks Rhodes",
       activity:"Europe's largest active medieval town (UNESCO). Palace of the Grand Masters – remarkable Crusader fortification. Street of the Knights (Odos Ippoton). Rhodes Old Town walls (3km). Mandraki Harbour where Colossus once stood.",
       excursion:"✅ INCLUDED: Rhodes medieval Old Town & Palace of Grand Masters (UNESCO)", tags:["included"],
       links:[{label:"Palace of Grand Masters", url:"https://odysseus.culture.gr/h/1/gh155.jsp?obj_id=3326", type:"ticket"}] },
 
     { date:"Sun 18 Oct", location:"Ephesus (Kuşadası), Turkey", flag:"🇹🇷",
-      img:"https://source.unsplash.com/800x400/?ephesus,library,celsus,turkey,ruins",
+      img:"linear-gradient(160deg,#5c4a3a 0%,#3a2d20 50%,#20180f 100%)",heroEmoji:"📚",heroLabel:"Ephesus, Turkey",heroSub:"Library of Celsus · Great Theatre · Ancient Ruins",
       accommodation:"Viking Sky", transport:"Ship docks Kuşadası | Coach to Ephesus (30 min)",
       activity:"One of antiquity's best-preserved cities. Library of Celsus towering 2nd-century façade. Great Theatre (25,000 seats). Temple of Hadrian. Terrace Houses with stunning frescoes (extra fee). Seven Wonders' Temple of Artemis site nearby.",
       excursion:"✅ INCLUDED: Ancient Ephesus – Library of Celsus & Great Theatre", tags:["included"],
       links:[{label:"Ephesus Tickets", url:"https://www.kusadasiport.com/ephesus-turkey", type:"ticket"}] },
 
     { date:"Mon 19 Oct", location:"Troy / Çanakkale, Turkey", flag:"🇹🇷",
-      img:"https://source.unsplash.com/800x400/?troy,ancient,ruins,turkey,canakkale",
+      img:"linear-gradient(160deg,#4a3a1a 0%,#2d200f 50%,#1a100a 100%)",heroEmoji:"🐎",heroLabel:"Troy & Gallipoli, Turkey",heroSub:"Trojan Horse · ANZAC Cove · Gallipoli Memorial",
       accommodation:"Viking Sky", transport:"Ship docks Çanakkale",
       activity:"Ancient Troy (UNESCO) – Homer's legendary city. Famous Trojan Horse replica. Troy Archaeological Museum (opened 2018). Then Gallipoli battlefields & ANZAC memorials – deeply moving WWI sites: Anzac Cove, Lone Pine, Chunuk Bair. Significant for Australians.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Troy UNESCO ruins & Gallipoli ANZAC memorial sites", tags:["booked"],
@@ -555,7 +558,7 @@ const SEGMENTS = [
              {label:"Gallipoli Anzac Info", url:"https://www.awm.gov.au/articles/encyclopedia/gallipoli", type:"info"}] },
 
     { date:"Tue 20 Oct", location:"Istanbul (overnight onboard)", flag:"🇹🇷",
-      img:"https://source.unsplash.com/800x400/?hagia,sophia,istanbul,turkey",
+      img:"linear-gradient(160deg,#1a2d5c 0%,#0f1a3a 50%,#0a1025 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Final Night Onboard",heroSub:"Hagia Sophia · Blue Mosque · Topkapi Palace",
       accommodation:"Viking Sky (final night onboard)", transport:"Ship arrives Istanbul overnight",
       activity:"Arrive Istanbul – final day aboard Viking Sky. Hagia Sophia (exquisite mosaics, now a mosque again). Blue Mosque and its six minarets. Topkapi Palace and its treasures. Grand Bazaar (4,000 shops). Bosphorus views.",
       excursion:"✅ INCLUDED: Istanbul – Hagia Sophia, Blue Mosque & Topkapi Palace", tags:["included"],
@@ -565,7 +568,7 @@ const SEGMENTS = [
 
   { id:"istanbul", name:"Istanbul", emoji:"🕌", color:"#8b5e00", days:[
     { date:"Wed 21 Oct", location:"Istanbul – Disembark & Explore", flag:"🇹🇷",
-      img:"https://source.unsplash.com/800x400/?galata,tower,istanbul,turkey",
+      img:"linear-gradient(160deg,#3a1a5c 0%,#1a0f3a 50%,#100a25 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Disembark",heroSub:"Hotel De Reve Galata · Grand Bazaar · Bosphorus",
       accommodation:"Hotel De Reve Galata Special Class", transport:"Disembark Viking Sky | Transfer to Hotel De Reve Galata",
       activity:"Disembark morning. Check in Hotel De Reve Galata. Galata Tower (panoramic views). Beyoğlu & İstiklal Avenue (vibrant boulevard). Egyptian Spice Bazaar. Dolmabahçe Palace on the Bosphorus. Evening: Bosphorus sunset cruise for the magical Istanbul skyline.",
       excursion:null, tags:[],
@@ -574,7 +577,7 @@ const SEGMENTS = [
              {label:"Bosphorus Cruise", url:"https://www.bosphorustours.com/", type:"book"}] },
 
     { date:"Thu 22 Oct", location:"Istanbul – Final Day (depart 01:30 Fri)", flag:"🇹🇷",
-      img:"https://source.unsplash.com/800x400/?basilica,cistern,istanbul,underground",
+      img:"linear-gradient(160deg,#1a1a4a 0%,#0f0f2d 50%,#0a0a1a 100%)",heroEmoji:"💧",heroLabel:"Istanbul – Final Day",heroSub:"Basilica Cistern · Süleymaniye · Depart 01:30",
       accommodation:"Hotel De Reve Galata (checkout before midnight)", transport:"Private transfer → Istanbul Airport IST for MH4270 01:30 on 23rd",
       activity:"Final day. Basilica Cistern (underground Byzantine reservoir – spectacular). Süleymaniye Mosque. Balat neighbourhood – colourful Greek/Jewish/Armenian quarter. Karaköy waterfront. Final Turkish dinner. Checkout hotel before midnight. Transfer to airport for 01:30 departure. Allow 3hrs for check-in.",
       excursion:null, tags:[],
@@ -584,12 +587,12 @@ const SEGMENTS = [
 
   { id:"home", name:"Home", emoji:"🏠", color:"#4a5568", days:[
     { date:"Fri 23 Oct", location:"Istanbul → KL → Melbourne", flag:"🌏",
-      img:"https://source.unsplash.com/800x400/?airplane,flight,airport",
+      img:"linear-gradient(160deg,#0a0f1a 0%,#1a2d5c 50%,#2d4a8f 100%)",heroEmoji:"🌙",heroLabel:"Istanbul → KL → Melbourne",heroSub:"MH4270 · MH147 · Homeward Bound",
       accommodation:"In Transit", transport:"MH4270 Istanbul IST → KL | MH147 KL → Melbourne",
       activity:"Depart Istanbul 01:30. Long-haul return via Kuala Lumpur. Arrive Melbourne to connect to Launceston.",
       excursion:null, tags:["flight"], links:[] },
     { date:"Sat 24 Oct", location:"Melbourne → Launceston – Home!", flag:"🇦🇺",
-      img:"https://source.unsplash.com/800x400/?launceston,tasmania,australia",
+      img:"linear-gradient(160deg,#1a5c3a 0%,#0f3a20 50%,#0a2010 100%)",heroEmoji:"🏠",heroLabel:"Home – Launceston, Tasmania!",heroSub:"41 days · 6 countries · 2 Viking cruises · Memories forever",
       accommodation:"Home – Launceston, Tasmania", transport:"VA1366 Melbourne → Launceston",
       activity:"Arrive Melbourne. Connect to VA1366 to Launceston. HOME after 41 extraordinary days across Europe! 6 countries, 2 Viking cruises, 30+ ports, countless unforgettable memories.",
       excursion:null, tags:["flight"], links:[] }
@@ -793,13 +796,22 @@ function buildMain() {
       linkBtns += `<a class="btn ${btnColor(l.type)}" href="${l.url}" target="_blank">${btnIcon(l.type)} ${l.label}</a>`;
     });
 
-    const imgHtml = day.img
-      ? `<div class="day-hero-wrap"><img src="${day.img}" alt="${day.location}" loading="lazy" onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1f3a,#2d6a8f)'"><div class="hero-overlay"></div></div>`
-      : `<div class="day-hero-wrap" style="display:flex;align-items:center;justify-content:center;font-size:40px">${day.flag}</div>`;
+    const heroBg = day.img || 'linear-gradient(160deg,#1a1f3a,#2d6a8f)';
+    const heroEmoji = day.heroEmoji || day.flag;
+    const heroLabel = day.heroLabel || day.location;
+    const heroSub = day.heroSub || '';
+    const imgHtml = `<div style="width:100%;height:160px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:${heroBg};position:relative;overflow:hidden;flex-shrink:0">
+      <div style="font-size:54px;line-height:1;z-index:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))">${heroEmoji}</div>
+      <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.95);font-family:Georgia,serif;margin-top:8px;letter-spacing:.3px;text-shadow:0 1px 4px rgba(0,0,0,.6);z-index:1;text-align:center;padding:0 12px">${heroLabel}</div>
+      ${heroSub ? `<div style="font-size:10px;color:rgba(255,255,255,.7);font-family:Arial,sans-serif;margin-top:3px;text-shadow:0 1px 3px rgba(0,0,0,.5);z-index:1;text-align:center;padding:0 12px">${heroSub}</div>` : ''}
+      <div style="position:absolute;bottom:0;left:0;right:0;height:50px;background:linear-gradient(to top,rgba(0,0,0,.4),transparent)"></div>
+    </div>`;
 
     card.innerHTML = `
-      <div class="day-card-header" onclick="toggleCard('card-${activeSegment}-${di}')">
+      <div onclick="toggleCard('card-${activeSegment}-${di}')">
         ${imgHtml}
+      </div>
+      <div class="day-card-header" onclick="toggleCard('card-${activeSegment}-${di}')">
         <div class="day-header-info">
           <div class="day-flag-date">
             <div class="day-flag">${day.flag}</div>
