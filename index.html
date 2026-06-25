@@ -427,28 +427,31 @@ const SEGMENTS = [
     { date:"Sat 03 Oct", location:"Budapest (arrive on Magni)", flag:"🇭🇺",
       img:"linear-gradient(160deg,#6b3a1a 0%,#3a1a0f 50%,#200f0a 100%)",heroEmoji:"🏰",heroLabel:"Budapest, Hungary",heroSub:"Fisherman's Bastion · Castle District · Chain Bridge",
       accommodation:"Viking Magni (final night onboard)", transport:"Ship arrives Budapest",
-      activity:"Final day aboard Viking Magni. Fisherman's Bastion for panoramic Danube views. Buda Castle District. Matthias Church. Chain Bridge. Parliament Building view from Pest side. Final dinner onboard. Farewell to crew.",
-      excursion:"✅ INCLUDED: Budapest – Buda Castle District & Fisherman's Bastion", tags:["included"],
+      activity:"Morning: Viking included excursion — panoramic Pest tour: Andrássy Avenue, Opera House, Heroes' Square; then Buda Castle District, Fisherman's Bastion, Matthias Church, Chain Bridge. Free time on Buda Hill before returning. ~2pm: Walk Király utca and Jewish Quarter — scout neighbourhood before check-in Sunday. Szimpla Kert ruin bar (opens noon Sat) and Gozsdu Courtyard — afternoon drinks, possibly with fellow cruise passengers. ~5:30pm: return to Viking Magni for final dinner on board 🥂",
+      excursion:"✅ INCLUDED: Budapest – Buda Castle District, Fisherman's Bastion & Andrássy Avenue", tags:["included"],
       links:[{label:"Fisherman's Bastion", url:"https://halaszbastya.eu/en/", type:"ticket"},
+             {label:"Szimpla Kert Ruin Bar", url:"https://szimpla.hu/", type:"info"},
              {label:"Buda Castle", url:"https://www.budacastlebudapest.com/", type:"info"}] }
   ]},
 
   { id:"budapest", name:"Budapest", emoji:"🏛️", color:"#7c3d8f", days:[
-    { date:"Sun 04 Oct", location:"Budapest – Explore the City", flag:"🇭🇺",
-      img:"linear-gradient(160deg,#3a1a6b 0%,#1a0f3a 50%,#0f0a20 100%)",heroEmoji:"🏛️",heroLabel:"Budapest",heroSub:"Heroes' Square · Thermal Baths · Great Market Hall",
-      accommodation:"7Seasons Apartments, Budapest", transport:"Disembark Viking Magni | Transfer to 7Seasons",
-      activity:"Disembark morning. Full day: Heroes' Square & Andrássy Avenue (UNESCO). Hungarian State Opera exterior. Széchenyi Thermal Baths. Great Market Hall for local food and souvenirs. Ruin bars in the Jewish Quarter evening.",
+    { date:"Sun 04 Oct", location:"Budapest – Disembarkation Day", flag:"🇭🇺",
+      img:"linear-gradient(160deg,#3a1a6b 0%,#1a0f3a 50%,#0f0a20 100%)",heroEmoji:"🏛️",heroLabel:"Budapest – Settle In",heroSub:"Great Market Hall · Danube Riverbank · Jewish Quarter",
+      accommodation:"7Seasons Apartments, Király utca — Budapest Jewish Quarter", transport:"Disembark Viking Magni | Transfer to 7Seasons Apartments",
+      activity:"Budapest is a rest and recovery base — halfway through a 41-day trip. Priority is laundry, space and recharging. Morning: disembark Viking Magni, check into 7Seasons on Király utca — unpack, laundry, decompress. Late morning: Great Market Hall — Hungarian lunch on ground floor (lángos, goulash), souvenirs upstairs. Afternoon: Shoes on the Danube memorial (free, very moving), Parliament Building views from the riverbank. Evening: dinner in the Jewish Quarter — Gettó Gulyás or similar on Király utca. Optional: Danube Night Cruise ~8pm, 60–75 min, Parliament lit up 🥂",
       excursion:null, tags:[],
-      links:[{label:"Széchenyi Baths Tickets", url:"https://www.szechenyifurdo.hu/en/tickets/", type:"ticket"},
-             {label:"Hungarian Parliament", url:"https://www.parlament.hu/en/visitor-information", type:"ticket"}] },
+      links:[{label:"Great Market Hall", url:"https://www.piaconline.hu/en/", type:"info"},
+             {label:"Danube Night Cruise", url:"https://www.legenda.hu/en/", type:"book"},
+             {label:"Shoes on the Danube", url:"https://maps.app.goo.gl/Y6UGzq5D4q8Hk8MN7", type:"info"}] },
 
-    { date:"Mon 05 Oct", location:"Budapest – Free Day", flag:"🇭🇺",
-      img:"linear-gradient(160deg,#1a3a6b 0%,#0f1a3a 50%,#0a0f25 100%)",heroEmoji:"⛰️",heroLabel:"Budapest – Free Day",heroSub:"Gellért Hill · Synagogue · Danube Cruise",
-      accommodation:"7Seasons Apartments, Budapest", transport:"Local tram/metro",
-      activity:"Free day. Options: Gellért Hill & Citadella for panoramic views, Margaret Island stroll, Dohány Street Synagogue (Europe's largest), Holocaust Memorial Tree of Life, or a Danube sunset cruise.",
+    { date:"Mon 05 Oct", location:"Budapest – Flexible Rest Day", flag:"🇭🇺",
+      img:"linear-gradient(160deg,#1a3a6b 0%,#0f1a3a 50%,#0a0f25 100%)",heroEmoji:"⛰️",heroLabel:"Budapest – Rest Day",heroSub:"Gellért Hill · Kazinczy Street · Wander at Will",
+      accommodation:"7Seasons Apartments, Király utca", transport:"On foot — everything nearby",
+      activity:"No fixed plan — rest, wander and recharge at your own pace. Options if the mood takes you: Great Market Hall (fully open Mondays, best day if skipped Sunday) · Gellért Hill & Citadella for panoramic views not on Viking excursion · Dohány Street Synagogue (Europe's largest, 5 min from apartment) · Café wander along Király utca and Kazinczy Street · Danube Night Cruise if not done Sunday 🥂. Early night recommended — flight to Venice tomorrow morning.",
       excursion:null, tags:[],
       links:[{label:"Dohány Synagogue Tickets", url:"https://www.dohanystreetsynagogue.hu/en/buy-tickets/", type:"ticket"},
-             {label:"Budapest Danube Cruise", url:"https://www.legenda.hu/en/", type:"book"}] }
+             {label:"Danube Night Cruise", url:"https://www.legenda.hu/en/", type:"book"},
+             {label:"Gellért Hill Info", url:"https://www.budapestinfo.hu/gellert-hill", type:"info"}] }
   ]},
 
   { id:"transit", name:"To Italy", emoji:"🛫", color:"#4a5568", days:[
@@ -557,32 +560,33 @@ const SEGMENTS = [
       links:[{label:"Troy UNESCO Site", url:"https://www.muze.gov.tr/en/muzeler/troy-museum", type:"ticket"},
              {label:"Gallipoli Anzac Info", url:"https://www.awm.gov.au/articles/encyclopedia/gallipoli", type:"info"}] },
 
-    { date:"Tue 20 Oct", location:"Istanbul (overnight onboard)", flag:"🇹🇷",
-      img:"linear-gradient(160deg,#1a2d5c 0%,#0f1a3a 50%,#0a1025 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Final Night Onboard",heroSub:"Hagia Sophia · Blue Mosque · Topkapi Palace",
-      accommodation:"Viking Sky (final night onboard)", transport:"Ship arrives Istanbul overnight",
-      activity:"Arrive Istanbul – final day aboard Viking Sky. Hagia Sophia (exquisite mosaics, now a mosque again). Blue Mosque and its six minarets. Topkapi Palace and its treasures. Grand Bazaar (4,000 shops). Bosphorus views.",
-      excursion:"✅ INCLUDED: Istanbul – Hagia Sophia, Blue Mosque & Topkapi Palace", tags:["included"],
-      links:[{label:"Topkapi Palace Tickets", url:"https://muze.gen.tr/muze-detay/tkp", type:"ticket"},
-             {label:"Hagia Sophia Info", url:"https://www.hagiasophia.com/", type:"info"}] }
+    { date:"Tue 20 Oct", location:"Istanbul – Final Night on Viking Sky", flag:"🇹🇷",
+      img:"linear-gradient(160deg,#1a2d5c 0%,#0f1a3a 50%,#0a1025 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Final Night Onboard",heroSub:"Spice Bazaar · Galata Tower · İstiklal Avenue",
+      accommodation:"Viking Sky (final night onboard)", transport:"Ship docked Istanbul | Walk to Galata area",
+      activity:"Morning: Viking included excursion — Spice Bazaar (Egyptian Bazaar) and Rüstem Pasha Mosque (exquisitely tiled Ottoman mosque above the bazaar). Back on board by noon for lunch. ~1:30pm: Galata Tower (pre-book timed entry — panoramic views over the Golden Horn and Bosphorus, 45–60 min). Walk up through Galata backstreets to İstiklal Avenue — atmospheric cafés, pastry stops, lively pedestrian boulevard. ~5pm: return to Viking Sky. Final dinner on board 🥂",
+      excursion:"✅ INCLUDED: Istanbul – Spice Bazaar & Rüstem Pasha Mosque", tags:["included"],
+      links:[{label:"Galata Tower Tickets", url:"https://www.galatakule.net.tr/en/", type:"ticket"},
+             {label:"Spice Bazaar Info", url:"https://www.misircarsisi.org.tr/", type:"info"}] }
   ]},
 
   { id:"istanbul", name:"Istanbul", emoji:"🕌", color:"#8b5e00", days:[
-    { date:"Wed 21 Oct", location:"Istanbul – Disembark & Explore", flag:"🇹🇷",
-      img:"linear-gradient(160deg,#3a1a5c 0%,#1a0f3a 50%,#100a25 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Disembark",heroSub:"Hotel De Reve Galata · Grand Bazaar · Bosphorus",
-      accommodation:"Hotel De Reve Galata Special Class", transport:"Disembark Viking Sky | Transfer to Hotel De Reve Galata",
-      activity:"Disembark morning. Check in Hotel De Reve Galata. Galata Tower (panoramic views). Beyoğlu & İstiklal Avenue (vibrant boulevard). Egyptian Spice Bazaar. Dolmabahçe Palace on the Bosphorus. Evening: Bosphorus sunset cruise for the magical Istanbul skyline.",
-      excursion:null, tags:[],
-      links:[{label:"Hotel De Reve Galata", url:"https://www.hotelderevestanbul.com/en/", type:"book"},
-             {label:"Galata Tower Tickets", url:"https://www.galatakule.net.tr/en/", type:"ticket"},
+    { date:"Wed 21 Oct", location:"Istanbul – Disembark & Sultanahmet", flag:"🇹🇷",
+      img:"linear-gradient(160deg,#3a1a5c 0%,#1a0f3a 50%,#100a25 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Disembark Day",heroSub:"Hagia Sophia · Grand Bazaar · Bosphorus Dinner Cruise",
+      accommodation:"Hotel De Reve Galata Special Class, Karaköy", transport:"Disembark Viking Sky | Walk 5 min to Hotel De Reve Galata | Walk across Galata Bridge to Sultanahmet",
+      activity:"Breakfast on board Viking Sky before disembarking. Walk 5 min to Hotel De Reve Galata — drop bags, freshen up. Walk to Galata Bridge (5 min), cross on foot (15 min, fishermen lining rails, Golden Horn views), continue up through Eminönü to Sultanahmet (~15-20 min). Turkish lunch near Sultanahmet. ~2pm: Hagia Sophia — pre-book timed entry, allow 1.5 hours (unmissable). ~4pm: Sultanahmet Square and Blue Mosque exterior (no need to go inside). ~4:30pm: Grand Bazaar (closes ~7pm, 2+ hours to browse 4,000 shops). ~7pm: Board Bosphorus dinner cruise from Karaköy/Eminönü pier — 5-10 min walk from hotel. 3 hours: Istanbul skyline at night, Turkish dinner, live entertainment. ~10:30pm back to hotel (5 min walk). Hotel has offered to assist with bookings — use them for the cruise. 🥂",
+      excursion:"Bosphorus Dinner Cruise ~7pm — book via hotel (Karaköy/Eminönü pier)", tags:[],
+      links:[{label:"Hagia Sophia Tickets", url:"https://muze.gen.tr/muze-detay/ayasofya", type:"ticket"},
+             {label:"Grand Bazaar Info", url:"https://www.grandbazaaristanbul.org/", type:"info"},
              {label:"Bosphorus Cruise", url:"https://www.bosphorustours.com/", type:"book"}] },
 
-    { date:"Thu 22 Oct", location:"Istanbul – Final Day (depart 01:30 Fri)", flag:"🇹🇷",
-      img:"linear-gradient(160deg,#1a1a4a 0%,#0f0f2d 50%,#0a0a1a 100%)",heroEmoji:"💧",heroLabel:"Istanbul – Final Day",heroSub:"Basilica Cistern · Süleymaniye · Depart 01:30",
-      accommodation:"Hotel De Reve Galata (checkout before midnight)", transport:"Private transfer → Istanbul Airport IST for MH4270 01:30 on 23rd",
-      activity:"Final day. Basilica Cistern (underground Byzantine reservoir – spectacular). Süleymaniye Mosque. Balat neighbourhood – colourful Greek/Jewish/Armenian quarter. Karaköy waterfront. Final Turkish dinner. Checkout hotel before midnight. Transfer to airport for 01:30 departure. Allow 3hrs for check-in.",
-      excursion:null, tags:[],
-      links:[{label:"Basilica Cistern Tickets", url:"https://www.yerebatan.com/en/tickets", type:"ticket"},
-             {label:"Süleymaniye Mosque", url:"https://www.suleymaniyecamii.org/en/", type:"info"}] }
+    { date:"Thu 22 Oct", location:"Istanbul – Asian Side & Farewell Dinner", flag:"🇹🇷",
+      img:"linear-gradient(160deg,#1a1a4a 0%,#0f0f2d 50%,#0a0a1a 100%)",heroEmoji:"🌙",heroLabel:"Istanbul – Final Day",heroSub:"Üsküdar · Kadıköy · Rooftop Farewell Dinner",
+      accommodation:"Hotel De Reve Galata (checkout ~10:30pm)", transport:"Ferry Karaköy → Üsküdar | Bus/taxi Üsküdar → Kadıköy | Ferry Kadıköy → Karaköy | Private transfer → Istanbul Airport IST",
+      activity:"Rooftop breakfast at Hotel De Reve Galata — included in rate (only hotel breakfast of stay, Bosphorus views). ~10am: Ferry from Karaköy pier to Üsküdar (~10 min crossing, stunning views back toward European skyline). Üsküdar waterfront: Ottoman atmosphere, Maiden's Tower views, local tea garden, far fewer tourists. ~1pm: Bus/taxi to Kadıköy — bohemian neighbourhood, local markets, excellent Turkish lunch at honest prices. ~3pm: Ferry Kadıköy → Karaköy (~25 min). Back at hotel ~3:30pm — rest, final packing. ~7pm: Rooftop farewell dinner at Hotel De Reve Galata (book table in advance via hotel) — Bosphorus views at night, perfect send-off 🥂. Ask hotel re: credit for missed breakfast on 23rd. ~10:30pm: checkout, private transfer to Istanbul Airport IST. MH4270 departs 01:30am Friday 23 October.",
+      excursion:"Rooftop dinner ~7pm — reserve table via hotel | Airport transfer ~10:30pm — book via hotel", tags:[],
+      links:[{label:"Hotel Rooftop Restaurant", url:"https://www.hotelderevestanbul.com/en/restaurant", type:"rest"},
+             {label:"Karaköy Ferry Pier", url:"https://www.ido.com.tr/en", type:"info"},
+             {label:"Kadıköy Guide", url:"https://www.lonelyplanet.com/turkey/istanbul/kadikoy", type:"info"}] }
   ]},
 
   { id:"home", name:"Home", emoji:"🏠", color:"#4a5568", days:[
@@ -870,27 +874,27 @@ function saveNote(key) {
 // ════════════════════════════════════════
 const DOC_CATEGORIES = [
   { id:'flights', icon:'✈️', title:'Flights & Transfers', items:[
-    {name:'VA1365 – Launceston → Melbourne', detail:'Mon 14 Sep'},
-    {name:'MH148 – Melbourne → Kuala Lumpur', detail:'Tue 15 Sep'},
-    {name:'MH20 – Kuala Lumpur → Paris CDG', detail:'Tue/Wed 15-16 Sep'},
-    {name:'Eurostar – Paris → Amsterdam', detail:'Sun 20 Sep, 10:30'},
-    {name:'OS543 – Budapest → Vienna → Venice', detail:'Tue 06 Oct'},
-    {name:'MH4270 – Istanbul → Kuala Lumpur', detail:'Fri 23 Oct, 01:30'},
-    {name:'MH147 – Kuala Lumpur → Melbourne', detail:'Fri 23 Oct'},
-    {name:'VA1366 – Melbourne → Launceston', detail:'Sat 24 Oct'},
+    {name:'Virgin Australia – Domestic Legs', detail:'VA1365 Launceston→Melbourne (14 Sep) · VA1366 Melbourne→Launceston (24 Oct)', url:'https://drive.google.com/file/d/1-QGzN2kaBzb3hS_mYSYO6qiEdwN2oVWK/view?usp=sharing'},
+    {name:'Malaysian Airlines – Overseas Flights', detail:'MH148/MH20 Melbourne→Paris (15 Sep) · MH4270/MH147 Istanbul→Melbourne (23 Oct)', url:'https://drive.google.com/file/d/1-QU4Fqe2lrB3hS_mYSYO6qiEdwN2oVWK/view?usp=sharing'},
+    {name:'Austrian Air – Budapest to Venice', detail:'OS543 Budapest→Vienna→Venice · Tue 06 Oct', url:'https://drive.google.com/file/d/1-PZaN2kaBzb3hS_mYSYO6qiEdwN2oVWK/view?usp=sharing'},
+    {name:'Eurostar – Paris → Amsterdam', detail:'Sun 20 Sep, 10:30 depart'},
+    {name:'MH4270 – Istanbul → Kuala Lumpur', detail:'Fri 23 Oct, 01:30 depart (see Malaysian Airlines doc above)'},
+    {name:'MH147 – Kuala Lumpur → Melbourne', detail:'Fri 23 Oct (see Malaysian Airlines doc above)'},
   ]},
   { id:'hotels', icon:'🏨', title:'Hotels & Accommodation', items:[
     {name:'Pan Pacific South Wharf', detail:'Melbourne – Mon 14 Sep'},
-    {name:'Les Jardins de Verve – By Locke', detail:'Paris Latin Quarter – 16-20 Sep (4 nights)'},
-    {name:'Viking Magni', detail:'River cruise – 20 Sep to 03 Oct'},
-    {name:'7Seasons Apartments', detail:'Budapest – 04-06 Oct (2 nights)'},
-    {name:'Hotel Grande Italia', detail:'Chioggia – Tue 06 Oct (1 night)'},
-    {name:'Viking Sky', detail:'Ocean cruise – 07-21 Oct'},
-    {name:'Hotel De Reve Galata Special Class', detail:'Istanbul – 21-23 Oct (2 nights)'},
+    {name:'Le Jardin de Verre by Locke – Paris', detail:'Latin Quarter – 16-20 Sep (4 nights)', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'Le Jardin de Verre – Agoda Receipt', detail:'Paris booking receipt', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'Viking Magni', detail:'River cruise – 20 Sep to 03 Oct (Viking docs coming)'},
+    {name:'7Seasons Apartments – Budapest', detail:'Király utca – 04-06 Oct (2 nights)', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'7Seasons Apartments – Receipt', detail:'Budapest booking receipt', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'Hotel Grande Italia – Chioggia', detail:'Chioggia – Tue 06 Oct (1 night)', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'Viking Sky', detail:'Ocean cruise – 07-21 Oct (Viking docs coming)'},
+    {name:'Hotel De Reve Galata – Istanbul', detail:'Karaköy – 21-23 Oct (2 nights)', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
   ]},
   { id:'cruise', icon:'🚢', title:'Viking Cruise Documents', items:[
-    {name:'Viking Magni – Booking Confirmation', detail:'Grand European Tour – Amsterdam to Budapest'},
-    {name:'Viking Sky – Booking Confirmation', detail:'Ancient Adriatic Treasures – Chioggia to Istanbul'},
+    {name:'Viking Magni – Booking Confirmation', detail:'Grand European Tour – Amsterdam to Budapest (awaiting official docs)'},
+    {name:'Viking Sky – Booking Confirmation', detail:'Ancient Adriatic Treasures – Chioggia to Istanbul (awaiting official docs)'},
     {name:'Viking Magni – Excursion: Nuremberg', detail:'Pre-booked WWII History tour'},
     {name:'Viking Magni – Excursion: Melk & Wachau', detail:'Pre-booked Melk Abbey & Wine Tasting'},
     {name:'Viking Sky – Excursion: Troy & Gallipoli', detail:'Pre-booked ANZAC memorial sites'},
@@ -899,18 +903,23 @@ const DOC_CATEGORIES = [
     {name:'Moulin Rouge – Féerie Show', detail:'Thu 17 Sep, 20:30 seating, Paris'},
     {name:'Versailles – Passport Ticket', detail:'Sat 19 Sep, 09:30 timed entry'},
     {name:'Margaux Restaurant', detail:'Sat 19 Sep, 19:00, Paris 16th'},
+    {name:'Bosphorus Dinner Cruise', detail:'Wed 21 Oct ~7pm — book via Hotel De Reve Galata'},
+    {name:'Hagia Sophia – Timed Entry', detail:'Wed 21 Oct — pre-book online, sells out'},
+    {name:'Galata Tower – Timed Entry', detail:'Tue 20 Oct afternoon — pre-book online'},
+    {name:'Danube Night Cruise – Budapest', detail:'Sun 4 Oct or Mon 5 Oct ~8pm — book in advance'},
   ]},
   { id:'insurance', icon:'🛡', title:'Insurance & Health', items:[
-    {name:'Travel Insurance Policy', detail:'Add your policy number and emergency contact'},
-    {name:'EHIC / Medicare Overseas', detail:'European Health Insurance details'},
+    {name:'RACT Travel Insurance Certificate', detail:'Policy certificate', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'RACT Travel Insurance PDS', detail:'Full policy document (Product Disclosure Statement)', url:'https://drive.google.com/file/d/1LujaExxayeWjysj2hAP2DS7w1sg99cXG/view?usp=sharing'},
+    {name:'Medicare Overseas', detail:'Medicare card details for overseas emergency'},
     {name:'Emergency Contacts', detail:'Family, doctor, bank numbers'},
     {name:'Prescription Medications', detail:'List of medications and doses for customs'},
   ]},
   { id:'other', icon:'📄', title:'Other Documents', items:[
-    {name:'Passports', detail:'Australian passports – check expiry dates (need 6 months validity)'},
-    {name:'Travel Visas', detail:'Turkey e-Visa required (apply at evisa.gov.tr)'},
-    {name:'Travel Itinerary Summary', detail:'This document!'},
-    {name:'Currency & Cards', detail:'Euro, HUF, HRK, TRY – advise bank of travel'},
+    {name:'Passports', detail:'Australian passports – stored securely in Gmail drafts as backup'},
+    {name:'Travel Visas', detail:'Australia exempt from Turkey e-Visa (no action required)'},
+    {name:'Google Drive – All Documents', detail:'Full document folder', url:'https://drive.google.com/drive/folders/1LujaExxayeWjysj2hAP2DS7w1sg99cXG?usp=sharing'},
+    {name:'Currency & Cards', detail:'Euro · HUF (Hungary) · TRY (Turkey) — advise bank of travel dates'},
   ]}
 ];
 
@@ -929,10 +938,12 @@ function buildDocsPanel() {
     let itemsHtml = cat.items.map((item,i)=>{
       const key = cat.id+'-'+i;
       const saved = docNotes[key] || {url:'',note:''};
+      const driveBtn = item.url ? `<a href="${item.url}" target="_blank" class="doc-link-btn" style="margin-top:8px;display:inline-flex">📄 Open Document</a>` : '';
       return `<div class="doc-item">
         <div class="doc-item-info">
           <div class="doc-item-name">${item.name}</div>
           <div class="doc-item-detail">${item.detail}</div>
+          ${driveBtn}
           <input class="doc-url-input" id="url-${key}" placeholder="Paste booking URL or reference number…"
             value="${saved.url||''}" oninput="saveDocNote('${key}')">
           <textarea class="doc-note-area" id="docnote-${key}"
