@@ -135,6 +135,85 @@ body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-hei
 
 /* ── DOCS PANEL ── */
 #docs-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+#pack-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+.pack-section{margin-bottom:24px}
+.pack-section-title{font-size:15px;font-weight:700;color:var(--navy);border-bottom:2px solid var(--navy);padding-bottom:4px;margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px}
+.pack-subsection{font-size:12px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.4px;margin:12px 0 6px}
+.pack-item{display:flex;align-items:flex-start;gap:10px;padding:7px 10px;border-radius:6px;margin-bottom:4px;background:var(--stone);cursor:pointer;transition:.15s}
+.pack-item:active{transform:scale(.98)}
+.pack-item.checked{background:#e8f5e9;opacity:.75}
+.pack-item input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:var(--navy);flex-shrink:0;margin-top:1px}
+.pack-item-text{flex:1;font-size:14px;color:var(--text-main)}
+.pack-item.checked .pack-item-text{text-decoration:line-through;color:var(--text-muted)}
+.pack-item-badge{font-size:11px;font-weight:700;color:var(--white);background:var(--navy);border-radius:4px;padding:1px 6px;flex-shrink:0;white-space:nowrap}
+.pack-progress{background:var(--stone-dark);border-radius:999px;height:8px;margin-bottom:6px;overflow:hidden}
+.pack-progress-bar{height:8px;background:var(--navy);border-radius:999px;transition:.3s}
+.pack-summary{font-size:12px;color:var(--text-muted);margin-bottom:16px}
+.pack-note{font-size:12px;color:var(--text-muted);font-style:italic;padding:8px 10px;background:var(--stone);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;margin-bottom:6px}
+.nav-btn.active-pack{background:var(--navy);color:var(--gold)}
+.nav-btn.active-home{background:var(--gold);color:var(--navy)}
+.nav-btn.active-task{background:#2d7a4f;color:#fff}
+#home-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+.home-welcome{background:linear-gradient(160deg,var(--navy) 0%,#2d4a8f 100%);border-radius:var(--radius);padding:20px;margin-bottom:16px;text-align:center}
+.home-welcome-title{font-size:20px;font-weight:700;color:var(--gold);font-family:Georgia,serif;margin-bottom:4px}
+.home-welcome-sub{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:16px}
+.home-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px}
+.home-stat{background:rgba(255,255,255,.1);border-radius:8px;padding:10px 6px;text-align:center}
+.home-stat-num{font-size:22px;font-weight:700;color:var(--gold)}
+.home-stat-label{font-size:10px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.4px}
+.home-btn-row{display:flex;gap:10px;justify-content:center}
+.home-action-btn{padding:10px 20px;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:Arial,sans-serif;transition:.15s}
+.home-action-btn:active{transform:scale(.96)}
+.home-action-btn.today{background:var(--gold);color:var(--navy)}
+.home-action-btn.signout{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.cal-section{margin-bottom:20px}
+.cal-month{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--navy);text-transform:uppercase;letter-spacing:.5px}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-dow{font-size:10px;font-weight:700;color:var(--text-muted);text-align:center;padding:3px 0;text-transform:uppercase}
+.cal-day{border-radius:6px;padding:4px 2px;text-align:center;cursor:default;min-height:44px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:1px}
+.cal-day.empty{background:transparent}
+.cal-day.trip{cursor:pointer;background:var(--stone)}
+.cal-day.trip:active{transform:scale(.95)}
+.cal-day.today-day{background:var(--gold)!important;box-shadow:0 0 0 2px var(--navy)}
+.cal-day.pre-trip{background:transparent;opacity:.4}
+.cal-day-num{font-size:13px;font-weight:700;color:var(--text-main);line-height:1}
+.cal-day.today-day .cal-day-num{color:var(--navy)}
+.cal-day-emoji{font-size:11px;line-height:1}
+.cal-day-seg{font-size:8px;color:var(--text-muted);line-height:1;text-align:center;max-width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cal-day.today-day .cal-day-seg{color:var(--navy)}
+.cal-legend{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.cal-legend-item{display:flex;align-items:center;gap:4px;font-size:11px;color:var(--text-muted)}
+.cal-legend-dot{width:10px;height:10px;border-radius:3px}
+.nav-btn.active-esim{background:#7c3d8f;color:#fff}
+#task-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+#esim-panel{display:none;padding:16px 16px 120px;max-width:600px;margin:0 auto}
+.task-group{margin-bottom:20px}
+.task-group-title{font-size:14px;font-weight:700;color:var(--white);background:#2d7a4f;padding:8px 12px;border-radius:6px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.4px}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:8px 10px;border-radius:6px;margin-bottom:4px;background:var(--stone);cursor:pointer;transition:.15s}
+.task-item:active{transform:scale(.98)}
+.task-item.done{background:#e8f5e9;opacity:.7}
+.task-item input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:#2d7a4f;flex-shrink:0;margin-top:2px}
+.task-item-body{flex:1}
+.task-item-text{font-size:14px;color:var(--text-main);line-height:1.3}
+.task-item.done .task-item-text{text-decoration:line-through;color:var(--text-muted)}
+.task-item-meta{font-size:11px;color:var(--text-muted);margin-top:2px}
+.task-badge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px;flex-shrink:0;white-space:nowrap}
+.task-badge.urgent{background:#c0392b;color:#fff}
+.task-badge.soon{background:#e67e22;color:#fff}
+.task-badge.whenever{background:#7f8c8d;color:#fff}
+.task-badge.done-badge{background:#2d7a4f;color:#fff}
+.task-progress{background:var(--stone-dark);border-radius:999px;height:8px;margin-bottom:6px;overflow:hidden}
+.task-progress-bar{height:8px;background:#2d7a4f;border-radius:999px;transition:.3s}
+.task-summary{font-size:12px;color:var(--text-muted);margin-bottom:12px}
+.esim-card{background:var(--stone);border-radius:var(--radius);padding:14px;margin-bottom:14px;border-left:4px solid #7c3d8f}
+.esim-card h3{font-size:14px;font-weight:700;color:#7c3d8f;margin:0 0 8px}
+.esim-step{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--stone-dark);align-items:flex-start}
+.esim-step:last-child{border-bottom:none}
+.esim-step-num{width:22px;height:22px;background:#7c3d8f;color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.esim-step-text{font-size:13px;color:var(--text-main);line-height:1.4;flex:1}
+.esim-step-text strong{color:var(--navy)}
+.esim-note{font-size:12px;color:var(--text-muted);font-style:italic;padding:8px 10px;background:var(--stone);border-left:3px solid #7c3d8f;border-radius:0 6px 6px 0;margin:6px 0}
+.esim-warning{font-size:12px;color:#c0392b;padding:8px 10px;background:#fdf2f2;border-left:3px solid #c0392b;border-radius:0 6px 6px 0;margin:6px 0;font-weight:600}
 .docs-header{background:var(--white);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
 .docs-header h2{font-size:16px;color:var(--navy);margin-bottom:4px}
 .docs-header p{font-size:12px;color:var(--text-muted);font-family:Arial,sans-serif;line-height:1.5}
@@ -228,17 +307,30 @@ body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-hei
 <div class="main" id="main"></div>
 
 <!-- Docs panel -->
+<div id="home-panel"></div>
 <div id="docs-panel"></div>
+<div id="pack-panel"></div>
+<div id="task-panel"></div>
+<div id="esim-panel"></div>
 
 <div class="bottom-nav">
-  <button class="nav-btn primary" onclick="goToday()" id="todayBtn">
-    <span class="nb-icon">📍</span><span class="nb-label">Today</span>
+  <button class="nav-btn primary" onclick="showHome()" id="homeBtn">
+    <span class="nb-icon">🏠</span><span class="nb-label">Home</span>
   </button>
   <button class="nav-btn secondary" onclick="showItinerary()" id="itinBtn">
     <span class="nb-icon">📅</span><span class="nb-label">Itinerary</span>
   </button>
   <button class="nav-btn secondary" onclick="showDocs()" id="docsBtn">
     <span class="nb-icon">📁</span><span class="nb-label">Documents</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showPacking()" id="packBtn">
+    <span class="nb-icon">🧳</span><span class="nb-label">Packing</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showTasks()" id="taskBtn">
+    <span class="nb-icon">✅</span><span class="nb-label">Tasks</span>
+  </button>
+  <button class="nav-btn secondary" onclick="showEsim()" id="esimBtn">
+    <span class="nb-icon">📶</span><span class="nb-label">eSIM</span>
   </button>
   <button class="nav-btn secondary" onclick="showSettings()" id="settBtn">
     <span class="nb-icon">⚙️</span><span class="nb-label">Settings</span>
@@ -253,18 +345,18 @@ body{font-family:Georgia,serif;background:var(--stone);color:var(--text);min-hei
 // ════════════════════════════════════════
 const SEGMENTS = [
   { id:"travel", name:"Travel Out", emoji:"✈️", color:"#4a5568", days:[
-    { date:"Mon 14 Sep", location:"Launceston → Melbourne", flag:"🇦🇺",
+    { date:"Mon 14 Sep", location:"Launceston → Melbourne", calLabel:"Melbourne", flag:"🇦🇺",
       img:"linear-gradient(160deg,#0f2347 0%,#1a4a7a 60%,#2d6a8f 100%)",heroEmoji:"🏙️",heroLabel:"Melbourne",heroSub:"Pan Pacific South Wharf",
       accommodation:"Pan Pacific South Wharf, Melbourne",
-      transport:"VA1365 Launceston → Melbourne (Economy) · Gary 19B · Leonie 19A",
-      activity:"Fly to Melbourne, check in overnight at Pan Pacific South Wharf. First leg of the great adventure!",
+      transport:"Uber → Launceston Airport | VA1365 Launceston→Melbourne (Economy) Gary 19B · Leonie 19A dep 10:15am arr 11:20am | TransfersX Melbourne Airport → Pan Pacific South Wharf",
+      activity:"Morning: Uber to Launceston Airport. VA1365 departs 10:15am, arrives Melbourne 11:20am Terminal 3. TransfersX transfer to Pan Pacific South Wharf — check in, settle in, enjoy Melbourne for the evening. First night of the great adventure!",
       excursion:null, tags:["flight"],
       links:[] },
-    { date:"Tue 15 Sep", location:"Melbourne → KL → Paris", flag:"🌏",
+    { date:"Tue 15 Sep", location:"Melbourne → KL → Paris", calLabel:"In Transit", flag:"🌏",
       img:"linear-gradient(160deg,#0a0f1a 0%,#1a2d5c 50%,#2d4a8f 100%)",heroEmoji:"✈️",heroLabel:"Melbourne → KL → Paris",heroSub:"Malaysian Airlines MH148 · MH20",
       accommodation:"In Transit (Malaysian Airlines)",
-      transport:"MH148 Melbourne→KL (Economy) Gary 12H · Leonie 12K | MH20 KL→Paris CDG (Economy) Gary 29A · Leonie 29B",
-      activity:"Long-haul flight to Paris via Kuala Lumpur. Arrive Paris CDG early Wednesday morning. Try to sleep on the plane!",
+      transport:"TransfersX Pan Pacific → Melbourne Airport Terminal 2 (~10am) | MH148 Melbourne→KL dep 1:25pm Gary 12H · Leonie 12K | MH20 KL→Paris CDG dep 11:40pm Gary 29A · Leonie 29B",
+      activity:"TransfersX picks up ~10am for MH148 1:25pm departure from Terminal 2. Long overnight flight to Paris via Kuala Lumpur. Arrive Paris CDG early Wednesday morning. Use Airalo eSIM data from landing — activate on arrival. Try to sleep on the MH20 KL-Paris leg!",
       excursion:null, tags:["flight"], links:[] }
   ]},
 
@@ -272,8 +364,8 @@ const SEGMENTS = [
     { date:"Wed 16 Sep", location:"Paris – Arrival Day", flag:"🇫🇷",
       img:"linear-gradient(160deg,#8b1a4a 0%,#3a0f2a 50%,#1a1f3a 100%)",heroEmoji:"🗼",heroLabel:"Paris – Arrival Day",heroSub:"Les Jardins de Verve · Latin Quarter",
       accommodation:"Le Jardin de Verre by Locke, Latin Quarter — Locke Studio",
-      transport:"Taxi CDG → Hotel (~€62 fixed fare) | EES biometric at CDG",
-      activity:"Arrive ~07:00. EES biometric processing at CDG. Check-in from 11:00. Gentle first day: Place Monge Market 11:15, Panthéon 13:00, coffee at Le Comptoir du Panthéon 14:00, Luxembourg Gardens 14:45, Rue Mouffetard stroll 17:30. Dinner at Quartier Latin Pizza 18:30. Gelato at Amorino 20:00. Lights out 21:00 — jet lag is real.",
+      transport:"Daytrip private transfer CDG → Le Jardin de Verre, Latin Quarter | EES biometric processing at CDG on arrival",
+      activity:"Arrive CDG ~07:00. EES biometric processing on arrival. Daytrip driver meets you at arrivals. Transfer to Le Jardin de Verre (~45 min). Paris City Tax AUD ~$117 payable on check-in — have EUR on Wise card. Check-in from 11:00. Gentle first day: buy toiletries at Pharmacie Place Monge, Place Monge Market 11:15, Panthéon 13:00, Luxembourg Gardens 14:45, Rue Mouffetard stroll 17:30. Dinner at Quartier Latin Pizza 18:30. Lights out 21:00 — jet lag is real.",
       excursion:null, tags:["arrival"],
       links:[
         {label:"Hotel Check-in", url:"https://byleocke.com/hotels/les-jardins-de-verve/", type:"book"},
@@ -308,7 +400,7 @@ const SEGMENTS = [
         {label:"Vins & Whisky", url:"https://maps.app.goo.gl/6SuQEfvNcGJjBc8G9", type:"rest"}
       ] },
 
-    { date:"Sat 19 Sep", location:"Paris – Versailles Day Trip", flag:"🇫🇷",
+    { date:"Sat 19 Sep", location:"Paris – Versailles Day Trip", calLabel:"Paris", flag:"🇫🇷",
       img:"linear-gradient(160deg,#1a5c3a 0%,#0f3a20 50%,#0a1f10 100%)",heroEmoji:"👑",heroLabel:"Palace of Versailles",heroSub:"Hall of Mirrors · Gardens · Trianons",
       accommodation:"Le Jardin de Verre by Locke — Locke Studio",
       transport:"Walk to Gare d'Austerlitz | RER C 08:30 | Return ~16:00 | Taxi to Margaux 18:30",
@@ -322,12 +414,12 @@ const SEGMENTS = [
         {label:"RER C Info", url:"https://www.transilien.com/en/line-c/", type:"info"}
       ] },
 
-    { date:"Sun 20 Sep", location:"Paris → Amsterdam → Viking Magni", flag:"🇫🇷🇳🇱",
+    { date:"Sun 20 Sep", location:"Paris → Amsterdam → Viking Magni", calLabel:"Amsterdam", flag:"🇫🇷🇳🇱",
       img:"linear-gradient(160deg,#1a3d6b 0%,#0f2a4a 50%,#0a1525 100%)",heroEmoji:"🚢",heroLabel:"Paris → Amsterdam → Viking Magni",heroSub:"Eurostar 10:30 · Embark Grand European Tour",
       accommodation:"Viking Magni (embark)",
-      transport:"Taxi → Gare du Nord 09:00 | Eurostar 10:30 → Amsterdam Centraal 13:50 | Walk 5 min to dock",
-      activity:"07:30 wake & pack. Check out. Boulangerie Carton breakfast outside Gare du Nord 08:35. Eurostar check-in 09:00 (security + exit & entry controls). Depart 10:30. Arrive Amsterdam Centraal 13:50. Walk 5–10 min to Viking Magni. Check in 14:00, settle into French Balcony cabin. Canal walk 15:00–17:00: Prins Hendrikkade, Brouwersgracht, Haarlemmerdijk. Dinner onboard 18:00. Night walk Red Light District 19:45–21:15. Back to ship 21:30.",
-      excursion:"Eurostar Paris → Amsterdam 10:30 (BOOK URGENTLY – sells out)",
+      transport:"G7 Taxi (pre-booked) hotel → Gare du Nord dep ~08:30 | Eurostar 10:30 Paris Nord → Amsterdam Centraal arr 13:50 | Walk ~10 min Amsterdam Centraal → Viking Magni dock",
+      activity:"07:30 wake, final pack and check out. G7 Taxi pre-booked — departs hotel ~08:30 for Gare du Nord (allow extra time with luggage). Eurostar check-in by 09:00 — allow time for security, passport control and EES exit checks. Eurostar departs 10:30, arrives Amsterdam Centraal 13:50. Walk ~10 min to Viking Magni dock. Check in 14:00, settle into cabin. Canal walk 15:00–17:00. Dinner onboard 18:00. Night walk 19:45. Back to ship 21:30.",
+      excursion:"Eurostar Paris → Amsterdam 10:30 — G7 Taxi pre-booked for hotel → Gare du Nord",
       tags:[],
       links:[
         {label:"Book Eurostar", url:"https://www.eurostar.com/uk-en/train/france-to-netherlands/paris-to-amsterdam", type:"ticket"},
@@ -383,7 +475,7 @@ const SEGMENTS = [
       activity:"Transit the 16-lock Main-Danube Canal (106 miles). Nuremberg: Imperial Castle (Kaiserburg), medieval market square, Palace of Justice from the famous WWII Nuremberg Trials. Holy Roman Empire history.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Nuremberg & WWII History tour", tags:["booked"],
       links:[{label:"Nuremberg Imperial Castle", url:"https://www.kaiserburg-nuernberg.de/englisch/", type:"info"},
-             {label:"Nuremberg Trials Court", url:"https://www.museums.nuremberg.de/memorium-nuremberg-trials/", type:"ticket"}] },
+             {label:"Nuremberg Trials Court", url:"https://www.museums.nuremberg.de/memorium-nuremberg-trials/", type:"info"}] },
 
     { date:"Mon 28 Sep", location:"Regensburg, Germany", flag:"🇩🇪",
       img:"linear-gradient(160deg,#1a3d5c 0%,#0f2540 50%,#0a1525 100%)",heroEmoji:"🌉",heroLabel:"Regensburg, Germany",heroSub:"UNESCO City · Stone Bridge · Alte Würstküche",
@@ -405,7 +497,7 @@ const SEGMENTS = [
       accommodation:"Viking Magni", transport:"Ship docks Melk, sails Wachau Valley to Krems",
       activity:"Melk Abbey – 900-year-old Benedictine monastery, Austria's finest baroque architecture. Medieval manuscripts, breathtaking ceiling frescoes. Afternoon: sail UNESCO Wachau Valley past hillside vineyards. Krems: Steiner Tor city gate. Wine tasting in Wachau wine region.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Melk Abbey & Wachau Valley Wine Tasting", tags:["booked"],
-      links:[{label:"Melk Abbey Tickets", url:"https://www.stiftmelk.at/en/visit/opening-hours-and-prices/", type:"ticket"},
+      links:[{label:"Melk Abbey Info", url:"https://www.stiftmelk.at/en/visit/opening-hours-and-prices/", type:"info"},
              {label:"Wachau Valley Info", url:"https://www.welterbe-wachau.at/en/", type:"info"}] },
 
     { date:"Thu 01 Oct", location:"Vienna, Austria", flag:"🇦🇹",
@@ -413,15 +505,15 @@ const SEGMENTS = [
       accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docks Vienna overnight",
       activity:"City of waltzes and classical music. Ringstrasse boulevard: Hofburg Palace, Kunsthistorisches Museum, Vienna City Hall, Burgtheater. State Opera House. Learn the Viennese waltz. Optional: Schönbrunn Palace.",
       excursion:"✅ INCLUDED: Vienna city tour – Ringstrasse, State Opera & classical music heritage", tags:["included"],
-      links:[{label:"Vienna State Opera", url:"https://www.wiener-staatsoper.at/en/", type:"ticket"},
-             {label:"Schönbrunn Palace", url:"https://www.schoenbrunn.at/en/tickets/", type:"ticket"}] },
+      links:[{label:"Vienna State Opera", url:"https://www.wiener-staatsoper.at/en/", type:"info"},
+             {label:"Schoenbrunn Palace", url:"https://www.schoenbrunn.at/en/", type:"info"}] },
 
     { date:"Fri 02 Oct", location:"Vienna, Austria (Day 2)", flag:"🇦🇹",
       img:"linear-gradient(160deg,#4a2d6b 0%,#2d1a3a 50%,#1a0f25 100%)",heroEmoji:"🎨",heroLabel:"Vienna, Austria – Day 2",heroSub:"Belvedere Gallery · Klimt's The Kiss · Café Culture",
       accommodation:"Viking Magni (overnight Vienna)", transport:"Ship docked overnight Vienna",
       activity:"Second day in Vienna. Belvedere Gallery (Klimt's The Kiss). Vienna's legendary café culture: Café Central or Demel. Prater park and Giant Ferris Wheel. Naschmarkt food market. Optional: Spanish Riding School.",
       excursion:"✅ INCLUDED: Vienna leisure day – Belvedere, café culture & museum mile", tags:["included"],
-      links:[{label:"Belvedere Tickets", url:"https://www.belvedere.at/en/buy-tickets", type:"ticket"},
+      links:[{label:"Belvedere Museum", url:"https://www.belvedere.at/en/", type:"info"},
              {label:"Naschmarkt Info", url:"https://www.wiener-naschmarkt.eu/en/", type:"info"}] },
 
     { date:"Sat 03 Oct", location:"Budapest (arrive on Magni)", flag:"🇭🇺",
@@ -429,7 +521,7 @@ const SEGMENTS = [
       accommodation:"Viking Magni (final night onboard)", transport:"Ship arrives Budapest",
       activity:"Morning: Viking included excursion — panoramic Pest tour: Andrássy Avenue, Opera House, Heroes' Square; then Buda Castle District, Fisherman's Bastion, Matthias Church, Chain Bridge. Free time on Buda Hill before returning. ~2pm: Walk Király utca and Jewish Quarter — scout neighbourhood before check-in Sunday. Szimpla Kert ruin bar (opens noon Sat) and Gozsdu Courtyard — afternoon drinks, possibly with fellow cruise passengers. ~5:30pm: return to Viking Magni for final dinner on board 🥂",
       excursion:"✅ INCLUDED: Budapest – Buda Castle District, Fisherman's Bastion & Andrássy Avenue", tags:["included"],
-      links:[{label:"Fisherman's Bastion", url:"https://halaszbastya.eu/en/", type:"ticket"},
+      links:[{label:"Fishermans Bastion", url:"https://halaszbastya.eu/en/", type:"info"},
              {label:"Szimpla Kert Ruin Bar", url:"https://szimpla.hu/", type:"info"},
              {label:"Buda Castle", url:"https://www.budacastlebudapest.com/", type:"info"}] }
   ]},
@@ -449,34 +541,34 @@ const SEGMENTS = [
       accommodation:"7Seasons Apartments, Király utca — Deluxe One-Bedroom Apartment", transport:"On foot — everything nearby",
       activity:"No fixed plan — rest, wander and recharge at your own pace. Options if the mood takes you: Great Market Hall (fully open Mondays, best day if skipped Sunday) · Gellért Hill & Citadella for panoramic views not on Viking excursion · Dohány Street Synagogue (Europe's largest, 5 min from apartment) · Café wander along Király utca and Kazinczy Street · Danube Night Cruise if not done Sunday 🥂. Early night recommended — flight to Venice tomorrow morning.",
       excursion:null, tags:[],
-      links:[{label:"Dohány Synagogue Tickets", url:"https://www.dohanystreetsynagogue.hu/en/buy-tickets/", type:"ticket"},
+      links:[{label:"Dohany Street Synagogue", url:"https://www.dohanystreetsynagogue.hu/en/", type:"info"},
              {label:"Danube Night Cruise", url:"https://www.legenda.hu/en/", type:"book"},
-             {label:"Gellért Hill Info", url:"https://www.budapestinfo.hu/gellert-hill", type:"info"}] }
+             {label:"Gellert Hill Info", url:"https://www.budapestinfo.hu/gellert-hill", type:"info"}] }
   ]},
 
   { id:"transit", name:"To Italy", emoji:"🛫", color:"#4a5568", days:[
-    { date:"Tue 06 Oct", location:"Budapest → Venice → Chioggia", flag:"🇭🇺🇮🇹",
+    { date:"Tue 06 Oct", location:"Budapest → Venice → Chioggia", calLabel:"Chioggia", flag:"🇭🇺🇮🇹",
       img:"linear-gradient(160deg,#1a5c5c 0%,#0f3a3a 50%,#0a2020 100%)",heroEmoji:"⚓",heroLabel:"Budapest → Venice → Chioggia",heroSub:"Austrian Air OS543 · Hotel Grande Italia",
-      accommodation:"Hotel Grande Italia, Chioggia — Superior Double or Twin Room", transport:"OS632 Budapest→Vienna (Economy) ref DQXON9 dep 11:15 | OS543 Vienna→Venice (Economy) dep 12:50 arr 13:55 | Private transfer Venice→Chioggia (~1hr)",
-      activity:"Fly Austrian Air OS543 Budapest–Vienna–Venice Marco Polo. Private transfer (~1hr) to Chioggia – 'Little Venice' at the southern tip of the Venetian Lagoon. Check in Hotel Grande Italia. Evening stroll along Corso del Popolo, canals, fishing boats and harbour cafes.",
+      accommodation:"Hotel Grande Italia, Chioggia — Superior Double or Twin Room", transport:"Walk disembarkation dock → 7Seasons Apartments (~1.5km flat) | Daytrip 7Seasons → Budapest Airport BUD dep ~08:00 | OS632 Budapest→Vienna dep 11:15 ref DQXON9 | OS543 Vienna→Venice dep 12:50 arr 13:55 | Daytrip Venice Marco Polo → Hotel Grande Italia Chioggia (~1hr)",
+      activity:"Early morning: walk from disembarkation dock to 7Seasons Apartments (~1.5km flat, final bag collection). Daytrip picks up ~08:00 for Budapest Airport BUD. OS632 departs 11:15am to Vienna, connecting to OS543 dep 12:50 arriving Venice Marco Polo 13:55. Daytrip transfer (~1hr) to Hotel Grande Italia, Chioggia. Check in, evening stroll along Corso del Popolo, canals and harbour cafes. Board Viking Sky tomorrow morning.",
       excursion:null, tags:["flight"],
       links:[{label:"Hotel Grande Italia", url:"https://www.hotelgrandeitalia.it/en/", type:"book"}] }
   ]},
 
   { id:"sky", name:"Viking Sky", emoji:"⚓", color:"#8b2635", days:[
-    { date:"Wed 07 Oct", location:"Chioggia – Embark Viking Sky", flag:"🇮🇹",
+    { date:"Wed 07 Oct", location:"Chioggia – Embark Viking Sky", calLabel:"Venice", flag:"🇮🇹",
       img:"linear-gradient(160deg,#1a4a5c 0%,#0f2d3a 50%,#0a1520 100%)",heroEmoji:"🛳️",heroLabel:"Chioggia – Embark Viking Sky",heroSub:"Ancient Adriatic Treasures · Venice Lagoon",
-      accommodation:"Viking Sky", transport:"Transfer to Viking Sky embarkation",
-      activity:"Embark Viking Sky. Settle into stateroom. Explore Chioggia's canals, fishing boats and lively Corso del Popolo pedestrian street. 'Little Venice' at the southern tip of the Venetian Lagoon, steeped in seafaring traditions.",
+      accommodation:"Viking Sky", transport:"Local transfer Hotel Grande Italia → Viking Sky embarkation dock Chioggia (arranged via hotel)",
+      activity:"Local transfer from Hotel Grande Italia to Viking Sky dock (arranged by hotel — they are familiar with Viking passengers). Embark Viking Sky, settle into stateroom. Explore Chioggia's canals, fishing boats and lively Corso del Popolo. 'Little Venice' at the southern tip of the Venetian Lagoon, steeped in seafaring tradition.",
       excursion:"✅ INCLUDED: Chioggia – Venetian Lagoon fishing village orientation", tags:["included"], links:[] },
 
-    { date:"Thu 08 Oct", location:"Venice, Italy", flag:"🇮🇹",
+    { date:"Thu 08 Oct", location:"Venice, Italy", calLabel:"Venice", flag:"🇮🇹",
       img:"linear-gradient(160deg,#1a2d5c 0%,#0f1a3a 50%,#0a1025 100%)",heroEmoji:"🚣",heroLabel:"Venice, Italy",heroSub:"St Mark's · Doge's Palace · Rialto Bridge",
       accommodation:"Viking Sky", transport:"Vaporetto from Chioggia",
       activity:"Full day Venice. St. Mark's Square & Basilica (pre-book entry). Doge's Palace – Bridge of Sighs. Rialto Bridge & morning fish market. Gondola ride through smaller canals. Explore Dorsoduro and Cannaregio away from crowds.",
       excursion:"✅ INCLUDED: Venice – St. Mark's Basilica, Doge's Palace & Rialto highlights", tags:["included"],
-      links:[{label:"St Mark's Basilica", url:"https://www.basilicasanmarco.it/en/visit/", type:"ticket"},
-             {label:"Doge's Palace Tickets", url:"https://www.visitmuve.it/en/museums/palazzo-ducale/", type:"ticket"}] },
+      links:[{label:"St Marks Basilica", url:"https://www.basilicasanmarco.it/en/", type:"info"},
+             {label:"Doges Palace", url:"https://www.visitmuve.it/en/museums/palazzo-ducale/", type:"info"}] },
 
     { date:"Fri 09 Oct", location:"Zadar, Croatia", flag:"🇭🇷",
       img:"linear-gradient(160deg,#1a4a3a 0%,#0f2d20 50%,#0a1510 100%)",heroEmoji:"🌊",heroLabel:"Zadar, Croatia",heroSub:"Sea Organ · Roman Forum · Dalmatian Coast",
@@ -490,8 +582,8 @@ const SEGMENTS = [
       accommodation:"Viking Sky", transport:"Ship docks Dubrovnik",
       activity:"Walk the complete 2km city wall circuit for magnificent Adriatic views (UNESCO). Stradun main street. Rector's Palace. Franciscan Monastery (oldest pharmacy in Europe, since 1317). Optional: cable car to Mount Srđ for panoramic views.",
       excursion:"✅ INCLUDED: Dubrovnik Old Town walls & historic streets (UNESCO)", tags:["included"],
-      links:[{label:"Dubrovnik City Walls Tickets", url:"https://www.dubrovnik-info.hr/en/old-town/city-walls", type:"ticket"},
-             {label:"Dubrovnik Cable Car", url:"https://www.dubrovnikcablecar.com/en/", type:"ticket"}] },
+      links:[{label:"Dubrovnik City Walls", url:"https://www.dubrovnik-info.hr/en/old-town/city-walls", type:"info"},
+             {label:"Visit Dubrovnik", url:"https://www.dubrovnik-info.hr/en/", type:"info"}] },
 
     { date:"Sun 11 Oct", location:"Kotor, Montenegro", flag:"🇲🇪",
       img:"linear-gradient(160deg,#2d1a5c 0%,#1a0f3a 50%,#0f0a20 100%)",heroEmoji:"⛵",heroLabel:"Kotor, Montenegro",heroSub:"Bay of Kotor · UNESCO Old Town · Mountain Fortress",
@@ -512,52 +604,52 @@ const SEGMENTS = [
       accommodation:"Viking Sky", transport:"Ship docks Katakolon | Coach to Olympia (30 min)",
       activity:"Birthplace of the Olympic Games. Ancient Olympia ruins: Temple of Zeus (one of Seven Wonders), original stadium track, Pheidias's Workshop, Palaestra wrestling school. Olympia Archaeological Museum with famous Hermes of Praxiteles.",
       excursion:"✅ INCLUDED: Ancient Olympia ruins & Archaeological Museum", tags:["included"],
-      links:[{label:"Ancient Olympia Tickets", url:"https://www.culture.gov.gr/en/service/SitePages/view.aspx?iID=1417", type:"ticket"}] },
+      links:[{label:"Ancient Olympia Info", url:"https://www.culture.gov.gr/en/service/SitePages/view.aspx?iID=1417", type:"info"}] },
 
     { date:"Wed 14 Oct", location:"Athens (Piraeus), Greece – Day 1", flag:"🇬🇷",
       img:"linear-gradient(160deg,#5c4a2d 0%,#3a2d1a 50%,#20180f 100%)",heroEmoji:"🏛️",heroLabel:"Athens, Greece – Day 1",heroSub:"Acropolis · Parthenon · UNESCO · Ancient Agora",
       accommodation:"Viking Sky", transport:"Ship docks Piraeus | Metro Line 1 to Athens",
       activity:"The Acropolis & Parthenon (UNESCO). Acropolis Museum. Ancient Agora – heart of Athenian democracy. Temple of Hephaestus (best preserved in Greece). Syntagma Square & Parliament guard changing ceremony.",
       excursion:"✅ INCLUDED: Athens – Acropolis, Parthenon & Ancient Agora (UNESCO)", tags:["included"],
-      links:[{label:"Acropolis Tickets", url:"https://etickets.tap.gr/", type:"ticket"},
-             {label:"Acropolis Museum", url:"https://www.theacropolismuseum.gr/en/tickets", type:"ticket"}] },
+      links:[{label:"Acropolis Info", url:"https://odysseus.culture.gr/h/3/gh351.jsp?obj_id=45", type:"info"},
+             {label:"Acropolis Museum", url:"https://www.theacropolismuseum.gr/en/", type:"info"}] },
 
     { date:"Thu 15 Oct", location:"Athens (Piraeus), Greece – Day 2", flag:"🇬🇷",
       img:"linear-gradient(160deg,#4a2d5c 0%,#2d1a3a 50%,#1a0f20 100%)",heroEmoji:"🫒",heroLabel:"Athens, Greece – Day 2",heroSub:"Plaka District · Monastiraki · National Museum",
       accommodation:"Viking Sky", transport:"Ship docked overnight Piraeus",
       activity:"Second day Athens. Plaka District – 'Neighbourhood of the Gods': cobblestone lanes, neoclassical architecture, meze & ouzo. National Archaeological Museum. Monastiraki flea market. Optional: Cape Sounion and Temple of Poseidon.",
       excursion:"✅ INCLUDED: Athens Plaka District & National Archaeological Museum", tags:["included"],
-      links:[{label:"National Arch. Museum", url:"https://www.namuseum.gr/en/collections/", type:"ticket"},
-             {label:"Temple of Poseidon", url:"https://odysseus.culture.gr/h/3/gh351.jsp?obj_id=2485", type:"ticket"}] },
+      links:[{label:"National Archaeological Museum", url:"https://www.namuseum.gr/en/", type:"info"},
+             {label:"Cape Sounion - Temple of Poseidon", url:"https://odysseus.culture.gr/h/3/gh351.jsp?obj_id=2485", type:"info"}] },
 
     { date:"Fri 16 Oct", location:"Heraklion, Crete, Greece", flag:"🇬🇷",
       img:"linear-gradient(160deg,#5c3d2d 0%,#3a251a 50%,#20150f 100%)",heroEmoji:"🐂",heroLabel:"Heraklion, Crete",heroSub:"Palace of Knossos · Minoan Civilisation",
       accommodation:"Viking Sky", transport:"Ship docks Heraklion",
       activity:"Home to Europe's earliest civilisation – the Minoans. Palace of Knossos – 3,500-year-old Bronze Age labyrinthine complex. Heraklion Archaeological Museum with famous Minoan frescoes. Venetian harbour walls & Koules Fortress.",
       excursion:"✅ INCLUDED: Crete – Minoan Palace of Knossos & Archaeological Museum", tags:["included"],
-      links:[{label:"Knossos Tickets", url:"https://etickets.tap.gr/", type:"ticket"},
-             {label:"Heraklion Arch. Museum", url:"https://www.heraklionarchaeologicalmuseum.gr/en/", type:"ticket"}] },
+      links:[{label:"Knossos Palace Info", url:"https://www.culture.gov.gr/en/", type:"info"},
+             {label:"Heraklion Archaeological Museum", url:"https://www.heraklionarchaeologicalmuseum.gr/en/", type:"info"}] },
 
     { date:"Sat 17 Oct", location:"Rhodes, Greece", flag:"🇬🇷",
       img:"linear-gradient(160deg,#1a4a5c 0%,#0f2d3a 50%,#0a1520 100%)",heroEmoji:"🗡️",heroLabel:"Rhodes, Greece",heroSub:"UNESCO Medieval Town · Palace of Grand Masters",
       accommodation:"Viking Sky", transport:"Ship docks Rhodes",
       activity:"Europe's largest active medieval town (UNESCO). Palace of the Grand Masters – remarkable Crusader fortification. Street of the Knights (Odos Ippoton). Rhodes Old Town walls (3km). Mandraki Harbour where Colossus once stood.",
       excursion:"✅ INCLUDED: Rhodes medieval Old Town & Palace of Grand Masters (UNESCO)", tags:["included"],
-      links:[{label:"Palace of Grand Masters", url:"https://odysseus.culture.gr/h/1/gh155.jsp?obj_id=3326", type:"ticket"}] },
+      links:[{label:"Palace of Grand Masters Info", url:"https://odysseus.culture.gr/h/1/gh155.jsp?obj_id=3326", type:"info"}] },
 
     { date:"Sun 18 Oct", location:"Ephesus (Kuşadası), Turkey", flag:"🇹🇷",
       img:"linear-gradient(160deg,#5c4a3a 0%,#3a2d20 50%,#20180f 100%)",heroEmoji:"📚",heroLabel:"Ephesus, Turkey",heroSub:"Library of Celsus · Great Theatre · Ancient Ruins",
       accommodation:"Viking Sky", transport:"Ship docks Kuşadası | Coach to Ephesus (30 min)",
       activity:"One of antiquity's best-preserved cities. Library of Celsus towering 2nd-century façade. Great Theatre (25,000 seats). Temple of Hadrian. Terrace Houses with stunning frescoes (extra fee). Seven Wonders' Temple of Artemis site nearby.",
       excursion:"✅ INCLUDED: Ancient Ephesus – Library of Celsus & Great Theatre", tags:["included"],
-      links:[{label:"Ephesus Tickets", url:"https://www.kusadasiport.com/ephesus-turkey", type:"ticket"}] },
+      links:[{label:"Ephesus Info", url:"https://www.kusadasiport.com/ephesus-turkey", type:"info"}] },
 
     { date:"Mon 19 Oct", location:"Troy / Çanakkale, Turkey", flag:"🇹🇷",
       img:"linear-gradient(160deg,#4a3a1a 0%,#2d200f 50%,#1a100a 100%)",heroEmoji:"🐎",heroLabel:"Troy & Gallipoli, Turkey",heroSub:"Trojan Horse · ANZAC Cove · Gallipoli Memorial",
       accommodation:"Viking Sky", transport:"Ship docks Çanakkale",
       activity:"Ancient Troy (UNESCO) – Homer's legendary city. Famous Trojan Horse replica. Troy Archaeological Museum (opened 2018). Then Gallipoli battlefields & ANZAC memorials – deeply moving WWI sites: Anzac Cove, Lone Pine, Chunuk Bair. Significant for Australians.",
       excursion:"⭐ VIKING EXCURSION BOOKED: Troy UNESCO ruins & Gallipoli ANZAC memorial sites", tags:["booked"],
-      links:[{label:"Troy UNESCO Site", url:"https://www.muze.gov.tr/en/muzeler/troy-museum", type:"ticket"},
+      links:[{label:"Troy UNESCO Site", url:"https://www.muze.gov.tr/en/muzeler/troy-museum", type:"info"},
              {label:"Gallipoli Anzac Info", url:"https://www.awm.gov.au/articles/encyclopedia/gallipoli", type:"info"}] },
 
     { date:"Tue 20 Oct", location:"Istanbul – Final Night on Viking Sky", flag:"🇹🇷",
@@ -565,40 +657,39 @@ const SEGMENTS = [
       accommodation:"Viking Sky (final night onboard)", transport:"Ship docked Istanbul | Walk to Galata area",
       activity:"Morning: Viking included excursion — Spice Bazaar (Egyptian Bazaar) and Rüstem Pasha Mosque (exquisitely tiled Ottoman mosque above the bazaar). Back on board by noon for lunch. ~1:30pm: Galata Tower (pre-book timed entry — panoramic views over the Golden Horn and Bosphorus, 45–60 min). Walk up through Galata backstreets to İstiklal Avenue — atmospheric cafés, pastry stops, lively pedestrian boulevard. ~5pm: return to Viking Sky. Final dinner on board 🥂",
       excursion:"✅ INCLUDED: Istanbul – Spice Bazaar & Rüstem Pasha Mosque", tags:["included"],
-      links:[{label:"Galata Tower Tickets", url:"https://www.galatakule.net.tr/en/", type:"ticket"},
+      links:[{label:"Galata Tower Info", url:"https://www.galatakule.net.tr/en/", type:"info"},
              {label:"Spice Bazaar Info", url:"https://www.misircarsisi.org.tr/", type:"info"}] }
   ]},
 
   { id:"istanbul", name:"Istanbul", emoji:"🕌", color:"#8b5e00", days:[
     { date:"Wed 21 Oct", location:"Istanbul – Disembark & Sultanahmet", flag:"🇹🇷",
       img:"linear-gradient(160deg,#3a1a5c 0%,#1a0f3a 50%,#100a25 100%)",heroEmoji:"🕌",heroLabel:"Istanbul – Disembark Day",heroSub:"Hagia Sophia · Grand Bazaar · Bosphorus Dinner Cruise",
-      accommodation:"Hotel De Reve Galata Special Class, Karaköy — Deluxe Double Room (breakfast included)", transport:"Disembark Viking Sky | Walk 5 min to Hotel De Reve Galata | Walk across Galata Bridge to Sultanahmet",
+      accommodation:"Hotel De Reve Galata Special Class, Karaköy — Deluxe Double Room (breakfast included)", transport:"Disembark Viking Sky | 5 min walk to Hotel De Reve Galata, Karakoy (bags may need storing until room ready) | Walk across Galata Bridge to Sultanahmet (~35 min on foot)",
       activity:"Breakfast on board Viking Sky before disembarking. Walk 5 min to Hotel De Reve Galata — drop bags, freshen up. Walk to Galata Bridge (5 min), cross on foot (15 min, fishermen lining rails, Golden Horn views), continue up through Eminönü to Sultanahmet (~15-20 min). Turkish lunch near Sultanahmet. ~2pm: Hagia Sophia — pre-book timed entry, allow 1.5 hours (unmissable). ~4pm: Sultanahmet Square and Blue Mosque exterior (no need to go inside). ~4:30pm: Grand Bazaar (closes ~7pm, 2+ hours to browse 4,000 shops). ~7pm: Board Bosphorus dinner cruise from Karaköy/Eminönü pier — 5-10 min walk from hotel. 3 hours: Istanbul skyline at night, Turkish dinner, live entertainment. ~10:30pm back to hotel (5 min walk). Hotel has offered to assist with bookings — use them for the cruise. 🥂",
       excursion:"Bosphorus Dinner Cruise ~7pm — book via hotel (Karaköy/Eminönü pier)", tags:[],
-      links:[{label:"Hagia Sophia Tickets", url:"https://muze.gen.tr/muze-detay/ayasofya", type:"ticket"},
+      links:[{label:"Hagia Sophia Info", url:"https://www.hagiasophia.com/", type:"info"},
              {label:"Grand Bazaar Info", url:"https://www.grandbazaaristanbul.org/", type:"info"},
-             {label:"Bosphorus Cruise", url:"https://www.bosphorustours.com/", type:"book"}] },
+             {label:"Bosphorus Cruise Info", url:"https://www.bosphorustours.com/", type:"info"}] },
 
     { date:"Thu 22 Oct", location:"Istanbul – Asian Side & Farewell Dinner", flag:"🇹🇷",
       img:"linear-gradient(160deg,#1a1a4a 0%,#0f0f2d 50%,#0a0a1a 100%)",heroEmoji:"🌙",heroLabel:"Istanbul – Final Day",heroSub:"Üsküdar · Kadıköy · Rooftop Farewell Dinner",
-      accommodation:"Hotel De Reve Galata — Deluxe Double Room (checkout ~10:30pm)", transport:"Ferry Karaköy → Üsküdar | Bus/taxi Üsküdar → Kadıköy | Ferry Kadıköy → Karaköy | Private transfer → Istanbul Airport IST",
-      activity:"Rooftop breakfast at Hotel De Reve Galata — included in rate (only hotel breakfast of stay, Bosphorus views). ~10am: Ferry from Karaköy pier to Üsküdar (~10 min crossing, stunning views back toward European skyline). Üsküdar waterfront: Ottoman atmosphere, Maiden's Tower views, local tea garden, far fewer tourists. ~1pm: Bus/taxi to Kadıköy — bohemian neighbourhood, local markets, excellent Turkish lunch at honest prices. ~3pm: Ferry Kadıköy → Karaköy (~25 min). Back at hotel ~3:30pm — rest, final packing. ~7pm: Rooftop farewell dinner at Hotel De Reve Galata (book table in advance via hotel) — Bosphorus views at night, perfect send-off 🥂. Ask hotel re: credit for missed breakfast on 23rd. ~10:30pm: checkout, private transfer to Istanbul Airport IST. MH4270 departs 01:30am Friday 23 October.",
+      accommodation:"Hotel De Reve Galata — Deluxe Double Room (checkout ~10:30pm)", transport:"Ferry Karakoy → Uskudar (~10 min) | Bus/taxi Uskudar → Kadikoy | Ferry Kadikoy → Karakoy (~25 min) | Hotel recommended private transfer → Istanbul Airport IST dep ~10:30pm",
+      activity:"Rooftop breakfast at Hotel De Reve Galata — included in rate (only hotel breakfast of stay). ~10am: Ferry Karakoy → Uskudar. Waterfront walk, Maiden's Tower views, local tea garden. ~1pm: Bus/taxi to Kadikoy for lunch. ~3pm: Ferry back to Karakoy. Rest and final packing at hotel. ~7pm: Rooftop farewell dinner 🥂. ~10:30pm: Check out. Hotel recommended private transfer to Istanbul Airport IST. IMPORTANT: MH4270 is operated by Turkish Airlines — check in at Turkish Airlines desk, not Malaysian Airlines. MH4270 departs 01:30am Friday 23 October.",
       excursion:"Rooftop dinner ~7pm — reserve table via hotel | Airport transfer ~10:30pm — book via hotel", tags:[],
-      links:[{label:"Hotel Rooftop Restaurant", url:"https://www.hotelderevestanbul.com/en/restaurant", type:"rest"},
-             {label:"Karaköy Ferry Pier", url:"https://www.ido.com.tr/en", type:"info"},
-             {label:"Kadıköy Guide", url:"https://www.lonelyplanet.com/turkey/istanbul/kadikoy", type:"info"}] }
+      links:[{label:"Uskudar & Asian Side Guide", url:"https://istanbul-tourist-information.com/uskudar/", type:"info"},
+             {label:"Istanbul Transport - Moovit", url:"https://moovitapp.com/istanbul-1563/", type:"info"}] }
   ]},
 
   { id:"home", name:"Home", emoji:"🏠", color:"#4a5568", days:[
-    { date:"Fri 23 Oct", location:"Istanbul → KL → Melbourne", flag:"🌏",
+    { date:"Fri 23 Oct", location:"Istanbul → KL → Melbourne", calLabel:"In Transit", flag:"🌏",
       img:"linear-gradient(160deg,#0a0f1a 0%,#1a2d5c 50%,#2d4a8f 100%)",heroEmoji:"🌙",heroLabel:"Istanbul → KL → Melbourne",heroSub:"MH4270 · MH147 · Homeward Bound",
-      accommodation:"In Transit", transport:"MH4270 Istanbul→KL dep 01:40 (operated by Turkish Airlines, check-in with Turkish Airlines) | MH147 KL→Melbourne (Economy) Gary 15A · Leonie 15C dep 20:30",
-      activity:"Depart Istanbul 01:30. Long-haul return via Kuala Lumpur. Arrive Melbourne to connect to Launceston.",
+      accommodation:"In Transit", transport:"MH4270 Istanbul→KL dep 01:40 CHECK IN AT TURKISH AIRLINES DESK · 25kg baggage each | Transit KL · MH147 KL→Melbourne dep 8:30pm Gary 15A · Leonie 15C · 25kg baggage each",
+      activity:"Depart Istanbul 01:30am on MH4270 (Turkish Airlines operated — check in at Turkish Airlines counter). Arrive KL 5:15pm. Long transit — use airport lounge if accessible, free WiFi available. MH147 departs KL 8:30pm to Melbourne. Arrive Melbourne Saturday 7:15am.",
       excursion:null, tags:["flight"], links:[] },
-    { date:"Sat 24 Oct", location:"Melbourne → Launceston – Home!", flag:"🇦🇺",
+    { date:"Sat 24 Oct", location:"Melbourne → Launceston – Home!", calLabel:"Home!", flag:"🇦🇺",
       img:"linear-gradient(160deg,#1a5c3a 0%,#0f3a20 50%,#0a2010 100%)",heroEmoji:"🏠",heroLabel:"Home – Launceston, Tasmania!",heroSub:"41 days · 6 countries · 2 Viking cruises · Memories forever",
-      accommodation:"Home – Launceston, Tasmania", transport:"VA1366 Melbourne→Launceston (Business Class 🥂) · Gary 02C · Leonie 02A",
-      activity:"Arrive Melbourne. Connect to VA1366 to Launceston. HOME after 41 extraordinary days across Europe! 6 countries, 2 Viking cruises, 30+ ports, countless unforgettable memories.",
+      accommodation:"Home – Launceston, Tasmania", transport:"VA1366 Melbourne→Launceston dep 11:15am arr 12:25pm (Business Class 🥂) Gary 02C · Leonie 02A | Family pickup Launceston Airport",
+      activity:"Arrive Melbourne ~7:15am. Clear customs and immigration. Connect to VA1366 departing 11:15am from Terminal 3. Business Class seats 02C (Gary) and 02A (Leonie) — a perfect way to end the adventure. Arrive Launceston 12:25pm. Family pickup from the airport. HOME after 41 extraordinary days! 6 countries, 2 Viking cruises, 30+ ports and memories to last a lifetime. 🥂",
       excursion:null, tags:["flight"], links:[] }
   ]}
 ];
@@ -650,11 +741,9 @@ function checkPin() {
 function unlockApp(silent) {
   document.getElementById('pin-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
-  if (!silent) {
-    updateHeaderStats();
-    buildTabs();
-    buildMain();
-  }
+  updateHeaderStats();
+  buildTabs();
+  showHome();
 }
 
 function lockApp() {
@@ -1044,28 +1133,593 @@ function changePin() {
 // ════════════════════════════════════════
 function setPanel(p) {
   activePanel = p;
-  ['todayBtn','itinBtn','docsBtn','settBtn'].forEach(id=>{
-    document.getElementById(id)?.classList.remove('primary','secondary','active-docs');
+  ['homeBtn','itinBtn','docsBtn','packBtn','taskBtn','esimBtn','settBtn'].forEach(id=>{
+    document.getElementById(id)?.classList.remove('primary','secondary','active-docs','active-pack','active-task','active-esim','active-home');
     document.getElementById(id)?.classList.add('secondary');
   });
-  if (p==='itinerary') { document.getElementById('itinBtn')?.classList.replace('secondary','primary'); }
+  if (p==='home') { document.getElementById('homeBtn')?.classList.replace('secondary','active-home'); }
+  else if (p==='itinerary') { document.getElementById('itinBtn')?.classList.replace('secondary','primary'); }
   else if (p==='docs')  { document.getElementById('docsBtn')?.classList.replace('secondary','active-docs'); }
+  else if (p==='packing') { document.getElementById('packBtn')?.classList.replace('secondary','active-pack'); }
+  else if (p==='tasks') { document.getElementById('taskBtn')?.classList.replace('secondary','active-task'); }
+  else if (p==='esim') { document.getElementById('esimBtn')?.classList.replace('secondary','active-esim'); }
   else if (p==='settings') { document.getElementById('settBtn')?.classList.replace('secondary','primary'); }
+}
+
+
+// ════════════════════════════════════════
+// PACKING LIST DATA & PANEL
+// ════════════════════════════════════════
+const PACKING_SECTIONS = [
+  { title: "Clothing - Underwear & Socks", items: [
+    { text: "Briefs", badge: "10 | [S]" },
+    { text: "Merino wool socks - various weights", badge: "8pr | [S]" },
+    { text: "Compression socks - flying", badge: "1pr | [W]" },
+  ]},
+  { title: "Clothing - Tops", items: [
+    { text: "Polo shirts", badge: "6 | [S]" },
+    { text: "T-shirts (lounge / sleep)", badge: "2 | [S]" },
+    { text: "Singlets (layering)", badge: "2 | [S]" },
+    { text: "Buttoned shirts (evening)", badge: "2 | [S]" },
+  ]},
+  { title: "Clothing - Bottoms", items: [
+    { text: "Lightweight travel cargo pants", badge: "2 | [S/W]" },
+    { text: "Shorts", badge: "2 | [S]" },
+    { text: "Slacks / chinos (evening)", badge: "2 | [S]" },
+  ]},
+  { title: "Clothing - Nightwear & Layering", items: [
+    { text: "Short lightweight pyjama set", badge: "1 | [S]" },
+    { text: "Smart vest (evening / smart casual)", badge: "1 | [S]" },
+    { text: "Mac Pac thermal zip-up jacket", badge: "1 | [S/W]" },
+    { text: "Mac Pac soft shell warm jacket", badge: "1 | [S/W]" },
+    { text: "Mac Pac waterproof coat with hood", badge: "1 | [S/W]" },
+    { text: "Lightweight scarf", badge: "1 | [S/W]" },
+  ]},
+  { title: "Clothing - Footwear & Accessories", items: [
+    { text: "ASICS Gel-Kayano 32 runners (wear on travel days)", badge: "[W]" },
+    { text: "Skechers casuals (evenings / cruise)", badge: "1pr | [S]" },
+    { text: "Flip flops (cabin / pool / casual)", badge: "1pr | [S]" },
+    { text: "Belt", badge: "1 | [S]" },
+    { text: "Baseball cap", badge: "1 | [S]" },
+    { text: "Foldable leather wide brim hat (in own bag)", badge: "1 | [S]" },
+    { text: "Sunglasses", badge: "2pr | [X]" },
+    { text: "Reading glasses", badge: "2pr | [X/B]" },
+  ]},
+  { title: "Tech & Electronics", items: [
+    { text: "ResMed AirSense 11 CPAP in carry case", badge: "[B]" },
+    { text: "CPAP power cable", badge: "[B]" },
+    { text: "Distilled water for CPAP confirmed / purchased", badge: "Paris" },
+    { text: "Acer Aspire Spin 14 laptop", badge: "[B]" },
+    { text: "Laptop power supply / brick (backup)", badge: "[B]" },
+    { text: "Wireless mouse", badge: "[B]" },
+    { text: "Samsung S24 phone", badge: "[X/W]" },
+    { text: "Samsung smartwatch + charging cradle", badge: "[X/W]" },
+    { text: "Bluetooth noise-cancelling headphones + case", badge: "[B]" },
+    { text: "Samsung earbuds + case", badge: "[B/X]" },
+    { text: "Disgian universal travel adaptor (AU/UK/US/EU)", badge: "[B]" },
+    { text: "Tech pouch - USB-A and USB-C charging cables", badge: "[B]" },
+    { text: "USB-C laptop charging tested ✓", badge: "Pre-trip" },
+  ]},
+  { title: "Toiletries (Minimal - buy rest in Paris)", items: [
+    { text: "Toothbrush + small travel toothpaste", badge: "[B/S]" },
+    { text: "Razor / shaving supplies", badge: "[S]" },
+    { text: "Prescription medications (full 41-day supply)", badge: "[B]" },
+    { text: "Tide pens x2 - spot treatment", badge: "[B/S]" },
+    { text: "Travel laundry sheets", badge: "[S]" },
+    { text: "Travel washing line", badge: "[S]" },
+    { text: "Lip balm / hand cream (travel size)", badge: "[X]" },
+    { text: "Sunscreen (travel size)", badge: "[X/B]" },
+    { text: "Buy: deodorant, skincare, large toothpaste at Pharmacie Place Monge Paris", badge: "Paris" },
+  ]},
+  { title: "Documents & Money", items: [
+    { text: "Australian passports - both", badge: "[X/B]" },
+    { text: "Passport copies saved in Gmail drafts", badge: "Digital" },
+    { text: "RACT Travel Insurance Certificate (Policy 91003813)", badge: "[B]" },
+    { text: "Flight itineraries printed - all legs", badge: "[B]" },
+    { text: "Hotel confirmation printouts", badge: "[B]" },
+    { text: "Viking Magni booking documents", badge: "[B]" },
+    { text: "Viking Sky booking documents", badge: "[B]" },
+    { text: "Credit / debit cards (bank notified of travel)", badge: "[X]" },
+    { text: "Euro cash for arrival", badge: "[X]" },
+    { text: "HUF cash for Budapest", badge: "[X]" },
+    { text: "TRY cash for Istanbul", badge: "[X]" },
+    { text: "Travel wallet / card holder (RFID blocking)", badge: "[X]" },
+  ]},
+  { title: "Bag Essentials & Misc", items: [
+    { text: "500ml metal water bottle (empty through security)", badge: "[S]" },
+    { text: "Travel umbrella", badge: "[S]" },
+    { text: "Pen (for customs / arrival cards)", badge: "[X/B]" },
+    { text: "Neck pillow (long haul flights)", badge: "[B/W]" },
+    { text: "Eye mask (overnight flights)", badge: "[B]" },
+    { text: "Earplugs (backup to headphones)", badge: "[B/X]" },
+    { text: "Small padlock for checked luggage", badge: "[S]" },
+    { text: "Luggage tags on all bags", badge: "[S/B]" },
+    { text: "Packing cubes (Samsonite)", badge: "[S]" },
+  ]},
+  { title: "Pre-Trip Actions (tick when done)", items: [
+    { text: "RACT Insurance - confirm cruise cover active for both Viking legs", badge: "Admin" },
+    { text: "Notify bank/cards of travel dates and countries", badge: "Admin" },
+    { text: "Hagia Sophia timed entry booked", badge: "Istanbul" },
+    { text: "Galata Tower timed entry booked", badge: "Istanbul" },
+    { text: "Bosphorus dinner cruise booked via Hotel De Reve Galata", badge: "Istanbul" },
+    { text: "Rooftop dinner 22 Oct booked via Hotel De Reve Galata", badge: "Istanbul" },
+    { text: "Airport transfer 22 Oct 10:30pm booked via hotel", badge: "Istanbul" },
+    { text: "Danube Night Cruise booked (Budapest - Sun or Mon evening)", badge: "Budapest" },
+    { text: "Austrian Airlines seats selected online (ref DQXON9)", badge: "Flights" },
+    { text: "MH4270 Turkish Airlines seats selected at check-in", badge: "Flights" },
+    { text: "CPAP distilled water - confirm Viking ships stock it", badge: "Viking" },
+    { text: "Contact Hotel De Reve Galata re: breakfast credit (23 Oct)", badge: "Istanbul" },
+    { text: "Test USB-C laptop charging via Disgian adaptor", badge: "Tech" },
+    { text: "Break in ASICS Gel-Kayano 32 with long walks before Sep", badge: "Shoes" },
+  ]},
+];
+
+function buildPackingPanel() {
+  const saved = JSON.parse(localStorage.getItem('packingState') || '{}');
+  let total = 0, checked = 0;
+  PACKING_SECTIONS.forEach(s => s.items.forEach(() => total++));
+  Object.values(saved).forEach(v => { if(v) checked++; });
+  const pct = total ? Math.round(checked/total*100) : 0;
+
+  let html = '<div class="pack-section">';
+  html += '<div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px">Packing Checklist - Gary</div>';
+  html += '<div class="pack-summary">'+checked+' of '+total+' items packed ('+pct+'%)</div>';
+  html += '<div class="pack-progress"><div class="pack-progress-bar" style="width:'+pct+'%"></div></div>';
+  html += '<div class="pack-note">Bags: [S] Samsonite 75cm checked &nbsp;[B] Tomtoc 40L Backpack carry-on &nbsp;[X] Sling Bag &nbsp;[W] Wearing on travel day</div>';
+  html += '<div class="pack-note">Laundry: Paris washer/dryer then River cruise manual wash then Budapest machine then Viking Sky free laundry service</div>';
+  html += '<button onclick="resetPacking()" style="font-size:11px;padding:4px 10px;border:1px solid var(--stone-dark);border-radius:4px;background:var(--stone);cursor:pointer;margin-top:6px">Reset all checkboxes</button>';
+  html += '</div>';
+
+  PACKING_SECTIONS.forEach(function(section, si) {
+    html += '<div class="pack-section">';
+    html += '<div class="pack-section-title">'+section.title+'</div>';
+    section.items.forEach(function(item, ii) {
+      const key = 'pack-'+si+'-'+ii;
+      const isChecked = saved[key] || false;
+      const chk = isChecked ? ' checked' : '';
+      const cls = isChecked ? 'pack-item checked' : 'pack-item';
+      const chkAttr = isChecked ? 'checked' : '';
+      html += '<div class="'+cls+'" onclick="togglePack(\''+key+'\')" id="pi-'+key+'">';
+      html += '<input type="checkbox" '+chkAttr+' onclick="event.stopPropagation();togglePack(\''+key+'\')">';
+      html += '<span class="pack-item-text">'+item.text+'</span>';
+      html += '<span class="pack-item-badge">'+item.badge+'</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+
+  document.getElementById('pack-panel').innerHTML = html;
+}
+
+function togglePack(key) {
+  const saved = JSON.parse(localStorage.getItem('packingState') || '{}');
+  saved[key] = !saved[key];
+  localStorage.setItem('packingState', JSON.stringify(saved));
+  buildPackingPanel();
+}
+
+function resetPacking() {
+  if (confirm('Reset all packing checkboxes?')) {
+    localStorage.removeItem('packingState');
+    buildPackingPanel();
+  }
+}
+
+
+// ════════════════════════════════════════
+// TASKS DATA & PANEL
+// ════════════════════════════════════════
+const TASK_GROUPS = [
+  { title: "Do Now - Urgent", color: "#c0392b", items: [
+    { text: "Book Pan Pacific South Wharf Melbourne", meta: "14 Sep - confirm room for 1 night", badge: "urgent" },
+    { text: "Book TransfersX - Melbourne Airport to Pan Pacific", meta: "14 Sep arrival transfer", badge: "urgent" },
+    { text: "Book TransfersX - Pan Pacific to Melbourne Airport", meta: "15 Sep depart ~10am for MH148 1:25pm", badge: "urgent" },
+    { text: "Book Eurostar Paris to Amsterdam", meta: "Sun 20 Sep 10:30am - book at eurostar.com", badge: "urgent" },
+    { text: "Book Daytrip - CDG Airport to Le Jardin de Verre Paris", meta: "Wed 16 Sep arrival - book at daytrip.com", badge: "urgent" },
+    { text: "Book G7 Taxi - Le Jardin de Verre to Gare du Nord", meta: "Sun 20 Sep morning - book at g7.fr or app", badge: "urgent" },
+    { text: "Book Daytrip - 7Seasons Budapest to Budapest Airport BUD", meta: "Tue 6 Oct - depart ~8am for OS632 11:15am", badge: "urgent" },
+    { text: "Book Daytrip - Venice Marco Polo Airport to Hotel Grande Italia Chioggia", meta: "Tue 6 Oct afternoon arrival (~1hr transfer)", badge: "urgent" },
+    { text: "Notify Telstra of travel dates and countries", meta: "Check International Day Pass cost and activation", badge: "urgent" },
+    { text: "Notify Optus of travel dates and countries (Leonie)", meta: "Check International Day Pass cost and activation", badge: "urgent" },
+    { text: "Notify bank and credit card providers of travel", meta: "Wise card + all other cards - dates 14 Sep to 24 Oct", badge: "urgent" },
+  ]},
+  { title: "Do Soon - Before Departure", color: "#e67e22", items: [
+    { text: "Purchase Airalo Europe eSIM - Gary (Samsung S24)", meta: "10GB/30 day Europe regional plan - install at home on WiFi, activate on landing in Paris", badge: "soon" },
+    { text: "Purchase Airalo Europe eSIM - Leonie (iPhone)", meta: "10GB/30 day Europe regional plan - install at home on WiFi, activate on landing in Paris", badge: "soon" },
+    { text: "Turn OFF data roaming on Telstra SIM before boarding in Launceston", meta: "Critical - do this before 14 Sep to avoid bill shock", badge: "soon" },
+    { text: "Turn OFF data roaming on Optus SIM before boarding (Leonie)", meta: "Critical - do this before 14 Sep to avoid bill shock", badge: "soon" },
+    { text: "Set up WhatsApp on both phones and test calls", meta: "Create family group chat, practice voice and video calls", badge: "soon" },
+    { text: "Add key contacts to WhatsApp", meta: "Family, hotels, Daytrip drivers, G7 taxi", badge: "soon" },
+    { text: "Add power bank to sling bag", meta: "500mAh minimum for phone charging on the go", badge: "soon" },
+    { text: "Load Wise card with EUR, HUF and TRY", meta: "EUR for Paris city tax and incidentals, HUF for Budapest city tax, TRY for Istanbul", badge: "soon" },
+    { text: "Confirm CPAP distilled water availability with Viking Magni", meta: "Email Viking before departure", badge: "soon" },
+    { text: "Confirm CPAP distilled water availability with Viking Sky", meta: "Email Viking before departure", badge: "soon" },
+    { text: "Confirm RACT Insurance cruise cover active for both Viking legs", meta: "Policy 91003813 - check Magni 20 Sep-3 Oct and Sky 7-21 Oct", badge: "soon" },
+    { text: "Test USB-C laptop charging via Disgian travel adaptor", meta: "Plug in, use normally 30 min, check battery goes UP not down", badge: "soon" },
+    { text: "Break in ASICS Gel-Kayano 32 with long walks", meta: "Aim for several 3-4 hour walks on varied surfaces before Sep", badge: "soon" },
+    { text: "Check Telstra International Day Pass terms", meta: "Confirm only charged on days you make or receive calls", badge: "soon" },
+    { text: "Check Optus International Day Pass terms (Leonie)", meta: "Confirm only charged on days she makes or receives calls", badge: "soon" },
+  ]},
+  { title: "Paris - Book Before Travel", color: "#1a5c9c", items: [
+    { text: "Book Moulin Rouge - Feerie Show", meta: "Thu 17 Sep 8:30pm seating - check if already booked", badge: "soon" },
+    { text: "Book Versailles Passport Ticket", meta: "Sat 19 Sep 9:30am timed entry - book at en.chateauversailles.fr", badge: "soon" },
+    { text: "Book Margaux Restaurant", meta: "Sat 19 Sep 7:00pm - Paris 16th arrondissement", badge: "soon" },
+    { text: "Book 2CV Legendary Paris Night Tour", meta: "Fri 18 Sep 8:00pm - book at 4roues-sous-1parapluie.com", badge: "soon" },
+    { text: "Book Wine Tasting at Vins & Whisky", meta: "Fri 18 Sep 6:00pm - near Latin Quarter", badge: "soon" },
+    { text: "Book Batobus Day Pass", meta: "Thu 17 Sep - can buy online or at pier", badge: "whenever" },
+    { text: "Paris City Tax - have EUR cash ready", meta: "AUD ~$117 payable at Le Jardin de Verre on arrival", badge: "soon" },
+  ]},
+  { title: "Budapest - Book Before Travel", color: "#1a5c9c", items: [
+    { text: "Book Danube Night Cruise", meta: "Sun 4 Oct or Mon 5 Oct ~8pm - Legenda City Cruises or GetYourGuide", badge: "soon" },
+    { text: "Budapest City Tax - have HUF ready on Wise card", meta: "Payable at 7Seasons on arrival", badge: "soon" },
+    { text: "Check if Viking Magni offers shuttle from dock to city centre", meta: "Email Viking - could save the walk with luggage", badge: "whenever" },
+  ]},
+  { title: "Chioggia - Arrange Before Travel", color: "#1a5c9c", items: [
+    { text: "Contact Hotel Grande Italia re: transfer to Viking Sky dock", meta: "Ask hotel for their recommended local transfer operator", badge: "soon" },
+  ]},
+  { title: "Istanbul - Book via Hotel De Reve Galata", color: "#1a5c9c", items: [
+    { text: "Book Galata Tower timed entry", meta: "Tue 20 Oct afternoon - book online at galatakule.net.tr", badge: "soon" },
+    { text: "Book Hagia Sophia timed entry", meta: "Wed 21 Oct ~2pm - check current entry requirements and fees", badge: "soon" },
+    { text: "Book Bosphorus Dinner Cruise", meta: "Wed 21 Oct ~7pm - ask Hotel De Reve Galata to arrange", badge: "soon" },
+    { text: "Book Rooftop Farewell Dinner", meta: "Thu 22 Oct ~7pm - reserve table via hotel", badge: "soon" },
+    { text: "Book Airport Transfer", meta: "Thu 22 Oct ~10:30pm - arrange via hotel for 1:30am MH4270 flight", badge: "soon" },
+    { text: "Ask hotel about breakfast credit for missed morning (23 Oct)", meta: "Checking out 10:30pm 22 Oct - may qualify for room credit", badge: "whenever" },
+    { text: "Istanbul incidentals - have TRY on Wise card", meta: "For tips, small purchases, any tourist taxes", badge: "soon" },
+  ]},
+  { title: "On the Trip - When Needed", color: "#7c3d8f", items: [
+    { text: "Airalo top-up if data running low", meta: "Easy in-app top-up - check data balance weekly", badge: "whenever" },
+    { text: "Leave travel umbrella behind in Istanbul before flight home", meta: "Dispose to save weight before 1:30am departure", badge: "whenever" },
+    { text: "Dispose of remaining toiletries in Istanbul before flight", meta: "Deodorant, sunscreen etc - save weight on return", badge: "whenever" },
+    { text: "MH4270 check-in with Turkish Airlines desk at Istanbul Airport", meta: "Malaysian Airlines operated by Turkish Airlines - check in at Turkish Airlines counter", badge: "whenever" },
+    { text: "Select MH4270 seats at Turkish Airlines check-in", meta: "No seats pre-assigned - choose adjacent seats at check-in", badge: "whenever" },
+    { text: "Select Austrian Airlines OS632/OS543 seats online", meta: "Log in at austrian.com with ref DQXON9", badge: "soon" },
+  ]},
+];
+
+function buildTasksPanel() {
+  const saved = JSON.parse(localStorage.getItem('taskState') || '{}');
+  let total = 0, done = 0;
+  TASK_GROUPS.forEach(g => g.items.forEach(() => total++));
+  Object.values(saved).forEach(v => { if(v) done++; });
+  const pct = total ? Math.round(done/total*100) : 0;
+
+  let html = '<div class="task-group">';
+  html += '<div style="font-size:18px;font-weight:700;color:var(--navy);margin-bottom:4px">Trip Task List</div>';
+  html += '<div class="task-summary">'+done+' of '+total+' tasks completed ('+pct+'%)</div>';
+  html += '<div class="task-progress"><div class="task-progress-bar" style="width:'+pct+'%"></div></div>';
+  html += '<div style="font-size:11px;color:var(--text-muted);font-style:italic;margin-bottom:8px">Tap any task to mark complete. Red = do now, Orange = before departure, Blue = book before travel, Purple = during trip.</div>';
+  html += '<button onclick="resetTasks()" style="font-size:11px;padding:4px 10px;border:1px solid var(--stone-dark);border-radius:4px;background:var(--stone);cursor:pointer;">Reset all</button>';
+  html += '</div>';
+
+  TASK_GROUPS.forEach(function(group, gi) {
+    html += '<div class="task-group">';
+    html += '<div class="task-group-title" style="background:'+group.color+'">'+group.title+'</div>';
+    group.items.forEach(function(item, ii) {
+      const key = 'task-'+gi+'-'+ii;
+      const isDone = saved[key] || false;
+      const cls = isDone ? 'task-item done' : 'task-item';
+      html += '<div class="'+cls+'" onclick="toggleTask(\''+key+'\')" id="ti-'+key+'">';
+      html += '<input type="checkbox" '+(isDone?'checked':'')+' onclick="event.stopPropagation();toggleTask(\''+key+'\')">';
+      html += '<div class="task-item-body">';
+      html += '<div class="task-item-text">'+item.text+'</div>';
+      html += '<div class="task-item-meta">'+item.meta+'</div>';
+      html += '</div>';
+      const badgeClass = isDone ? 'done-badge' : item.badge;
+      const badgeLabel = isDone ? 'Done' : (item.badge === 'urgent' ? 'Urgent' : item.badge === 'soon' ? 'Soon' : 'When needed');
+      html += '<span class="task-badge '+badgeClass+'">'+badgeLabel+'</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+
+  document.getElementById('task-panel').innerHTML = html;
+}
+
+function toggleTask(key) {
+  const saved = JSON.parse(localStorage.getItem('taskState') || '{}');
+  saved[key] = !saved[key];
+  localStorage.setItem('taskState', JSON.stringify(saved));
+  buildTasksPanel();
+}
+
+function resetTasks() {
+  if (confirm('Reset all tasks?')) {
+    localStorage.removeItem('taskState');
+    buildTasksPanel();
+  }
+}
+
+function showTasks() {
+  setPanel('tasks');
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('home-panel').style.display = 'none';
+  document.getElementById('docs-panel').style.display = 'none';
+  document.getElementById('pack-panel').style.display = 'none';
+  document.getElementById('esim-panel').style.display = 'none';
+  const tp = document.getElementById('task-panel');
+  tp.style.display = 'block';
+  buildTasksPanel();
+}
+
+// ════════════════════════════════════════
+// eSIM PANEL
+// ════════════════════════════════════════
+function buildEsimPanel() {
+  const html = `
+<div style="font-size:18px;font-weight:700;color:#7c3d8f;margin-bottom:4px">eSIM & Connectivity Guide</div>
+<div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">Europe 41-day trip setup for Gary (Samsung S24) and Leonie (iPhone)</div>
+
+<div class="esim-card">
+  <h3>The Setup: Dual SIM Strategy</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text"><strong>Airalo eSIM</strong> handles all mobile data in Europe - maps, messaging apps, the trip app, browsing. Cheap local rates across all 42 countries including Turkey.</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text"><strong>Telstra/Optus SIM</strong> stays active for traditional voice calls only. Data roaming must be turned OFF before departure.</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text"><strong>WhatsApp</strong> over Airalo data replaces most phone calls - free calls and messages to family, hotels, drivers and each other.</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text"><strong>Ship WiFi</strong> on both Viking Magni and Viking Sky is good - use it heavily. Airalo data is for shore time only.</div></div>
+</div>
+
+<div class="esim-card">
+  <h3>What to Buy</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text"><strong>Provider:</strong> Airalo (already installed on both phones)</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text"><strong>Plan:</strong> Eurolink regional eSIM - covers all 42 countries including France, Germany, Austria, Hungary, Italy, Croatia, Montenegro, Greece and Turkey in one plan</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text"><strong>Size:</strong> 10GB / 30 days each - more than enough given ship WiFi. Top up easily in the Airalo app if needed.</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text"><strong>Buy two:</strong> One for Gary, one for Leonie - purchased separately in each person's Airalo account</div></div>
+</div>
+
+<div class="esim-card">
+  <h3>Gary - Samsung S24 Setup Steps</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text">Open Airalo app, search for Eurolink Europe plan, purchase 10GB/30 day plan</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text">Install eSIM via QR code - do this at home on home WiFi, at least 1 week before departure</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text">Go to Settings > Connections > SIM Manager. You will see two lines: Telstra and Airalo</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text">Set <strong>Preferred SIM for calls:</strong> Telstra. Set <strong>Preferred SIM for data:</strong> Airalo</div></div>
+  <div class="esim-step"><div class="esim-step-num">5</div><div class="esim-step-text">Go to Telstra SIM settings > turn <strong>Data Roaming OFF</strong>. This is critical.</div></div>
+  <div class="esim-step"><div class="esim-step-num">6</div><div class="esim-step-text">Leave Airalo eSIM inactive until you land at CDG Paris. Then turn it on and enable data roaming on the Airalo line.</div></div>
+  <div class="esim-step"><div class="esim-step-num">7</div><div class="esim-step-text">Your phone should connect within 1 minute of landing. Test by opening Google Maps.</div></div>
+</div>
+
+<div class="esim-card">
+  <h3>Leonie - iPhone Setup Steps</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text">Open Airalo app, purchase Eurolink Europe 10GB/30 day plan</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text">Install eSIM at home on WiFi - iPhone will prompt through the steps automatically</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text">Go to Settings > Cellular. You will see Primary (Optus) and Travel (Airalo)</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text">Set <strong>Default Voice Line:</strong> Primary (Optus). Set <strong>Mobile Data:</strong> Travel (Airalo)</div></div>
+  <div class="esim-step"><div class="esim-step-num">5</div><div class="esim-step-text">Tap Primary (Optus) > turn <strong>Data Roaming OFF</strong>. Critical step.</div></div>
+  <div class="esim-step"><div class="esim-step-num">6</div><div class="esim-step-text">Leave Airalo inactive until landing at CDG. Then go to Settings > Cellular > Travel (Airalo) > turn on Data Roaming.</div></div>
+  <div class="esim-step"><div class="esim-step-num">7</div><div class="esim-step-text">iMessage and FaceTime will continue working on your Australian number via Airalo data - no number change needed.</div></div>
+</div>
+
+<div class="esim-card">
+  <h3>WhatsApp Setup Guide</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text">Download WhatsApp on both phones if not already installed. It registers to your Australian mobile number - no new number needed.</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text">Create a family group chat before departure - add all family members who you will update during the trip</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text">Practice making a WhatsApp voice call and video call before September - call each other or family to get comfortable</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text">Add Hotel De Reve Galata, Daytrip support and G7 Taxi to contacts - most will have WhatsApp for communication</div></div>
+  <div class="esim-step"><div class="esim-step-num">5</div><div class="esim-step-text">Calling family in Australia via WhatsApp: open the chat, tap the phone or video icon. Free over any WiFi or Airalo data.</div></div>
+  <div class="esim-warning">Important: When making WhatsApp calls, make sure you are connected to Airalo data or ship WiFi - not Telstra/Optus data roaming</div>
+</div>
+
+<div class="esim-card">
+  <h3>Data Tips - Making 10GB Last</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text"><strong>On the ships:</strong> Always connect to Viking WiFi. Turn Airalo data off in the app to save your allowance.</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text"><strong>In hotels:</strong> Use hotel WiFi for any heavy browsing, downloads or streaming.</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text"><strong>Ashore:</strong> Google Maps uses very little data when navigating. WhatsApp calls use around 1MB per minute.</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text"><strong>Check balance:</strong> Airalo app > My eSIMs shows remaining data. Check weekly.</div></div>
+  <div class="esim-step"><div class="esim-step-num">5</div><div class="esim-step-text"><strong>Top up:</strong> If running low, tap top-up in the Airalo app. Instant, no new eSIM needed.</div></div>
+  <div class="esim-note">At 3-4 hours of active use per shore day and 15-20 shore days, 10GB is very comfortable. Estimated usage: 4-6GB total.</div>
+</div>
+
+<div class="esim-card">
+  <h3>If Connectivity Drops</h3>
+  <div class="esim-step"><div class="esim-step-num">1</div><div class="esim-step-text">Toggle Airplane Mode on then off - forces the phone to reconnect to a network</div></div>
+  <div class="esim-step"><div class="esim-step-num">2</div><div class="esim-step-text">Check Airalo app - confirm eSIM is active and data roaming is on for that line</div></div>
+  <div class="esim-step"><div class="esim-step-num">3</div><div class="esim-step-text">Check data balance - if at 0, top up in the app</div></div>
+  <div class="esim-step"><div class="esim-step-num">4</div><div class="esim-step-text">Airalo support is available 24/7 in the app via chat</div></div>
+  <div class="esim-note">In rural areas of Germany and Austria some networks may drop to 3G. This is normal and won't affect basic navigation and messaging.</div>
+</div>
+`;
+  document.getElementById('esim-panel').innerHTML = html;
+}
+
+function showEsim() {
+  setPanel('esim');
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('home-panel').style.display = 'none';
+  document.getElementById('docs-panel').style.display = 'none';
+  document.getElementById('pack-panel').style.display = 'none';
+  document.getElementById('task-panel').style.display = 'none';
+  const ep = document.getElementById('esim-panel');
+  ep.style.display = 'block';
+  buildEsimPanel();
+}
+
+
+// ════════════════════════════════════════
+// HOME SCREEN WITH CALENDAR
+// ════════════════════════════════════════
+
+// Segment colour map for calendar
+const SEG_COLOURS = {
+  'travel':  { bg:'#4a5568', emoji:'✈️', label:'Travel' },
+  'paris':   { bg:'#2d6a8f', emoji:'🗼', label:'Paris' },
+  'magni':   { bg:'#1a5c3a', emoji:'🚢', label:'Magni' },
+  'budapest':{ bg:'#7c3d8f', emoji:'🏛️', label:'Budapest' },
+  'sky':     { bg:'#8b2635', emoji:'⚓', label:'Sky' },
+  'istanbul':{ bg:'#8b5e00', emoji:'🕌', label:'Istanbul' },
+};
+
+function buildDayMap() {
+  const map = {};
+  SEGMENTS.forEach(seg => {
+    seg.days.forEach((day, di) => {
+      const d = parseDate(day.date);
+      const key = d.toISOString().slice(0,10);
+      map[key] = { seg: seg.id, segIdx: SEGMENTS.indexOf(seg), dayIdx: di, day };
+    });
+  });
+  return map;
+}
+
+function buildHomePanel() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const tripStart = new Date('2026-09-14'); tripStart.setHours(0,0,0,0);
+  const tripEnd   = new Date('2026-10-24'); tripEnd.setHours(0,0,0,0);
+  const dayMap = buildDayMap();
+
+  // Stats
+  const totalDays = 41;
+  const taskSaved = JSON.parse(localStorage.getItem('taskState') || '{}');
+  const taskTotal = TASK_GROUPS.reduce((a,g) => a+g.items.length, 0);
+  const taskDone  = Object.values(taskSaved).filter(Boolean).length;
+  const packSaved = JSON.parse(localStorage.getItem('packingState') || '{}');
+  const packTotal = PACKING_SECTIONS.reduce((a,s) => a+s.items.length, 0);
+  const packDone  = Object.values(packSaved).filter(Boolean).length;
+
+  let statusText, statusSub;
+  if (today < tripStart) {
+    const days = Math.ceil((tripStart - today) / 86400000);
+    statusText = days + ' days to go!';
+    statusSub = 'Sutherland European Adventure 2026';
+  } else if (today > tripEnd) {
+    statusText = 'Trip Complete!';
+    statusSub = '41 extraordinary days across Europe';
+  } else {
+    const day = Math.floor((today - tripStart) / 86400000) + 1;
+    statusText = 'Day ' + day + ' of 41';
+    statusSub = 'You are on your adventure!';
+  }
+
+  // Build calendar months (Sep + Oct 2026)
+  const months = [
+    { year: 2026, month: 8, name: 'September 2026' },  // 0-indexed
+    { year: 2026, month: 9, name: 'October 2026' },
+  ];
+
+  const dows = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  let calHtml = '';
+  months.forEach(({ year, month, name }) => {
+    calHtml += '<div class="cal-section">';
+    calHtml += '<div class="cal-month">' + name + '</div>';
+    calHtml += '<div class="cal-grid">';
+    dows.forEach(d => { calHtml += '<div class="cal-dow">'+d+'</div>'; });
+
+    const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+    const daysInMonth = new Date(year, month+1, 0).getDate();
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      calHtml += '<div class="cal-day empty"></div>';
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const date = new Date(year, month, d);
+      date.setHours(0,0,0,0);
+      const key = date.toISOString().slice(0,10);
+      const isToday = date.getTime() === today.getTime();
+      const tripDay = dayMap[key];
+
+      if (tripDay) {
+        const sc = SEG_COLOURS[tripDay.seg] || { bg:'#4a5568', emoji:'🌍', label:'' };
+        const locStr = tripDay.day.calLabel || tripDay.day.location.split('–')[0].split('→')[0].trim();
+        const shortLoc = locStr.slice(0,8);
+        calHtml += '<div class="cal-day trip'+(isToday?' today-day':'')+'" ';
+        calHtml += 'style="background:'+(isToday?'var(--gold)':sc.bg+'22')+';border:1.5px solid '+sc.bg+(isToday?';box-shadow:0 0 0 2px var(--navy)':'')+'" ';
+        calHtml += 'onclick="calDayClick('+tripDay.segIdx+','+tripDay.dayIdx+')" ';
+        calHtml += 'title="'+tripDay.day.date+' - '+tripDay.day.location+'">';
+        calHtml += '<span class="cal-day-num" style="color:'+(isToday?'var(--navy)':sc.bg)+'">'+d+'</span>';
+        calHtml += '<span class="cal-day-emoji">'+sc.emoji+'</span>';
+        calHtml += '<span class="cal-day-seg" style="color:'+(isToday?'var(--navy)':'#555')+'">'+shortLoc+'</span>';
+        calHtml += '</div>';
+      } else if (date >= tripStart && date <= tripEnd) {
+        calHtml += '<div class="cal-day pre-trip"><span class="cal-day-num">'+d+'</span></div>';
+      } else {
+        calHtml += '<div class="cal-day"><span class="cal-day-num" style="color:#ccc">'+d+'</span></div>';
+      }
+    }
+    calHtml += '</div></div>';
+  });
+
+  // Legend
+  let legendHtml = '<div class="cal-legend">';
+  Object.values(SEG_COLOURS).forEach(sc => {
+    legendHtml += '<div class="cal-legend-item"><div class="cal-legend-dot" style="background:'+sc.bg+'"></div>'+sc.emoji+' '+sc.label+'</div>';
+  });
+  legendHtml += '</div>';
+
+  document.getElementById('home-panel').innerHTML = `
+    <div class="home-welcome">
+      <div class="home-welcome-title">🌍 Sutherland European Adventure</div>
+      <div class="home-welcome-sub">${statusText} &nbsp;·&nbsp; ${statusSub}</div>
+      <div class="home-stats">
+        <div class="home-stat"><div class="home-stat-num">41</div><div class="home-stat-label">Days</div></div>
+        <div class="home-stat"><div class="home-stat-num">${taskDone}/${taskTotal}</div><div class="home-stat-label">Tasks Done</div></div>
+        <div class="home-stat"><div class="home-stat-num">${packDone}/${packTotal}</div><div class="home-stat-label">Items Packed</div></div>
+      </div>
+      <div class="home-btn-row">
+        <button class="home-action-btn today" onclick="goToday()">📍 Go to Today</button>
+        <button class="home-action-btn signout" onclick="lockApp()">🔒 Sign Out</button>
+      </div>
+    </div>
+    ${legendHtml}
+    ${calHtml}
+    <div style="text-align:center;font-size:11px;color:var(--text-muted);padding:8px 0">Tap any trip day to open its itinerary</div>
+  `;
+}
+
+function calDayClick(segIdx, dayIdx) {
+  activeSegment = segIdx;
+  buildTabs();
+  showItinerary();
+  setTimeout(() => {
+    const el = document.getElementById(`card-${segIdx}-${dayIdx}`);
+    if (el) { el.scrollIntoView({ behavior:'smooth', block:'start' }); el.classList.add('open'); }
+  }, 150);
+}
+
+function showHome() {
+  setPanel('home');
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('docs-panel').style.display = 'none';
+  document.getElementById('pack-panel').style.display = 'none';
+  document.getElementById('task-panel').style.display = 'none';
+  document.getElementById('esim-panel').style.display = 'none';
+  const hp = document.getElementById('home-panel');
+  hp.style.display = 'block';
+  buildHomePanel();
 }
 
 function showItinerary() {
   setPanel('itinerary');
   document.getElementById('main').style.display = 'block';
+  document.getElementById('home-panel').style.display = 'none';
   document.getElementById('docs-panel').style.display = 'none';
+  document.getElementById('pack-panel').style.display = 'none';
+  document.getElementById('task-panel').style.display = 'none';
+  document.getElementById('esim-panel').style.display = 'none';
   buildMain();
 }
 
 function showDocs() {
   setPanel('docs');
   document.getElementById('main').style.display = 'none';
+  document.getElementById('home-panel').style.display = 'none';
+  document.getElementById('pack-panel').style.display = 'none';
+  document.getElementById('task-panel').style.display = 'none';
+  document.getElementById('esim-panel').style.display = 'none';
   const dp = document.getElementById('docs-panel');
   dp.style.display = 'block';
   buildDocsPanel();
+}
+
+function showPacking() {
+  setPanel('packing');
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('home-panel').style.display = 'none';
+  document.getElementById('docs-panel').style.display = 'none';
+  document.getElementById('task-panel').style.display = 'none';
+  document.getElementById('esim-panel').style.display = 'none';
+  const pp = document.getElementById('pack-panel');
+  pp.style.display = 'block';
+  buildPackingPanel();
 }
 
 function goToday() {
